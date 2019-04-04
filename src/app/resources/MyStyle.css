@@ -1,0 +1,51 @@
+/*color de fondo*/
+.background_app{
+    -fx-background-color: #00aff0;
+}
+
+/* cajas de texto */
+.text_app{
+    -fx-background-color: #cceffc;
+    -fx-text-fill: #000;
+    -fx-prompt-text-fill: #5aaff0;
+    -fx-text-box-border: transparent;        
+    -fx-background-radius: 0;
+    -fx-padding: 8;
+    -fx-font-size:14px;
+}
+
+.text_app:focused {
+    -fx-text-fill: #000;
+    -fx-background-color: #fff;     
+}
+
+/*boton de inicio de sesion*/
+.button_app{
+    -fx-background-color: #0c7daf;
+    -fx-border-radius: 46;
+    -fx-background-radius: 46;
+    -fx-text-fill: #fff;    
+    -fx-alignment: CENTER;
+}
+
+/**etiqueta de inicio de sesion*/
+.textb_app{
+    -fx-text-fill: #fff;
+    -fx-font-size:16px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 0,0,0,1 );
+}
+
+/**etiqueta ¿no puede...*/
+.textnp_app{
+    -fx-text-fill: #fff;
+    -fx-font-size:12px;
+    -fx-font-weight: normal;    
+}
+
+/*etiqueta de error*/
+.texterr_app{
+    -fx-text-fill: #a53b3f;
+    -fx-font-size:12px;
+    -fx-font-style:italic;    
+}
