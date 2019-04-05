@@ -1,5 +1,6 @@
 package app;
 
+import app.clients.ClientsController;
 import app.login.LoginController;
 import java.io.InputStream;
 import javafx.application.Application;
@@ -21,9 +22,11 @@ public class FXMain extends Application {
     public void start(Stage stage) throws Exception {
          try {
             this.stage = stage;
-            stage.setTitle("Sample Login - [http://www.jc-mouse.net/]");                     
-            LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
-            login.setStage(stage);            
+            stage.setTitle("HOTEL");                     
+            //LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
+            //login.setStage(stage);            
+            ClientsController client = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
+            client.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
