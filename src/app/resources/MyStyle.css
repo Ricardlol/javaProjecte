@@ -4,7 +4,7 @@
 }
 
 /* cajas de texto */
-.text_app{
+.labels{
     -fx-background-color: #cceffc;
     -fx-text-fill: #000;
     -fx-prompt-text-fill: #5aaff0;
