@@ -22,9 +22,9 @@ public class FXMain extends Application {
     public void start(Stage stage) throws Exception {
          try {
             this.stage = stage;
-            stage.setTitle("HOTEL");                     
+            stage.setTitle("Clients");                     
             //LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
-            //login.setStage(stage);            
+            //login.setStage(stage); 
             ClientsController client = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
             client.setStage(stage);
             stage.show();
