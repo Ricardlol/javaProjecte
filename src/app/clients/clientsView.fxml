@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="569.0" prefWidth="979.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.clients.clientsController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.clients.ClientsController">
    <children>
       <Label layoutX="464.0" layoutY="30.0" text="Cliente">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Separator layoutX="21.0" layoutY="82.0" prefHeight="15.0" prefWidth="948.0" />
+      <Separator layoutX="21.0" layoutY="82.0" prefHeight="15.0" prefWidth="901.0" />
       <Label layoutX="116.0" layoutY="104.0" text="DOCUMENTACION" />
       <TextField fx:id="documnetation" layoutX="279.0" layoutY="99.0" />
       <Label layoutX="116.0" layoutY="154.0" text="CLIENTE" />
@@ -30,7 +30,7 @@
       <TextField fx:id="ocupation" layoutX="279.0" layoutY="349.0" />
       <Label layoutX="116.0" layoutY="404.0" text="ESTADO CIVIL" />
       <TextField fx:id="status" layoutX="279.0" layoutY="399.0" />
-      <Separator layoutX="58.0" layoutY="445.0" prefHeight="15.0" prefWidth="481.0" />
+      <Separator layoutX="20.0" layoutY="444.0" prefHeight="15.0" prefWidth="472.0" />
       <AnchorPane layoutX="11.0" layoutY="460.0" prefHeight="96.0" prefWidth="519.0">
          <children>
             <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" text="GUARDAR" />
@@ -38,11 +38,11 @@
             <Button layoutX="353.0" layoutY="35.0" mnemonicParsing="false" text="ELIMINAR" />
          </children>
       </AnchorPane>
-      <Separator layoutX="555.0" layoutY="90.0" orientation="VERTICAL" prefHeight="460.0" prefWidth="15.0" />
-      <ListView layoutX="601.0" layoutY="182.0" prefHeight="297.0" prefWidth="354.0" />
-      <Label layoutX="601.0" layoutY="109.0" text="CLIENTE" />
-      <TextField layoutX="686.0" layoutY="104.0" />
-      <Button layoutX="875.0" layoutY="104.0" mnemonicParsing="false" text="BUSCAR" />
+      <Separator layoutX="501.0" layoutY="108.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
+      <ListView layoutX="553.0" layoutY="183.0" prefHeight="297.0" prefWidth="354.0" />
+      <Label layoutX="553.0" layoutY="110.0" text="CLIENTE" />
+      <TextField layoutX="638.0" layoutY="105.0" />
+      <Button layoutX="827.0" layoutY="105.0" mnemonicParsing="false" text="BUSCAR" />
       <Label fx:id="errorTextName" layoutX="314.0" layoutY="174.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
