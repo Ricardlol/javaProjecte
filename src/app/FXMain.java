@@ -27,6 +27,7 @@ public class FXMain extends Application {
             stage.setTitle("HOTEL");   
             PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
             principal.setStage(stage);
+
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
