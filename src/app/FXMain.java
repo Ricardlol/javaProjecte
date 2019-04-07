@@ -2,7 +2,9 @@ package app;
 
 import app.clients.ClientsController;
 import app.login.LoginController;
+import app.principal.PrincipalController;
 import java.io.InputStream;
+import java.security.Principal;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -25,8 +27,11 @@ public class FXMain extends Application {
             stage.setTitle("HOTEL");                     
             //LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
             //login.setStage(stage);            
-            ClientsController client = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
-            client.setStage(stage);
+            //ClientsController client = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
+            //client.setStage(stage);
+            
+             PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
+             principal.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
