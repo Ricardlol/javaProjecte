@@ -14,13 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JFrame;
 
 /**
  * FXML Controller class
  *
  * @author daw2
  */
-public class ClientsController implements Initializable {
+public class ClientsController implements Initializable{
 
     @FXML Button btnOk;
     @FXML TextField documnetation;
@@ -37,6 +38,10 @@ public class ClientsController implements Initializable {
     @FXML Label errorTextNac;
     @FXML Label errorTextOc;
     @FXML Label errorTextCiv;
+    
+    public ClientsController(){
+        
+    }
     
     private Stage stage;
     /**
