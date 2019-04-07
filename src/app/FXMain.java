@@ -24,14 +24,9 @@ public class FXMain extends Application {
     public void start(Stage stage) throws Exception {
          try {
             this.stage = stage;
-            stage.setTitle("HOTEL");                     
-            //LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
-            //login.setStage(stage);            
-            //ClientsController client = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
-            //client.setStage(stage);
-            
-             PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
-             principal.setStage(stage);
+            stage.setTitle("HOTEL");   
+            PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
+            principal.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

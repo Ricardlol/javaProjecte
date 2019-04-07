@@ -11,7 +11,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Clientes">
             <items>
-              <MenuItem mnemonicParsing="false" text="Gestion Clientes" />
+              <MenuItem mnemonicParsing="false" onAction="#clientView" text="Gestion Clientes" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Habitacion">
