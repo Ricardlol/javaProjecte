@@ -95,7 +95,7 @@ public class ClientsController implements Initializable{
             result= false;
         }
         if(email.getText().length()>0){
-            boolean mensaje=comprovarEmail(email.getText());
+            boolean mensaje=validate(4,email.getText());
             if(!mensaje){
                 errorTextIncorrectEmail.setVisible(true);
                 result= false;
@@ -130,14 +130,14 @@ public class ClientsController implements Initializable{
             errorTextDocumentation.setVisible(true);
             result = false;
         }
-        /*if (result){
-            result = comprovarString(optionDoc.getText());
+        if (result){
+            result = validate(1,optionDoc.getText());
             System.out.println(result);
             if (result==false){
                 errorTextDocumentation.setText(optionDoc.getText()+" opcio incorrecta");
                 errorTextDocumentation.setVisible(true);
             }
-        }*/
+        }
         return result;
     }
     
@@ -152,18 +152,21 @@ public class ClientsController implements Initializable{
         errorTextIncorrectEmail.setVisible(false);
     }
     
-    private boolean comprovarEmail(String email){
-        boolean result = false;
-        String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@"+"[a-z0-9-]+(\\.[a-z0-9-])$";
-        Pattern pattern = Pattern.compile(emailPattern);
-        if (email != null){
-            Matcher matcher = pattern.matcher(email);
-            if (matcher.matches()) {
-              System.out.println("Válido");
+    private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    
+    public static final Pattern VALID_DNI_REGEX = Pattern.compile("/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", Pattern.CASE_INSENSITIVE);
+
+    
+    private boolean validate(int opcion, String cadena) {
+        Matcher matcher=VALID_EMAIL_ADDRESS_REGEX .matcher(cadena);;    
+        if(opcion==1){
+            if(optionDoc.getText().equals("DNI")){
+                System.out.println("DNI");
+                matcher = VALID_DNI_REGEX .matcher(cadena);
             }
+            
         }
-        
-        return result;
+        return matcher.find();
     }
     public void setStage (Stage stage){
         this.stage = stage;
