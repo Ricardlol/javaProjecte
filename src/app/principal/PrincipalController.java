@@ -21,6 +21,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import app.clients.ClientsController;
+import app.apartament.ApartamentController;
+import app.products.ProductsController;
 
 /**
  * FXML Controller class
@@ -41,12 +43,36 @@ public class PrincipalController implements Initializable {
         // TODO
     }
     
+    public void apartamentsView(ActionEvent event){
+        try {
+            this.stage = new Stage();
+            stage.setTitle("GESTION DE HABITACIONES");   
+            ApartamentController apartament = (ApartamentController) replaceSceneContent("apartament/apartamentView.fxml");
+            apartament.setStage(stage);
+            stage.show();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void productsView(ActionEvent event){
+        try {
+            this.stage = new Stage();
+            stage.setTitle("GESTION DE PRODUCTOS");   
+            ProductsController productes = (ProductsController) replaceSceneContent("products/ProductsView.fxml");
+            productes.setStage(stage);
+            stage.show();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
     public void clientView(ActionEvent event){
         try {
             this.stage = new Stage();
             stage.setTitle("GESTION DE CLIENTES");   
-            ClientsController principal = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
-            principal.setStage(stage);
+            ClientsController clients = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
+            clients.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -64,7 +90,7 @@ public class PrincipalController implements Initializable {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 1000,600);
+        Scene scene = new Scene(page, 970,570);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
