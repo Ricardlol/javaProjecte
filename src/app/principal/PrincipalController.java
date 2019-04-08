@@ -10,14 +10,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import app.clients.ClientsController;
@@ -70,7 +66,11 @@ public class PrincipalController implements Initializable {
     public void clientView(ActionEvent event){
         try {
             this.stage = new Stage();
-            stage.setTitle("GESTION DE CLIENTES");   
+            stage.setTitle("GESTION DE CLIENTES"); 
+            stage.setMinHeight(570);
+            stage.setMinWidth(970);
+            stage.setMaxHeight(570);
+            stage.setMaxWidth(970);
             ClientsController clients = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
             clients.setStage(stage);
             stage.show();

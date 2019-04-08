@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,66 +19,78 @@
       </Label>
       <Separator layoutX="21.0" layoutY="82.0" prefHeight="15.0" prefWidth="901.0" />
       <Label layoutX="116.0" layoutY="104.0" text="DOCUMENTACION" />
-      <TextField fx:id="documnetation" layoutX="279.0" layoutY="99.0" />
+      <TextField fx:id="documnetation" layoutX="256.0" layoutY="99.0" />
       <Label layoutX="116.0" layoutY="154.0" text="CLIENTE" />
-      <TextField fx:id="client" layoutX="279.0" layoutY="149.0" />
+      <TextField fx:id="client" layoutX="256.0" layoutY="147.0" />
       <Label layoutX="116.0" layoutY="204.0" text="TELEFONO" />
-      <TextField fx:id="tel" layoutX="279.0" layoutY="199.0" />
+      <TextField fx:id="tel" layoutX="256.0" layoutY="197.0" />
       <Label layoutX="116.0" layoutY="254.0" text="EMAIL" />
-      <TextField fx:id="email" layoutX="279.0" layoutY="249.0" />
+      <TextField fx:id="email" layoutX="256.0" layoutY="247.0" />
       <Label layoutX="116.0" layoutY="304.0" text="NACIONALIDAD" />
-      <TextField fx:id="nac" layoutX="279.0" layoutY="299.0" />
+      <TextField fx:id="nac" layoutX="256.0" layoutY="297.0" />
       <Label layoutX="116.0" layoutY="354.0" text="OCUPACION" />
-      <TextField fx:id="ocupation" layoutX="279.0" layoutY="349.0" />
+      <TextField fx:id="ocupation" layoutX="256.0" layoutY="347.0" />
       <Label layoutX="116.0" layoutY="404.0" text="ESTADO CIVIL" />
-      <TextField fx:id="status" layoutX="279.0" layoutY="399.0" />
+      <TextField fx:id="status" layoutX="256.0" layoutY="397.0" />
       <Separator layoutX="20.0" layoutY="444.0" prefHeight="15.0" prefWidth="472.0" />
-      <AnchorPane layoutX="11.0" layoutY="460.0" prefHeight="96.0" prefWidth="519.0">
+      <AnchorPane layoutX="11.0" layoutY="460.0" prefHeight="96.0" prefWidth="480.0">
          <children>
-            <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" text="GUARDAR" />
-            <Button layoutX="192.0" layoutY="35.0" mnemonicParsing="false" text="MODIFICAR" />
-            <Button layoutX="353.0" layoutY="35.0" mnemonicParsing="false" text="ELIMINAR" />
+            <Button fx:id="save" layoutX="45.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnGuardar" text="GUARDAR" />
+            <Button layoutX="197.0" layoutY="35.0" mnemonicParsing="false" text="MODIFICAR" />
+            <Button layoutX="364.0" layoutY="35.0" mnemonicParsing="false" text="ELIMINAR" />
          </children>
       </AnchorPane>
       <Separator layoutX="501.0" layoutY="108.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
-      <ListView layoutX="553.0" layoutY="183.0" prefHeight="297.0" prefWidth="354.0" />
-      <Label layoutX="553.0" layoutY="110.0" text="CLIENTE" />
-      <TextField layoutX="638.0" layoutY="105.0" />
-      <Button layoutX="827.0" layoutY="105.0" mnemonicParsing="false" text="BUSCAR" />
-      <Label fx:id="errorTextName" layoutX="314.0" layoutY="174.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <ListView layoutX="553.0" layoutY="146.0" prefHeight="312.0" prefWidth="354.0" />
+      <Label layoutX="553.0" layoutY="103.0" text="CLIENTE" />
+      <TextField layoutX="636.0" layoutY="99.0" />
+      <Button layoutX="826.0" layoutY="96.0" mnemonicParsing="false" text="BUSCAR" />
+      <Label fx:id="errorTextName" layoutX="291.0" layoutY="172.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextDocumentation" layoutX="314.0" layoutY="122.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextDocumentation" layoutX="291.0" layoutY="128.0" prefHeight="16.0" prefWidth="207.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextTel" layoutX="314.0" layoutY="225.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextTel" layoutX="291.0" layoutY="223.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextEmail" layoutX="314.0" layoutY="277.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextEmail" layoutX="291.0" layoutY="277.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextNac" layoutX="314.0" layoutY="323.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextNac" layoutX="291.0" layoutY="321.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextOc" layoutX="314.0" layoutY="375.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextOc" layoutX="291.0" layoutY="373.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="errorTextCiv" layoutX="314.0" layoutY="425.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+      <Label fx:id="errorTextCiv" layoutX="291.0" layoutY="423.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
+      <Label fx:id="errorTextIncorrectEmail" layoutX="291.0" layoutY="275.0" prefHeight="16.0" prefWidth="101.0" text="Email incorrecto">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <MenuButton fx:id="optionDoc" layoutX="430.0" layoutY="99.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="67.0" text="----">
+        <items>
+          <MenuItem mnemonicParsing="true" onAction="#changeToDNI" text="DNI" />
+            <MenuItem mnemonicParsing="false" onAction="#changeToNIE" text="NIE" />
+          <MenuItem mnemonicParsing="true" onAction="#changeToPassport" text="PASSPORT" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>
