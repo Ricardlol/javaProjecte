@@ -8,6 +8,7 @@ package app.products;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -15,7 +16,10 @@ import javafx.fxml.Initializable;
  * @author daw2
  */
 public class ProductsController implements Initializable {
-
+    
+    
+    private Stage stage;
+     
     /**
      * Initializes the controller class.
      */
@@ -24,4 +28,7 @@ public class ProductsController implements Initializable {
         // TODO
     }    
     
+    public void setStage (Stage stage){
+        this.stage = stage;
+    }
 }

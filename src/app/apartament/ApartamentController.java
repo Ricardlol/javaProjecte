@@ -8,6 +8,7 @@ package app.apartament;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -16,12 +17,18 @@ import javafx.fxml.Initializable;
  */
 public class ApartamentController implements Initializable {
 
+    private Stage stage;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+    
+    public void setStage (Stage stage){
+        this.stage = stage;
+    }
     
 }

@@ -16,12 +16,12 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Habitacion">
             <items>
-              <MenuItem mnemonicParsing="false" text="Gestion Habitaciones" />
+              <MenuItem mnemonicParsing="false" onAction="#apartamentsView" text="Gestion Habitaciones" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Productos">
             <items>
-              <MenuItem mnemonicParsing="false" text="Gestion Productos" />
+              <MenuItem mnemonicParsing="false" onAction="#productsView" text="Gestion Productos" />
             </items>
           </Menu>
         </menus>
