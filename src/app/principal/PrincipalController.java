@@ -64,7 +64,7 @@ public class PrincipalController implements Initializable {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 480,320);
+        Scene scene = new Scene(page, 1000,600);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
