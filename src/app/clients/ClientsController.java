@@ -18,6 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuButton;
+import app.model.Clients;
 
 /**
  * FXML Controller class
@@ -43,6 +44,7 @@ public class ClientsController implements Initializable{
     @FXML Label errorTextCiv;
     @FXML Label errorTextIncorrectEmail;
     @FXML MenuButton optionDoc;
+    private Clients clientobj;
     
     private Stage stage;
     
@@ -55,6 +57,7 @@ public class ClientsController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
        //oculta mensaje de error
        ocultarMensajes();
+       Clients clientobj = new Clients();
     }
     
     public void changeToDNI(){
@@ -70,13 +73,14 @@ public class ClientsController implements Initializable{
     }
     
     public void btnGuardar(){
-        ocultarMensajes();
+        clientobj.crear();
+        /*ocultarMensajes();
         boolean campos = comprovarCampos();
         if(campos){
             System.out.println("A la base de datos !!!");
         } else{
             System.out.println("Pon los bien puto");
-        }
+        }*/
     }
     
     private boolean comprovarCampos(){
