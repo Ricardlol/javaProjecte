@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.apartament.ApartamentController">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="app.apartament.ApartamentController">
+   <children>
+      <Label layoutX="484.0" layoutY="50.0" text="Apartament">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="41.0" layoutY="102.0" prefHeight="15.0" prefWidth="901.0" />
+      <Label layoutX="136.0" layoutY="124.0" text="ID_APARTAMENT" />
+      <TextField fx:id="documnetation" layoutX="299.0" layoutY="119.0" />
+      <Label layoutX="136.0" layoutY="174.0" text="NOM_APARTAMENT" />
+      <TextField fx:id="client" layoutX="299.0" layoutY="169.0" />
+      <Label layoutX="136.0" layoutY="224.0" text="PREU" />
+      <TextField fx:id="tel" layoutX="299.0" layoutY="219.0" />
+      <Label layoutX="136.0" layoutY="274.0" text="TEMPORADA" />
+      <Separator layoutX="40.0" layoutY="464.0" prefHeight="15.0" prefWidth="472.0" />
+      <AnchorPane layoutX="31.0" layoutY="480.0" prefHeight="96.0" prefWidth="519.0">
+         <children>
+            <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" text="GUARDAR" />
+            <Button layoutX="192.0" layoutY="35.0" mnemonicParsing="false" text="MODIFICAR" />
+            <Button layoutX="353.0" layoutY="35.0" mnemonicParsing="false" text="ELIMINAR" />
+         </children>
+      </AnchorPane>
+      <Separator layoutX="521.0" layoutY="128.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
+      <ListView layoutX="581.0" layoutY="196.0" prefHeight="297.0" prefWidth="354.0" />
+      <Label layoutX="573.0" layoutY="130.0" text="APARTAMENT" />
+      <TextField layoutX="658.0" layoutY="125.0" />
+      <Button layoutX="847.0" layoutY="125.0" mnemonicParsing="false" text="BUSCAR" />
+      <Label fx:id="errorTextName" layoutX="334.0" layoutY="194.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorTextDocumentation" layoutX="334.0" layoutY="142.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorTextTel" layoutX="334.0" layoutY="245.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorTextEmail" layoutX="334.0" layoutY="302.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tel1" layoutX="299.0" layoutY="270.0" />
+   </children>
 </AnchorPane>
