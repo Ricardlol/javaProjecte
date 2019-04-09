@@ -10,5 +10,8 @@ package app.model;
  * @author daw2
  */
 public interface Connectionsdb {
-    
+    public void buscar();
+    public void crear();
+    public void modificar();
+    public void eliminar();
 }
