@@ -7,16 +7,30 @@ package app.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 /**
  *
  * @author daw2
  */
 public interface Connectionsdb {
-    public void buscar();
-    public void crear();
-    public void modificar();
-    public void eliminar();
+    public static void cerrarConnect(ResultSet rs, Statement stmt){
+        if(rs !=null){
+                try{
+                    rs.close();
+                }catch(SQLException e){}
+                rs=null;
+            }
+            
+            if(stmt!=null){
+                try {
+                    stmt.close();
+                } catch (SQLException e) {}
+                stmt=null;
+            }
+    };
+    
     public static Connection connectarMySQL(){
         Connection conn = null;
 
@@ -36,21 +50,20 @@ public interface Connectionsdb {
         }
         return conn;
     }
+    
     public static String getConnectionDB(){
         String database = "java_project";
-        String hostname = "192.168.0.15";
+        String hostname = "192.168.12.96";
         String port = "3306";
         String url = "jdbc:mysql://" + hostname +":"+ port+"/" + database;
         System.out.println(url);
         return url;
     };
-
-    public static String geDriver(){
-        return "";
-    }
+    
     public static String getUserDB(){
         return "root";
     };
+    
     public static String getPasswordBD(){
         return "";
         

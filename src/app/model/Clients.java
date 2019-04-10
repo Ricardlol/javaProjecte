@@ -40,10 +40,8 @@ public class Clients implements Connectionsdb{
 
     @Override
     public void crear() {
-        
-        sSQL ="INSERT INTO cliente VALUES (53642474B, Ricard, España,"+ 635640728+", ricard@gmail.com, Practicas, Soltero);";
+        sSQL ="INSERT INTO cliente VALUES ('53642474W', 'Ricard', 'España',"+ 635640728+", 'ricard@gmail.com', 'Practicas', 'Soltero');";
         try {
-            rs = stmt.executeQuery(sSQL);
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
             }
@@ -52,29 +50,17 @@ public class Clients implements Connectionsdb{
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }finally{
-            if(rs !=null){
-                try{
-                    rs.close();
-                }catch(SQLException e){}
-                rs=null;
-            }
-            
-            if(stmt!=null){
-                try {
-                    stmt.close();
-                } catch (SQLException e) {}
-                stmt=null;
-            }
+            Connectionsdb.cerrarConnect(rs,stmt);
         }
     }
 
     @Override
-    public void modificar() {
+    public void eliminar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void eliminar() {
+    public void modificar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
