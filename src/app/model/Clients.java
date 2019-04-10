@@ -6,11 +6,9 @@
 package app.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
 
 /**
  *
@@ -20,9 +18,18 @@ public class Clients implements Connectionsdb{
     
     private Connection conn;
     private String sSQL="";
+    private Statement stmt = null;
+    private ResultSet rs = null;
     
     public Clients(){
         conn = Connectionsdb.connectarMySQL();
+        try{
+            stmt=conn.createStatement();
+        }catch(SQLException e){
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
     }
     
     @Override
@@ -33,21 +40,27 @@ public class Clients implements Connectionsdb{
 
     @Override
     public void crear() {
-        sSQL ="INSERT INTO cliente VALUES (53642474B, Ricard, España, 635640728, ricard@gmail.com, Practicas, Soltero)";
+        sSQL ="INSERT INTO cliente VALUES ('53642474W', 'Ricard', 'España',"+ 635640728+", 'ricard@gmail.com', 'Practicas', 'Soltero');";
         try {
-            PreparedStatement pstm = conn.prepareStatement(sSQL);
-        } catch (SQLException ex) {
-            System.out.println("Error al insertar");
+            if(stmt.execute(sSQL)){
+                rs=stmt.getResultSet();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            Connectionsdb.cerrarConnect(rs,stmt);
         }
     }
 
     @Override
-    public void modificar() {
+    public void eliminar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void eliminar() {
+    public void modificar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

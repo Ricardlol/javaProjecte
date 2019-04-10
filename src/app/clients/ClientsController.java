@@ -57,7 +57,7 @@ public class ClientsController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
        //oculta mensaje de error
        ocultarMensajes();
-       Clients clientobj = new Clients();
+       clientobj = new Clients();
     }
     
     public void changeToDNI(){
