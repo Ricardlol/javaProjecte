@@ -35,16 +35,16 @@
       <Separator layoutX="20.0" layoutY="444.0" prefHeight="15.0" prefWidth="472.0" />
       <AnchorPane layoutX="11.0" layoutY="460.0" prefHeight="96.0" prefWidth="480.0">
          <children>
-            <Button fx:id="save" layoutX="45.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnGuardar" text="GUARDAR" />
-            <Button layoutX="197.0" layoutY="35.0" mnemonicParsing="false" text="MODIFICAR" />
-            <Button layoutX="364.0" layoutY="35.0" mnemonicParsing="false" text="ELIMINAR" />
+            <Button fx:id="save" layoutX="45.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSave" text="GUARDAR" />
+            <Button fx:id="modify" layoutX="197.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
+            <Button fx:id="delete" layoutX="364.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
          </children>
       </AnchorPane>
       <Separator layoutX="501.0" layoutY="108.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
       <ListView layoutX="553.0" layoutY="146.0" prefHeight="312.0" prefWidth="354.0" />
       <Label layoutX="553.0" layoutY="103.0" text="CLIENTE" />
-      <TextField layoutX="636.0" layoutY="99.0" />
-      <Button layoutX="826.0" layoutY="96.0" mnemonicParsing="false" text="BUSCAR" />
+      <TextField fx:id="nameSearch" layoutX="636.0" layoutY="99.0" />
+      <Button fx:id="search" layoutX="826.0" layoutY="96.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
       <Label fx:id="errorTextName" layoutX="291.0" layoutY="172.0" prefHeight="16.0" prefWidth="101.0" text="Rellena el campo">
          <font>
             <Font size="10.0" />

@@ -14,14 +14,15 @@ import java.sql.Statement;
  *
  * @author daw2
  */
-public class Clients implements Connectionsdb{
+public class Clients implements Connectionsdb, actions{
     
     private Connection conn;
     private String sSQL="";
     private Statement stmt = null;
     private ResultSet rs = null;
+    private String tabla = "cliente";
     
-    public Clients(){
+    private void connection(){
         conn = Connectionsdb.connectarMySQL();
         try{
             stmt=conn.createStatement();
@@ -32,15 +33,9 @@ public class Clients implements Connectionsdb{
         }
     }
     
-    @Override
-    public void buscar() {
-        String connexString = Connectionsdb.getConnectionDB();
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void crear() {
-        sSQL ="INSERT INTO cliente VALUES ('53642474W', 'Ricard', 'España',"+ 635640728+", 'ricard@gmail.com', 'Practicas', 'Soltero');";
+    public void create(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
+        connection();
+        sSQL ="INSERT INTO "+tabla+" VALUES ('"+documnetation+"', '"+client+"', '"+nac+"',"+tel+", '"+email+"', '"+ocupation+"', '"+status+"');";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
@@ -54,15 +49,46 @@ public class Clients implements Connectionsdb{
         }
     }
 
+    public void modify(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
+        connection();
+        sSQL ="UPDATE "+tabla+" SET nombre ='"+client+"', nacionalidad='"+nac+"', telefono='"+tel+"', email='"+email+"', ocupacion='"+ocupation+"', estadoCivil='"+ status+"' WHERE documento='"+documnetation+"';";
+        try {
+            if(stmt.execute(sSQL)){
+                rs=stmt.getResultSet();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            Connectionsdb.cerrarConnect(rs,stmt);
+        }
+    }
+    
     @Override
-    public void eliminar() {
+    public void search() {
+        String connexString = Connectionsdb.getConnectionDB();
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void delete(String id) {
+        connection();
+        sSQL ="DELETE FROM "+tabla+" WHERE documento= '"+id+"';";
+        try {
+            if(stmt.execute(sSQL)){
+                rs=stmt.getResultSet();
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            Connectionsdb.cerrarConnect(rs,stmt);
+        }
     }
 
-    @Override
-    public void modificar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }
 

@@ -72,8 +72,8 @@ public class ClientsController implements Initializable{
         optionDoc.setText("NIE");
     }
     
-    public void btnGuardar(){
-        clientobj.crear();
+    public void btnSave(){
+        clientobj.create(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
         /*ocultarMensajes();
         boolean campos = comprovarCampos();
         if(campos){
@@ -81,6 +81,18 @@ public class ClientsController implements Initializable{
         } else{
             System.out.println("Pon los bien puto");
         }*/
+    }
+    
+    public void btnModify(){
+        clientobj.modify(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
+    }
+    
+    public void btnDelete(){
+        clientobj.delete(documnetation.getText());
+    }
+    
+    public void btnSearch(){
+        clientobj.create(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
     }
     
     private boolean comprovarCampos(){
