@@ -21,25 +21,32 @@ public interface Connectionsdb {
         Connection conn = null;
 
         try {
-            Class.forName(geDriver());
-            conn = DriverManager.getConnection(getConnectionDB(), getUserDB(), getPasswordBD());
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
+            Class.forName("com.mysql.jdbc.Driver").newInstance();
+        } catch (Exception e) {
+            System.out.println("Error paquete");
+            System.out.println(e.getMessage());
         }
+        try{
+            conn = DriverManager.getConnection(getConnectionDB(), getUserDB(), getPasswordBD());
 
+        } catch(SQLException e){
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
         return conn;
     }
     public static String getConnectionDB(){
         String database = "java_project";
-        String hostname = "192.168.12.41";
-        //String port = "3306";
-        String url = "jdbc:mysql://" + hostname + "/" + database + "?useSSL=false";
+        String hostname = "192.168.0.15";
+        String port = "3306";
+        String url = "jdbc:mysql://" + hostname +":"+ port+"/" + database;
         System.out.println(url);
         return url;
     };
 
     public static String geDriver(){
-        return "com.mysql.jdbc.Driver";
+        return "";
     }
     public static String getUserDB(){
         return "root";
