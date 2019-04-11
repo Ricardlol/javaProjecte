@@ -27,25 +27,6 @@ public class ProductsController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @FXML Button btnOk;
-    @FXML TextField documnetation;
-    @FXML TextField client;
-    @FXML TextField tel;
-    @FXML TextField email;
-    @FXML TextField nac;
-    @FXML TextField ocupation;
-    @FXML TextField status;
-    @FXML Label errorTextDocumentation;
-    @FXML Label errorTextName;
-    @FXML Label errorTextTel;
-    @FXML Label errorTextEmail;
-    @FXML Label errorTextNac;
-    @FXML Label errorTextOc;
-    @FXML Label errorTextCiv;
-    
-    public ProductsController(){
-        
-    }
     
     private Stage stage;
     /**
@@ -54,61 +35,8 @@ public class ProductsController implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-       //oculta mensaje de error
-        errorTextDocumentation.setVisible(false);
-        errorTextName.setVisible(false);
-        errorTextTel.setVisible(false);
-        errorTextEmail.setVisible(false);
-        errorTextNac.setVisible(false);
-        errorTextOc.setVisible(false);
-        errorTextCiv.setVisible(false);
-        
-        //cuando cualquier de los  textfield gane foco 
-        //si existe mensaje de error visible -> se oculta
-        
-        documnetation.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextDocumentation.setVisible(false);
-             }
-        });
-        
-        client.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-        
-        tel.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-        
-        email.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-        
-        nac.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-        
-        ocupation.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-        
-        status.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-             if (newValue){
-                errorTextName.setVisible(false);
-             }
-        });
-    }
+    public void initialize(URL url, ResourceBundle rb) {}
+    
     public void setStage (Stage stage){
         this.stage = stage;
     }   
