@@ -5,11 +5,13 @@
  */
 package app.model;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author ricard
  */
 public interface actions {
-    public void search(String id);
+    public Object search(String id);
     public void delete(String id);
 }

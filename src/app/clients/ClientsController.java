@@ -19,6 +19,8 @@ import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.scene.control.MenuButton;
 import app.model.Clients;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * FXML Controller class
@@ -93,7 +95,17 @@ public class ClientsController implements Initializable{
     }
     
     public void btnSearch(){
-        clientobj.search(nameSearch.getText());
+        ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
+        try {
+            while(result.next()) {
+                String name = result.getString("nombre");
+                System.out.println(name + "\n");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
     }
     
     private boolean comprovarCampos(){

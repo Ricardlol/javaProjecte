@@ -41,6 +41,7 @@ public class Clients implements Connectionsdb, actions{
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
+                System.out.println("Cliente creado");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -57,6 +58,7 @@ public class Clients implements Connectionsdb, actions{
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
+                System.out.println("Cliente modificado");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -68,28 +70,20 @@ public class Clients implements Connectionsdb, actions{
     }
     
     @Override
-    public void search(String id) {
+    public Object search(String id) {
+        Object rsend=null;
         connection();
-        System.out.println(id);
         sSQL ="SELECT * FROM "+tabla+" WHERE documento='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
+            rsend=rs;
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }finally{
-            try {
-                while(rs.next()) {
-                    String name = rs.getString("nombre");
-                    System.out.println(name + "\n");
-                }
-            } catch (SQLException e) {
-                System.out.println("SQLException"+ e.getMessage());
-                System.out.println("SQLState"+ e.getSQLState());
-                System.out.println("VendorError"+ e.getErrorCode());
-            }
-            Connectionsdb.cerrarConnect(rs,stmt);
+            //Connectionsdb.cerrarConnect(rs,stmt);
+            return rsend;
         }
     }
     
@@ -100,6 +94,7 @@ public class Clients implements Connectionsdb, actions{
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
+                System.out.println("Cliente Eliminado");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
