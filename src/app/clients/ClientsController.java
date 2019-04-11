@@ -103,7 +103,7 @@ public class ClientsController implements Initializable{
     }
     
     public void btnDelete(){
-        clientobj.delete(documnetation.getText());
+        clientobj.delete(documnetation.getText(), null);
     }
     
     public void btnSearch(){

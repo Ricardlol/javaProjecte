@@ -88,7 +88,7 @@ public class Clients implements Connectionsdb, actions{
     }
     
     @Override
-    public void delete(String id) {
+    public void delete(String id, String id2) {
         connection();
         sSQL ="DELETE FROM "+tabla+" WHERE documento= '"+id+"';";
         try {
