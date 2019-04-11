@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author daw2
  */
-public class Appartament implements Connectionsdb, actions{
+public class Apartament implements Connectionsdb, actions{
     private Connection conn;
     private String sSQL="";
     private Statement stmt = null;
@@ -32,13 +32,13 @@ public class Appartament implements Connectionsdb, actions{
         }
     }
     
-    public void create(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
+    public void create(String nhab, String piso, String caract, String precio, String estado, String tipo) {
         connection();
-        sSQL ="INSERT INTO "+tabla+" VALUES ('"+documnetation+"', '"+client+"', '"+nac+"',"+tel+", '"+email+"', '"+ocupation+"', '"+status+"');";
+        sSQL ="INSERT INTO "+tabla+" (nhabitacion, piso, caracteristicas, precio, estado, tipo) VALUES ('"+nhab+"', '"+piso+"', '"+caract+"',"+precio+", '"+estado+"', '"+tipo+"');";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
-                System.out.println("Cliente creado");
+                System.out.println("Abitación creada");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -49,13 +49,14 @@ public class Appartament implements Connectionsdb, actions{
         }
     }
 
-    public void modify(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
+    public void modify(String nhab, String piso, String caract, String precio, String estado, String tipo) {
         connection();
-        sSQL ="UPDATE "+tabla+" SET nombre ='"+client+"', nacionalidad='"+nac+"', telefono='"+tel+"', email='"+email+"', ocupacion='"+ocupation+"', estadoCivil='"+ status+"' WHERE documento='"+documnetation+"';";
+        
+        sSQL ="UPDATE "+tabla+" SET nhabitacion ='"+nhab+"', piso='"+piso+"', caracteristicas='"+caract+"', precio="+precio+", estado='"+estado+"', tipo='"+ tipo+"' WHERE nhabitacion='"+nhab+"';";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
-                System.out.println("Cliente modificado");
+                System.out.println("Apartamento modificado");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -67,10 +68,10 @@ public class Appartament implements Connectionsdb, actions{
     }
     
     @Override
-    public Object search(String id) {
+    public Object search(String nhab) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE documento='"+id+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE nhabitacion='"+nhab+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;
@@ -85,9 +86,9 @@ public class Appartament implements Connectionsdb, actions{
     }
     
     @Override
-    public void delete(String id) {
+    public void delete(String id, String id2) {
         connection();
-        sSQL ="DELETE FROM "+tabla+" WHERE documento= '"+id+"';";
+        sSQL ="DELETE FROM "+tabla+" WHERE nhabitacion= '"+id+", piso="+id2+"';";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();

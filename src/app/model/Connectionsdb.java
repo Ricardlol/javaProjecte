@@ -51,7 +51,7 @@ public interface Connectionsdb {
     
     public static String getConnectionDB(){
         String database = "java_project";
-        String hostname = "192.168.12.167";
+        String hostname = "192.168.0.15";
         String port = "3306";
         String url = "jdbc:mysql://" + hostname +":"+ port+"/" + database;
         return url;

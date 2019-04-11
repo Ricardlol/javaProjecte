@@ -6,16 +6,22 @@
 package app.principal;
 
 import app.FXMain;
+
 import java.io.InputStream;
+
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.JavaFXBuilderFactory;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import app.clients.ClientsController;
 import app.apartament.ApartamentController;
 import app.products.ProductsController;
@@ -54,7 +60,7 @@ public class PrincipalController implements Initializable {
     public void productsView(ActionEvent event){
         try {
             this.stage = new Stage();
-            stage.setTitle("GESTION DE PRODUCTOS");   
+            stage.setTitle("GESTION DE PRODUCTOS");
             ProductsController productes = (ProductsController) replaceSceneContent("products/ProductsView.fxml");
             productes.setStage(stage);
             stage.show();

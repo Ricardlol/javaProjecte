@@ -13,5 +13,5 @@ import java.sql.ResultSet;
  */
 public interface actions {
     public Object search(String id);
-    public void delete(String id);
+    public void delete(String id, String id2);
 }
