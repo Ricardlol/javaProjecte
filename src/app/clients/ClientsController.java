@@ -35,6 +35,7 @@ public class ClientsController implements Initializable{
     @FXML TextField nac;
     @FXML TextField ocupation;
     @FXML TextField status;
+    @FXML TextField nameSearch;
     @FXML Label errorTextDocumentation;
     @FXML Label errorTextName;
     @FXML Label errorTextTel;
@@ -92,7 +93,7 @@ public class ClientsController implements Initializable{
     }
     
     public void btnSearch(){
-        clientobj.create(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
+        clientobj.search(nameSearch.getText());
     }
     
     private boolean comprovarCampos(){

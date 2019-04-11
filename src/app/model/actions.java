@@ -10,6 +10,6 @@ package app.model;
  * @author ricard
  */
 public interface actions {
-    public void search();
+    public void search(String id);
     public void delete(String id);
 }

@@ -20,14 +20,12 @@ public interface Connectionsdb {
                 try{
                     rs.close();
                 }catch(SQLException e){}
-                rs=null;
             }
             
             if(stmt!=null){
                 try {
                     stmt.close();
                 } catch (SQLException e) {}
-                stmt=null;
             }
     };
     
@@ -53,7 +51,7 @@ public interface Connectionsdb {
     
     public static String getConnectionDB(){
         String database = "java_project";
-        String hostname = "192.168.0.15";
+        String hostname = "192.168.12.167";
         String port = "3306";
         String url = "jdbc:mysql://" + hostname +":"+ port+"/" + database;
         return url;
