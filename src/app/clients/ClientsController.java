@@ -6,21 +6,25 @@
 package app.clients;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javax.swing.JFrame;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javafx.event.ActionEvent;
-import javafx.scene.control.MenuButton;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+
+import javafx.stage.Stage;
+
 import app.model.Clients;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.ListView;
 
 /**
  * FXML Controller class
@@ -28,8 +32,8 @@ import java.sql.SQLException;
  * @author daw2
  */
 public class ClientsController implements Initializable{
-
-    @FXML Button btnOk;
+    
+    // all TextFields in page
     @FXML TextField documnetation;
     @FXML TextField client;
     @FXML TextField tel;
@@ -38,6 +42,8 @@ public class ClientsController implements Initializable{
     @FXML TextField ocupation;
     @FXML TextField status;
     @FXML TextField nameSearch;
+    
+    // all Labels in page
     @FXML Label errorTextDocumentation;
     @FXML Label errorTextName;
     @FXML Label errorTextTel;
@@ -46,7 +52,13 @@ public class ClientsController implements Initializable{
     @FXML Label errorTextOc;
     @FXML Label errorTextCiv;
     @FXML Label errorTextIncorrectEmail;
+    
+    // menuButton in page
     @FXML MenuButton optionDoc;
+    
+    // list in page
+    @FXML ListView listView;
+    
     private Clients clientobj;
     
     private Stage stage;
