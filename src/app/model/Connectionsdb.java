@@ -15,6 +15,13 @@ import java.sql.Statement;
  * @author daw2
  */
 public interface Connectionsdb {
+    
+    final String database = "java_project";
+    final String hostname = "192.168.0.17";
+    final String port = "3306";
+    final String user =  "root";
+    final String password =  "";
+    
     public static void cerrarConnect(ResultSet rs, Statement stmt){
         if(rs !=null){
                 try{
@@ -39,7 +46,7 @@ public interface Connectionsdb {
             System.out.println(e.getMessage());
         }
         try{
-            conn = DriverManager.getConnection(getConnectionDB(), getUserDB(), getPasswordBD());
+            conn = DriverManager.getConnection(getConnectionDB(), user, password);
 
         } catch(SQLException e){
             System.out.println("SQLException"+ e.getMessage());
@@ -50,19 +57,6 @@ public interface Connectionsdb {
     }
     
     public static String getConnectionDB(){
-        String database = "java_project";
-        String hostname = "192.168.0.17";
-        String port = "3306";
-        String url = "jdbc:mysql://" + hostname +":"+ port+"/" + database;
-        return url;
-    };
-    
-    public static String getUserDB(){
-        return "root";
-    };
-    
-    public static String getPasswordBD(){
-        return "";
-        
+        return "jdbc:mysql://" + hostname +":"+ port+"/" + database;
     };
 }
