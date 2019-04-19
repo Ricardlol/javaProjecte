@@ -24,10 +24,13 @@ public class FXMain extends Application {
     public void start(Stage stage) throws Exception {
          try {
             this.stage = stage;
+            stage.setMinHeight(500);
+            stage.setMinWidth(500);
+            stage.setMaxHeight(500);
+            stage.setMaxWidth(500);
             stage.setTitle("HOTEL");   
             PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
             principal.setStage(stage);
-
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

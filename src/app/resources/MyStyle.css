@@ -1,51 +1,52 @@
-/*color de fondo*/
-.background_app{
-    -fx-background-color: #00aff0;
+.background_Principal{
+    -fx-background-image: url(./images/timbre.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 500 500;
+    -fx-background-position: center center;
 }
 
-/* cajas de texto */
-.labels{
-    -fx-background-color: #cceffc;
-    -fx-text-fill: #000;
-    -fx-prompt-text-fill: #5aaff0;
-    -fx-text-box-border: transparent;        
-    -fx-background-radius: 0;
-    -fx-padding: 8;
-    -fx-font-size:14px;
+.background_Apartamento{
+    -fx-background-image: url(./images/habitacion.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950 570;
+    -fx-background-position: center center;
 }
 
-.text_app:focused {
-    -fx-text-fill: #000;
-    -fx-background-color: #fff;     
+.background_Clientes{
+    -fx-background-image: url(./images/clientes.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950 570;
+    -fx-background-position: center center;
 }
 
-/*boton de inicio de sesion*/
-.button_app{
-    -fx-background-color: #0c7daf;
-    -fx-border-radius: 46;
-    -fx-background-radius: 46;
-    -fx-text-fill: #fff;    
-    -fx-alignment: CENTER;
+.background_Productes{
+    -fx-background-image: url(./images/extras2.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950 570;
+    -fx-background-position: center center;
 }
 
-/**etiqueta de inicio de sesion*/
-.textb_app{
-    -fx-text-fill: #fff;
-    -fx-font-size:16px;
-    -fx-font-weight: bold;
-    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 0,0,0,1 );
+.backgroundGrey{
+    -fx-background-color:  rgba(215,215,215,0.7);
 }
 
-/**etiqueta ¿no puede...*/
-.textnp_app{
-    -fx-text-fill: #fff;
-    -fx-font-size:12px;
-    -fx-font-weight: normal;    
+#titulo_apartamento{
+    -fx-font-family: Ubuntu;
+    -fx-font-size:24px;
 }
 
-/*etiqueta de error*/
-.texterr_app{
+#titulo_clientes{
+    -fx-font-family: Ubuntu;
+    -fx-font-size:24px;
+}
+.texterr{
+    -fx-font-family: Ubuntu;
     -fx-text-fill: #a53b3f;
-    -fx-font-size:12px;
-    -fx-font-style:italic;    
+    -fx-font-size:11px;
+    -fx-font-weight: bold;    
+}
+
+.labels{
+    -fx-font-family: Ubuntu;
+    -fx-font-size:13px;
 }
