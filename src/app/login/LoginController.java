@@ -107,7 +107,11 @@ public class LoginController implements Initializable {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 970,570);
+        Scene scene = new Scene(page);
+        stage.setMinHeight(600);
+        stage.setMinWidth(950);
+        stage.setMaxHeight(600);
+        stage.setMaxWidth(950);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();

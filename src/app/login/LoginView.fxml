@@ -15,11 +15,11 @@
             <Image url="@../resources/images/logo.PNG" />
          </image>
       </ImageView>
-      <Label layoutX="428.0" layoutY="289.0" styleClass="textb_app" text="Iniciar Sesión" />
+      <Label layoutX="428.0" layoutY="289.0" styleClass="labels" text="Iniciar Sesión" />
       <TextField fx:id="txtUser" layoutX="352.0" layoutY="324.0" prefHeight="36.0" prefWidth="260.0" promptText="Nombre de usuario" styleClass="text_app" />
       <PasswordField fx:id="txtPass" layoutX="353.0" layoutY="376.0" prefHeight="36.0" prefWidth="260.0" promptText="Palabra secreta" styleClass="text_app" />
       <Button fx:id="btnOk" layoutX="405.0" layoutY="434.0" mnemonicParsing="false" onAction="#verifyUserData" prefHeight="25.0" prefWidth="153.0" styleClass="button_app" text="Iniciar sesión" />
-      <Label fx:id="txtMsgError" layoutX="414.0" layoutY="474.0" styleClass="texterr_app" text="Los datos son incorrectos" />
+      <Label fx:id="txtMsgError" layoutX="414.0" layoutY="474.0" styleClass="texterr" text="Los datos son incorrectos" />
       <Label layoutX="729.0" layoutY="524.0" styleClass="textnp_app" text="¿No puede acceder a su cuenta?" />
    </children>
 </AnchorPane>
