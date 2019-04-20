@@ -22,6 +22,11 @@ public interface Connectionsdb {
     final String user =  "root";
     final String password =  "";
     
+    /**
+     * tanca la connecxio a la base de dades
+     * @param rs es el resultat de la consulta
+     * @param stmt l'estat de la consulta
+     */
     public static void cerrarConnect(ResultSet rs, Statement stmt){
         if(rs !=null){
                 try{
@@ -36,6 +41,10 @@ public interface Connectionsdb {
             }
     };
     
+    /**
+     * es conecta a la base de dades mysql
+     * @return retorna la connecxio per poder fer les consultes
+     */
     public static Connection connectarMySQL(){
         Connection conn = null;
 
@@ -55,7 +64,10 @@ public interface Connectionsdb {
         }
         return conn;
     }
-    
+    /**
+     * crea la url per connectarnos a la base de dades
+     * @return retorna la url a la qual en conectarem 
+     */
     public static String getConnectionDB(){
         return "jdbc:mysql://" + hostname +":"+ port+"/" + database;
     };

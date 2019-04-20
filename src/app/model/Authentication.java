@@ -3,30 +3,28 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Optional;
-import javafx.stage.Stage;
+
 /**
- * @web http://www.jc-mouse.net/
  * @author ricardLopez & joseManuel
  */
+
 public class Authentication  implements Connectionsdb{
     //atributos
     private String user;
     private String pass;
     private static int tipus;
-    
-    public Authentication(String user, String pass){
-        this.user = user;
-        this.pass = pass;
-    }
-    
     private Connection conn;
     private String sSQL="";
     private Statement stmt = null;
     private ResultSet rs = null;
     private String tabla = "usuarios";
     
+    public Authentication(String user, String pass){
+        this.user = user;
+        this.pass = pass;
+    }
+    
+    // Connecta amb la base de dades
     private void connection(){
         conn = Connectionsdb.connectarMySQL();
         try{
@@ -38,7 +36,12 @@ public class Authentication  implements Connectionsdb{
         }
     }
     
-     
+    /**
+     * @nom nom del usuario que que verifiarem que existeix
+     * @pass password del usuari a verificar
+     * @return retorna si l'usuari existeix
+    */
+    
     public boolean verifyUserData(String nom, String pass) {
         boolean userfind=false;
         connection();
@@ -62,14 +65,13 @@ public class Authentication  implements Connectionsdb{
             System.out.println("VendorError"+ e.getErrorCode());
         }finally{
             Connectionsdb.cerrarConnect(rs,stmt);
-            return userfind;
         }
+        return userfind;
     }
 
-    public void setStage(Stage stage) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    //Obtenemos el tipo de usuario que es
+    /**
+     * @return el tipus d'usuari
+     */
     public static int getTipus(){
         return tipus;
     }

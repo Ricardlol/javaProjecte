@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author daw2
+ * @author ricardLopez & joseManuel
  */
 public class Apartament implements Connectionsdb, actions{
     private Connection conn;
@@ -21,6 +21,7 @@ public class Apartament implements Connectionsdb, actions{
     private ResultSet rs = null;
     private String tabla = "habitacion";
     
+    // Connecta amb la base de dades
     private void connection(){
         conn = Connectionsdb.connectarMySQL();
         try{
@@ -31,6 +32,16 @@ public class Apartament implements Connectionsdb, actions{
             System.out.println("VendorError"+ e.getErrorCode());
         }
     }
+    
+    /**
+     * crear una entrada a la taula habitacion
+     * @param nhab numero d'habitacio que insertarem
+     * @param piso numero de pis
+     * @param caract caracteristiques del pis
+     * @param precio preu del pis
+     * @param estado si esta lliure o ocupat
+     * @param tipo el tipus del pis
+     */
     
     public void create(String nhab, String piso, String caract, String precio, String estado, String tipo) {
         connection();
@@ -49,6 +60,15 @@ public class Apartament implements Connectionsdb, actions{
         }
     }
 
+    /**
+     * modifica una entrada de la taula habitacion
+     * @param nhab numero d'habitacio
+     * @param piso numero de pis
+     * @param caract caracteristiques del pis
+     * @param precio preu del pis
+     * @param estado si esta lliure o ocupat
+     * @param tipo el tipus del pis
+     */
     public void modify(String nhab, String piso, String caract, String precio, String estado, String tipo) {
         connection();
         
@@ -66,6 +86,12 @@ public class Apartament implements Connectionsdb, actions{
             Connectionsdb.cerrarConnect(rs,stmt);
         }
     }
+    
+    /**
+     * busca un registre en la taula habitacion
+     * @param nhab numero d'habitacio
+     * @return retorna totes les habilacion amb aquell numero
+     */
     
     @Override
     public Object search(String nhab) {
@@ -85,6 +111,11 @@ public class Apartament implements Connectionsdb, actions{
         }
     }
     
+    /**
+     * eliminacio d'un registre de la taula habitacion
+     * @param id numero de l'abitacio
+     * @param id2 numero del pis
+     */
     @Override
     public void delete(String id, String id2) {
         connection();
