@@ -27,7 +27,6 @@ public class FXMain extends Application {
             stage.setTitle("ACCESS USUARIS");   
             LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
             login.setStage(stage);
-
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
