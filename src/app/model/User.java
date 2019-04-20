@@ -7,7 +7,7 @@ public class User {
     
     private String nick;
     private String pass;
-    private String fullName;
+    private int admin;
     
     /** Constructor de clase */
     public User(){}
@@ -15,12 +15,12 @@ public class User {
     /** Constructor de clase
      * @param nick apodo
      * @param pass palabra secreta
-     * @param fullName nombre completo
+     * @param admin si es administrador o no
      */
-    public User(String nick, String pass, String fullName){
+    public User(String nick, String pass, int admin){
         this.nick = nick;
         this.pass = pass;
-        this.fullName = fullName;
+        this.admin = admin;
     }
     
     public String getNick() {
@@ -39,12 +39,12 @@ public class User {
         this.pass = pass;
     }
 
-    public String getFullName() {
-        return fullName;
+    public int getAdmin() {
+        return admin;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setAdmin(int admin) {
+        this.admin = admin;
     }    
     
 }

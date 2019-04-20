@@ -24,9 +24,9 @@ public class FXMain extends Application {
     public void start(Stage stage) throws Exception {
          try {
             this.stage = stage;
-            stage.setTitle("HOTEL");   
-            PrincipalController principal = (PrincipalController) replaceSceneContent("principal/principalView.fxml");
-            principal.setStage(stage);
+            stage.setTitle("ACCESS USUARIS");   
+            LoginController login = (LoginController) replaceSceneContent("login/LoginView.fxml");
+            login.setStage(stage);
 
             stage.show();
         } catch (Exception ex) {
@@ -45,7 +45,7 @@ public class FXMain extends Application {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 480,320);
+        Scene scene = new Scene(page, 950,570);
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
