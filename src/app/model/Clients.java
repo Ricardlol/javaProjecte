@@ -9,12 +9,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author daw2
+ * @author ricardLopez & joseManuel
  */
 public class Clients implements Connectionsdb, actions{
     
@@ -35,6 +33,16 @@ public class Clients implements Connectionsdb, actions{
         }
     }
     
+    /**
+     * creacio dun registre a la taula cliente
+     * @param documnetation documentacion del cliente
+     * @param client nombre del cliente
+     * @param tel telefono del cliente
+     * @param email email del cliente
+     * @param nac nacionalidad del cliente
+     * @param ocupation ocupacion del cliente
+     * @param status estado del cliente
+     */
     public void create(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
         connection();
         sSQL ="INSERT INTO "+tabla+" VALUES ('"+documnetation+"', '"+client+"', '"+nac+"',"+tel+", '"+email+"', '"+ocupation+"', '"+status+"');";
@@ -51,7 +59,17 @@ public class Clients implements Connectionsdb, actions{
             Connectionsdb.cerrarConnect(rs,stmt);
         }
     }
-
+    
+    /**
+     * modificacio dun registre a la taula cliente
+     * @param documnetation documentacion del cliente
+     * @param client nombre del cliente
+     * @param tel telefono del cliente
+     * @param email email del cliente
+     * @param nac nacionalidad del cliente
+     * @param ocupation ocupacion del cliente
+     * @param status estado del cliente
+     */
     public void modify(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
         connection();
         sSQL ="UPDATE "+tabla+" SET nombre ='"+client+"', nacionalidad='"+nac+"', telefono='"+tel+"', email='"+email+"', ocupacion='"+ocupation+"', estadoCivil='"+ status+"' WHERE documento='"+documnetation+"';";
@@ -69,6 +87,11 @@ public class Clients implements Connectionsdb, actions{
         }
     }
     
+    /**
+     * buscar un registre en la taula clente
+     * @param id documento del client a buscar
+     * @return 
+     */
     @Override
     public Object search(String id) {
         Object rsend=null;
@@ -82,11 +105,16 @@ public class Clients implements Connectionsdb, actions{
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }finally{
-            //Connectionsdb.cerrarConnect(rs,stmt);
-            return rsend;
+            Connectionsdb.cerrarConnect(rs,stmt);
         }
+        return rsend;
     }
     
+    /**
+     * elimina un registre a la taula cliente
+     * @param id documento del client a eliminar
+     * @param id2 es null per tant no s'utilitza
+     */
     @Override
     public void delete(String id, String id2) {
         connection();
@@ -104,8 +132,5 @@ public class Clients implements Connectionsdb, actions{
             Connectionsdb.cerrarConnect(rs,stmt);
         }
     }
-
-    
-    
 }
 
