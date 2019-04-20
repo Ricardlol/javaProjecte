@@ -1,28 +1,28 @@
 .background_Principal{
     -fx-background-image: url(./images/timbre.jpg);
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 500 500;
+    -fx-background-size: 950 600;
     -fx-background-position: center center;
 }
 
 .background_Apartamento{
     -fx-background-image: url(./images/habitacion.jpg);
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 950 570;
+    -fx-background-size: 950 600;
     -fx-background-position: center center;
 }
 
 .background_Clientes{
     -fx-background-image: url(./images/clientes.jpg);
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 950 570;
+    -fx-background-size: 950 600;
     -fx-background-position: center center;
 }
 
 .background_Productes{
-    -fx-background-image: url(./images/extras2.jpg);
+    -fx-background-image: url(./images/extras.jpg);
     -fx-background-repeat: no-repeat;
-    -fx-background-size: 950 570;
+    -fx-background-size: 950 600;
     -fx-background-position: center center;
 }
 
@@ -36,6 +36,11 @@
 }
 
 #titulo_clientes{
+    -fx-font-family: Ubuntu;
+    -fx-font-size:24px;
+}
+
+#titulo_productes{
     -fx-font-family: Ubuntu;
     -fx-font-size:24px;
 }

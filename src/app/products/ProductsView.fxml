@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="950.0" styleClass="background_Productes" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.products.ProductsController">
    <children>
-      <Label layoutX="438.0" layoutY="40.0" text="Producte">
+      <Label id="titulo_productes" layoutX="438.0" layoutY="40.0" text="Producte">
          <font>
             <Font name="Arial" size="24.0" />
          </font>

@@ -73,10 +73,6 @@ public class PrincipalController implements Initializable {
         try {
             this.stage = new Stage();
             stage.setTitle("GESTION DE CLIENTES"); 
-            stage.setMinHeight(570);
-            stage.setMinWidth(970);
-            stage.setMaxHeight(570);
-            stage.setMaxWidth(970);
             ClientsController clients = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
             clients.setStage(stage);
             stage.show();
@@ -96,9 +92,13 @@ public class PrincipalController implements Initializable {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page, 970,570);
+        Scene scene = new Scene(page);
         stage.setScene(scene);
-        stage.sizeToScene();
+        //stage.sizeToScene();
+        stage.setMinHeight(600);
+        stage.setMinWidth(950);
+        stage.setMaxHeight(600);
+        stage.setMaxWidth(950);
         return (Initializable) loader.getController();
     }
     
