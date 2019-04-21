@@ -12,89 +12,92 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="950.0" styleClass="background_Clientes" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.clients.ClientsController">
    <children>
-      <Label id="titulo_clientes" layoutX="464.0" layoutY="30.0" text="Cliente">
+      <Label layoutX="466.0" layoutY="34.0" styleClass="titulo_clientes" text="Cliente">
          <font>
             <Font name="Arial" size="24.0" />
          </font>
       </Label>
-      <Separator layoutX="21.0" layoutY="82.0" prefHeight="15.0" prefWidth="914.0" />
-      <AnchorPane layoutX="16.0" layoutY="95.0" prefHeight="346.0" prefWidth="480.0" styleClass="backgroundGrey" stylesheets="@../resources/MyStyle.css">
+      <Separator layoutX="21.0" layoutY="84.0" prefHeight="10.0" prefWidth="900.0" />
+      <AnchorPane layoutX="23.0" layoutY="92.0" prefHeight="352.0" prefWidth="472.0" styleClass="backgroundGrey">
          <children>
-            <Label layoutX="25.0" layoutY="11.0" styleClass="labels" text="DOCUMENTACION" />
-            <Label fx:id="errorTextOc" layoutX="145.0" layoutY="10.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <Label layoutX="30.0" layoutY="15.0" prefHeight="16.0" prefWidth="118.0" styleClass="labels" text="DOCUMENTACION" />
+            <Label fx:id="errorTextDocumentation" layoutX="145.0" layoutY="13.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="documnetation" layoutX="170.0" layoutY="6.0" prefHeight="26.0" prefWidth="210.0" />
-            <MenuButton fx:id="optionDoc" layoutX="397.0" layoutY="5.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="67.0" text="----">
+            <TextField fx:id="documnetation" layoutX="175.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0" />
+            <MenuButton fx:id="optionDoc" layoutX="399.0" layoutY="10.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="67.0" text="----">
               <items>
                 <MenuItem mnemonicParsing="true" onAction="#changeToDNI" text="DNI" />
                   <MenuItem mnemonicParsing="false" onAction="#changeToNIE" text="NIE" />
                 <MenuItem mnemonicParsing="true" onAction="#changeToPassport" text="PASSPORT" />
               </items>
             </MenuButton>
-            <Label layoutX="90.0" layoutY="60.0" styleClass="labels" text="CLIENTE" />
-            <Label fx:id="errorTextCiv" layoutX="145.0" layoutY="59.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <Label layoutX="90.0" layoutY="65.0" styleClass="labels" text="CLIENTE" />
+            <Label fx:id="errorTextName" layoutX="145.0" layoutY="62.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="client" layoutX="170.0" layoutY="55.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="75.0" layoutY="110.0" styleClass="labels" text="TELEFONO" />
-            <Label fx:id="errorTextNac" layoutX="145.0" layoutY="110.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <TextField fx:id="client" layoutX="175.0" layoutY="60.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="75.0" layoutY="115.0" styleClass="labels" text="TELEFONO" />
+            <Label fx:id="errorTextTel" layoutX="145.0" layoutY="113.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="tel" layoutX="170.0" layoutY="105.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="105.0" layoutY="160.0" styleClass="labels" text="EMAIL" />
-            <Label fx:id="errorTextEmail" layoutX="145.0" layoutY="160.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <TextField fx:id="tel" layoutX="175.0" layoutY="110.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="100.0" layoutY="165.0" styleClass="labels" text="EMAIL" />
+            <Label fx:id="errorTextEmail" layoutX="145.0" layoutY="163.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="email" layoutX="170.0" layoutY="155.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="44.0" layoutY="210.0" styleClass="labels" text="NACIONALIDAD" />
-            <Label fx:id="errorTextTel" layoutX="145.0" layoutY="209.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <Label fx:id="errorTextIncorrectEmail" layoutX="227.0" layoutY="191.0" prefHeight="16.0" prefWidth="101.0" styleClass="texterr" text="Email incorrecto">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="nac" layoutX="170.0" layoutY="205.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="64.0" layoutY="260.0" styleClass="labels" text="OCUPACION" />
-            <Label fx:id="errorTextDocumentation" layoutX="145.0" layoutY="260.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <TextField fx:id="email" layoutX="175.0" layoutY="160.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="46.0" layoutY="215.0" styleClass="labels" text="NACIONALIDAD" />
+            <Label fx:id="errorTextNac" layoutX="145.0" layoutY="213.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="ocupation" layoutX="170.0" layoutY="255.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="55.0" layoutY="310.0" styleClass="labels" text="ESTADO CIVIL" />
-            <Label fx:id="errorTextName" layoutX="145.0" layoutY="310.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
+            <TextField fx:id="nac" layoutX="175.0" layoutY="210.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="66.0" layoutY="265.0" styleClass="labels" text="OCUPACION" />
+            <Label fx:id="errorTextOc" layoutX="145.0" layoutY="263.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="status" layoutX="170.0" layoutY="305.0" prefHeight="26.0" prefWidth="210.0" />
-            <Label layoutX="222.0" layoutY="181.0" styleClass="texterr" text="Email incorrecto" />
+            <TextField fx:id="ocupation" layoutX="175.0" layoutY="260.0" prefHeight="25.0" prefWidth="200.0" />
+            <Label layoutX="60.0" layoutY="315.0" styleClass="labels" text="ESTADO CIVIL" />
+            <Label fx:id="errorTextCiv" layoutX="145.0" layoutY="313.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <TextField fx:id="status" layoutX="175.0" layoutY="310.0" prefHeight="25.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
       <Separator layoutX="20.0" layoutY="444.0" prefHeight="15.0" prefWidth="472.0" />
-      <AnchorPane layoutX="16.0" layoutY="459.0" prefHeight="96.0" prefWidth="480.0" styleClass="backgroundGrey" stylesheets="@../resources/MyStyle.css">
+      <AnchorPane layoutX="19.0" layoutY="460.0" prefHeight="96.0" prefWidth="472.0" styleClass="backgroundGrey">
          <children>
             <Button fx:id="save" layoutX="45.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSave" text="GUARDAR" />
             <Button fx:id="modify" layoutX="197.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
             <Button fx:id="delete" layoutX="364.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
-            <Label layoutX="145.0" layoutY="12.0" styleClass="texterr" text="Los datos con * son obligatorios" />
          </children>
       </AnchorPane>
-      <Separator layoutX="501.0" layoutY="94.0" orientation="VERTICAL" prefHeight="446.0" prefWidth="15.0" />
-      <AnchorPane layoutX="519.0" layoutY="95.0" prefHeight="461.0" prefWidth="413.0" style="-fx-background-color: rgba(215,215,215,0.7);" styleClass="backgroundGrey" stylesheets="@../resources/MyStyle.css">
+      <Separator layoutX="501.0" layoutY="108.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
+      <AnchorPane layoutX="524.0" layoutY="92.0" prefHeight="463.0" prefWidth="399.0" styleClass="backgroundGrey">
          <children>
-            <Label layoutX="35.0" layoutY="10.0" styleClass="labels" text="CLIENTE" />
-            <TextField fx:id="nameSearch" layoutX="122.0" layoutY="5.0" prefHeight="26.0" prefWidth="195.0" />
-            <Button fx:id="search" layoutX="329.0" layoutY="5.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
-            <ListView layoutX="33.0" layoutY="52.0" prefHeight="385.0" prefWidth="358.0" />
+            <Label layoutX="35.0" layoutY="18.0" styleClass="labels" text="CLIENTE" />
+            <TextField fx:id="nameSearch" layoutX="118.0" layoutY="10.0" />
+            <Button fx:id="search" layoutX="305.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
+            <ListView layoutX="35.0" layoutY="57.0" prefHeight="392.0" prefWidth="348.0" />
          </children>
       </AnchorPane>
    </children>
