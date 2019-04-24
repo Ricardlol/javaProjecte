@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import app.clients.ClientsController;
 import app.apartament.ApartamentController;
 import app.products.ProductsController;
+import app.reserves.ReservesController;
 
 /**
  * FXML Controller class
@@ -73,8 +74,24 @@ public class PrincipalController implements Initializable {
         try {
             this.stage = new Stage();
             stage.setTitle("GESTION DE CLIENTES"); 
+            stage.setMinHeight(570);
+            stage.setMinWidth(970);
+            stage.setMaxHeight(570);
+            stage.setMaxWidth(970);
             ClientsController clients = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
             clients.setStage(stage);
+            stage.show();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void reservesView(ActionEvent event){
+        try {
+            this.stage = new Stage();
+            stage.setTitle("GESTION DE RESERVAS");
+            ReservesController reserves = (ReservesController) replaceSceneContent("reserves/ReservesView.fxml");
+            reserves.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());
@@ -92,13 +109,9 @@ public class PrincipalController implements Initializable {
         } finally {
             in.close();
         } 
-        Scene scene = new Scene(page);
+        Scene scene = new Scene(page, 970,570);
         stage.setScene(scene);
-        //stage.sizeToScene();
-        stage.setMinHeight(600);
-        stage.setMinWidth(950);
-        stage.setMaxHeight(600);
-        stage.setMaxWidth(950);
+        stage.sizeToScene();
         return (Initializable) loader.getController();
     }
     

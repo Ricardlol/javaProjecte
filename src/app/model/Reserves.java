@@ -9,18 +9,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
- * @author ricardLopez & joseManuel
+ * @author daw2
  */
-public class Clients implements Connectionsdb, actions{
-    
+public class Reserves implements Connectionsdb, actions{
     private Connection conn;
     private String sSQL="";
     private Statement stmt = null;
     private ResultSet rs = null;
-    private String tabla = "cliente";
+    private String tabla = "reserva";
     
     private void connection(){
         conn = Connectionsdb.connectarMySQL();
@@ -32,24 +33,36 @@ public class Clients implements Connectionsdb, actions{
             System.out.println("VendorError"+ e.getErrorCode());
         }
     }
+    public void create(String client, String apto, String usu, LocalDate fechaIn, String horaIn ,LocalDate fechaOut, String horaOut, String imp, String abo) {
     
-    /**
-     * creacio dun registre a la taula cliente
-     * @param documnetation documentacion del cliente
-     * @param client nombre del cliente
-     * @param tel telefono del cliente
-     * @param email email del cliente
-     * @param nac nacionalidad del cliente
-     * @param ocupation ocupacion del cliente
-     * @param status estado del cliente
-     */
-    public void create(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
+    //public void create(String client, String apto, String usu, String fechaIn, String horaIn ,String fechaOut, String horaOut, String imp, String abo) {
         connection();
-        sSQL ="INSERT INTO "+tabla+" VALUES ('"+documnetation+"', '"+client+"', '"+nac+"',"+tel+", '"+email+"', '"+ocupation+"', '"+status+"');";
+        //System.out.println(java.sql.Date.valueOf(fechaIn));
+        //System.out.println(java.sql.Date.valueOf(fechaOut));
+        sSQL ="INSERT INTO "+tabla+" (fk_cliente, fk_habitacion, fk_usuario, fehaIn, horaIn, fechafi, horafi, importe, abono ) VALUES ('"+client+"', '"+apto+"', '"+usu+"','"+java.sql.Date.valueOf(fechaIn)+"', '"+horaIn+"', '"+java.sql.Date.valueOf(fechaOut)+"', '"+horaOut+"', '"+imp+"', '"+abo+"');";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
-                System.out.println("Cliente creado");
+                System.out.println("Reserva creada");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            Connectionsdb.cerrarConnect(rs,stmt);
+        }
+    }
+
+    public void modify(String client, String apto, String usu, LocalDate fechaIn, String horaIn ,LocalDate fechaOut, String horaOut, String imp, String abo, String id) {
+        connection();
+        //System.out.println(client+" "+ apto+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+        //sSQL ="UPDATE "+tabla+" SET fk_cliente ='"+client+"', fk_habitacion='"+apto+"', fk_usuario='"+usu+"', fechaIn='"+java.sql.Date.valueOf(fechaIn)+"', horaIn='"+horaIn+"', fechafi='"+ java.sql.Date.valueOf(fechaOut)+"', horafi='"+ horaOut+"', , importe='"+ imp+"', abono='"+ abo+"' WHERE fk_habitacion='"+apto+"';";
+        sSQL ="UPDATE "+tabla+" SET fk_cliente ='"+client+"', fk_habitacion='"+apto+"', fk_usuario='"+usu+"', fehaIn='"+java.sql.Date.valueOf(fechaIn)+"', horaIn='"+horaIn+"', fechafi='"+ java.sql.Date.valueOf(fechaOut)+"', horafi='"+ horaOut+"', importe='"+ imp+"', abono='"+ abo+"' WHERE id='"+id+"';";
+        try {
+            if(stmt.execute(sSQL)){
+                rs=stmt.getResultSet();
+                System.out.println("Reserva Modificada");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -60,43 +73,11 @@ public class Clients implements Connectionsdb, actions{
         }
     }
     
-    /**
-     * modificacio dun registre a la taula cliente
-     * @param documnetation documentacion del cliente
-     * @param client nombre del cliente
-     * @param tel telefono del cliente
-     * @param email email del cliente
-     * @param nac nacionalidad del cliente
-     * @param ocupation ocupacion del cliente
-     * @param status estado del cliente
-     */
-    public void modify(String documnetation, String client, String tel, String email, String nac, String ocupation, String status) {
-        connection();
-        sSQL ="UPDATE "+tabla+" SET nombre ='"+client+"', nacionalidad='"+nac+"', telefono='"+tel+"', email='"+email+"', ocupacion='"+ocupation+"', estadoCivil='"+ status+"' WHERE documento='"+documnetation+"';";
-        try {
-            if(stmt.execute(sSQL)){
-                rs=stmt.getResultSet();
-                System.out.println("Cliente modificado");
-            }
-        } catch (SQLException e) {
-            System.out.println("SQLException"+ e.getMessage());
-            System.out.println("SQLState"+ e.getSQLState());
-            System.out.println("VendorError"+ e.getErrorCode());
-        }finally{
-            Connectionsdb.cerrarConnect(rs,stmt);
-        }
-    }
-    
-    /**
-     * buscar un registre en la taula clente
-     * @param id documento del client a buscar
-     * @return 
-     */
     @Override
-    public Object search(String id) {
+    public Object search(String cliente) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE documento='"+id+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente='"+cliente+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;
@@ -105,24 +86,19 @@ public class Clients implements Connectionsdb, actions{
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }finally{
-            Connectionsdb.cerrarConnect(rs,stmt);
+            //Connectionsdb.cerrarConnect(rs,stmt);
+            return rsend;
         }
-        return rsend;
     }
     
-    /**
-     * elimina un registre a la taula cliente
-     * @param id documento del client a eliminar
-     * @param id2 es null per tant no s'utilitza
-     */
     @Override
-    public void delete(String id, String id2) {
+    public void delete(String id, String cliente) {
         connection();
-        sSQL ="DELETE FROM "+tabla+" WHERE documento= '"+id+"';";
+        sSQL ="DELETE FROM "+tabla+" WHERE id= '"+id+", fk_cliente="+cliente+"';";
         try {
             if(stmt.execute(sSQL)){
                 rs=stmt.getResultSet();
-                System.out.println("Cliente Eliminado");
+                System.out.println("Reserva Eliminada");
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -133,4 +109,3 @@ public class Clients implements Connectionsdb, actions{
         }
     }
 }
-

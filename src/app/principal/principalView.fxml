@@ -24,6 +24,11 @@
               <MenuItem mnemonicParsing="false" onAction="#productsView" text="Gestion Productos" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Reservas">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#reservesView" text="Gestion Reservas" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>
