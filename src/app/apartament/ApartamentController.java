@@ -22,6 +22,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import javafx.stage.Stage;
 
@@ -53,9 +54,10 @@ public class ApartamentController implements Initializable {
     // menuButton in page
     @FXML MenuButton optionDoc;
     
-    // list in page
-    @FXML ListView listView;
-    
+    // table in page
+    @FXML GridPane gridpane;
+    int fila=10;
+    int col=5;
     
     private Apartament apartamentObj;
     
@@ -67,6 +69,20 @@ public class ApartamentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         apartamentObj = new Apartament();
+        for(int x=0;x<col; x++){
+            if(x==0){
+                gridpane.add(new Label("NUM HAB"), x,0);
+            }else if(x==1){
+                gridpane.add(new Label("PISO"), x,0);
+            }else if(x==2){
+                gridpane.add(new Label("PRECIO"), x,0);
+            }else if(x==3){
+                gridpane.add(new Label("ESTADO"), x,0);
+            }else{
+                gridpane.add(new Label("TIPO"), x,0);
+            }
+        }
+        
     }
     
      public void btnSave(){
