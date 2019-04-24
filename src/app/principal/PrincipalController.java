@@ -75,9 +75,9 @@ public class PrincipalController implements Initializable {
             this.stage = new Stage();
             stage.setTitle("GESTION DE CLIENTES"); 
             stage.setMinHeight(570);
-            stage.setMinWidth(970);
+            stage.setMinWidth(950);
             stage.setMaxHeight(570);
-            stage.setMaxWidth(970);
+            stage.setMaxWidth(950);
             ClientsController clients = (ClientsController) replaceSceneContent("clients/clientsView.fxml");
             clients.setStage(stage);
             stage.show();
