@@ -34,6 +34,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -41,6 +46,7 @@ import java.sql.Date;
  * @author ricardLopez & josemanuMartin
  */
 public class ReservesController implements Initializable {
+    
     
    
     
@@ -61,7 +67,8 @@ public class ReservesController implements Initializable {
     @FXML DatePicker fechafin;
     
     // all ChoiceBox in page
-    @FXML private ChoiceBox cash;
+    //@FXML private ChoiceBox cash;
+    @FXML ChoiceBox<String> cash;
     
     
   
@@ -72,9 +79,11 @@ public class ReservesController implements Initializable {
     private Reserves reservesobj;
     
     private String usu = Authentication.getUsuari();
-    private String fin;
-    private String fout;
+
+    private final float Preuapartamento = (float) 100.00;
+   
     private String id;
+    ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagado");
     
     
     private Stage stage;
@@ -89,7 +98,13 @@ public class ReservesController implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
        
         
-        reservesobj = new Reserves();
+        reservesobj = new Reserves();        
+        cash.setItems(availableChoices);
+        cash.setValue("Pendiente");
+        
+        // deshabilitar las fechas futuras
+        
+        
         
         
     }
@@ -101,18 +116,23 @@ public class ReservesController implements Initializable {
 
     @FXML
     public void btnSave() {
+        System.out.println(hora());
+        String h = hora();
+        horaEntrada.setText(h);
+        horaSalida.setText("Pendiente");
+        float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+        Import.setText(Float.toString(importEstada));
+        
+        System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
       
-       System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-      // System.out.println(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), "Pendiente");/*cash.getValue().toString()*/
-       //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ java.sql.Date.valueOf( fechaini.getValue())+" "+ horaEntrada.getText()+" "+ java.sql.Date.valueOf(  fechafin.getValue())+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-       
-       //reservesobj.create(idClient.getText(), idApartament.getText(), usu, java.sql.Date.valueOf(fechaini.getValue()), horaEntrada.getText(), java.sql.Date.valueOf(fechafin.getValue()), horaSalida.getText(), Import.getText(), "Pendiente");
-        reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), "Pendiente"/*cash.getValue().toString()*/);
+       //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+        reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
     }
 
     @FXML
     public void btnModify() {
-        //Buscar id
+        float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+        Import.setText(Float.toString(importEstada));
         
         ResultSet result = (ResultSet) reservesobj.search(idClient.getText());
         try {
@@ -150,6 +170,46 @@ public class ReservesController implements Initializable {
             System.out.println("VendorError"+ e.getErrorCode());
         }
     }
+    
+    private String hora(){
+        
+        LocalTime l = LocalTime.now();
+        int iHora, iMinuto, iSegundo;
+        String sHora, sMinuto, sSegundo;
+        iHora=l.getHour();
+        iMinuto=l.getMinute();
+        iSegundo=l.getSecond();
+        if(iHora<10){
+            sHora=Integer.toString(iHora);
+            sHora="0"+sHora;
+            System.out.println(sHora);
+        }else{
+           sHora=Integer.toString(iHora); 
+        }
+        
+        if(iMinuto<10){
+            sMinuto="0"+Integer.toString(iMinuto);
+        }else{
+           sMinuto=Integer.toString(iMinuto); 
+        }
+        
+        if(iSegundo<10){
+            sSegundo="0"+Integer.toString(iSegundo);
+        }else{
+           sSegundo=Integer.toString(iSegundo); 
+        }
+        
+        String lahora=sHora+":"+sMinuto+":"+sSegundo;
+        
+        return lahora;
+    }
+    
+    private float Importe(LocalDate fechaIni, LocalDate fechaFin){
+        
+        Period period = Period.between(fechaIni, fechaFin);        
+        return Preuapartamento * (float) period.getDays();
+    }
+    
     
     
     

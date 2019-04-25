@@ -26,6 +26,13 @@
     -fx-background-position: center center;
 }
 
+.background_Reserves{
+    -fx-background-image: url(./images/reserves.PNG);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950 600;
+    -fx-background-position: center center;
+}
+
 .backgroundGrey{
     -fx-background-color:  rgba(215,215,215,0.7);
 }
