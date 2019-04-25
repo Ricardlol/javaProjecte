@@ -3,8 +3,6 @@ package app.login;
 
 import app.FXMain;
 import app.model.Authentication;
-import app.principal.*;
-import app.model.User;
 import app.principal.PrincipalController;
 import java.io.InputStream;
 import java.net.URL;

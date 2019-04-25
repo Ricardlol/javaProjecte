@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
@@ -56,8 +57,10 @@ public class ClientsController implements Initializable{
     // menuButton in page
     @FXML MenuButton optionDoc;
     
-    // list in page
-    @FXML ListView listView;
+   // table in page
+    @FXML GridPane gridpane;
+    int fila=10;
+    int col=4;
     
     private Clients clientobj;
     
@@ -73,6 +76,17 @@ public class ClientsController implements Initializable{
        //oculta mensaje de error
        ocultarMensajes();
        clientobj = new Clients();
+       for(int x=0;x<col; x++){
+            if(x==0){
+                gridpane.add(new Label("DOCUMENTO"), x,0);
+            }else if(x==1){
+                gridpane.add(new Label("NOMBRE"), x,0);
+            }else if(x==2){
+                gridpane.add(new Label("TEL"), x,0);
+            }else{
+                gridpane.add(new Label("EMAIL"), x,0);
+            }
+        }
     }
     
     public void changeToDNI(){
@@ -107,11 +121,15 @@ public class ClientsController implements Initializable{
     }
     
     public void btnSearch(){
+        int i=1;
         ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
         try {
             while(result.next()) {
-                String name = result.getString("nombre");
-                System.out.println(name + "\n");
+                gridpane.add(new Label(result.getString("documento")),0,i);
+                gridpane.add(new Label(result.getString("nombre")),1,i);
+                gridpane.add(new Label(result.getString("telefono")),2,i);
+                gridpane.add(new Label(result.getString("email")),3,i);
+                i++;
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
