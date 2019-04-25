@@ -105,10 +105,8 @@ public class Apartament implements Connectionsdb, actions{
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
-        }finally{
-            //Connectionsdb.cerrarConnect(rs,stmt);
-            return rsend;
         }
+        return rsend;
     }
     
     /**

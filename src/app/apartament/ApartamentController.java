@@ -11,6 +11,8 @@ import java.net.URL;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.ResourceBundle;
 
@@ -18,7 +20,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -99,12 +100,16 @@ public class ApartamentController implements Initializable {
     }
     
     public void btnSearch(){
+        int i=1;
         ResultSet result = (ResultSet) apartamentObj.search(nhabSearch.getText());
         try {
             while(result.next()) {
-                String id = result.getString("id");
-                String habitacion = result.getString("nhabitacion");
-                System.out.println(id +" "+ habitacion+"\n");
+                gridpane.add(new Label(result.getString("nhabitacion")),0,i);
+                gridpane.add(new Label(result.getString("piso")),1,i);
+                gridpane.add(new Label(result.getString("precio")),2,i);
+                gridpane.add(new Label(result.getString("estado")),3,i);
+                gridpane.add(new Label(result.getString("tipo")),4,i);
+                i++;
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
