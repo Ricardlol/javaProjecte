@@ -57,7 +57,7 @@ public class ReservesController implements Initializable {
     @FXML TextField Import;
     @FXML TextField idClient;
     @FXML TextField reservaBuscar;
-    
+    @FXML TextField numReserva;
     // all Labels in page
    // @FXML Label errorTextCliente;
     //@FXML Label errorDateIniEmpty;
@@ -83,7 +83,7 @@ public class ReservesController implements Initializable {
     private final float Preuapartamento = (float) 100.00;
    
     private String id;
-    ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagado");
+    ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
     
     
     private Stage stage;
@@ -96,12 +96,16 @@ public class ReservesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-       
+        
+        //String nresrv;
         
         reservesobj = new Reserves();        
         cash.setItems(availableChoices);
-        cash.setValue("Pendiente");
+        cash.setValue("Pendiente");        
         
+       //System.out.println("Hello "+getNumReserva());
+       numReserva.setText(getNumReserva());
+        //getNumReserva();
         // deshabilitar las fechas futuras
         
         
@@ -111,6 +115,30 @@ public class ReservesController implements Initializable {
     
     public void setStage (Stage stage){
         this.stage = stage;
+    }
+    
+    public String getNumReserva(){
+        int nreserva = 0 ;
+        String nr="";
+        System.out.println("Buscar id reserva");
+        ResultSet result = (ResultSet) reservesobj.getNumeroReserva();
+        try {
+            while(result.next()) {
+                String id = result.getString("id");
+                System.out.println("Hola "+id +" "+"\n");
+                nreserva = Integer.parseInt(id);
+                nreserva++;
+                System.out.println(nreserva);
+                nr= Integer.toString(nreserva);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            
+            return nr;
+        }
     }
    
 
