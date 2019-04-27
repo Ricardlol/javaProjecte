@@ -89,6 +89,7 @@ public class ReservesController implements Initializable {
     ObservableList<String> nomproductes = FXCollections.observableArrayList();
     
     
+    
     private Stage stage;
     @FXML
     private Button save;
@@ -168,6 +169,57 @@ public class ReservesController implements Initializable {
             
            
         }
+    }
+    
+    public String getidExtras(String nombre){
+        ResultSet result = (ResultSet) extrasobj.search(nombre);
+        String idstr="";
+        try {
+            while(result.next()) {
+               idstr  = result.getString("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            
+           return idstr;
+        }
+    }
+    /*
+    @FXML
+    public int idServicio(String nombre){
+        int idservicio = 0 ;
+        String ns="";
+        System.out.println("Buscar id Servicio");
+        ResultSet result = (ResultSet) reservesobj.search(nombre);
+        try {
+            while(result.next()) {
+                String id = result.getString("id");
+                idservicio = Integer.parseInt(id);
+                
+                System.out.println(idservicio);
+                //ns= Integer.toString(nservicio);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            
+            return idservicio;
+        }
+    }*/
+    
+    @FXML
+    public void btnService(){
+        System.out.println("Hola radiola");
+        int nreserva = Integer.parseInt(numReserva.getText());
+        int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));
+        
+        System.out.println("Contratar Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
+        extrasobj.create(nreserva, id, usu);
     }
    
 

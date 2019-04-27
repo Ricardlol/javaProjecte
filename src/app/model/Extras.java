@@ -44,7 +44,7 @@ public class Extras implements Connectionsdb, actions{
      * @param precio preu del producte
      * @throws SQLException 
      */
-    private void insertProduct(String nombre, String precio) throws SQLException{
+   /* private void insertProduct(String nombre, String precio) throws SQLException{
         sSQL ="INSERT INTO "+tabla1+" (nombre, precio) VALUES ('"+nombre+"', '"+precio+"');";
         if(stmt.execute(sSQL)){
             rs=stmt.getResultSet();
@@ -55,13 +55,13 @@ public class Extras implements Connectionsdb, actions{
      * inserta registre en la taula gestionProductos
      * @param descripcion descripcio del producte
      * @throws SQLException 
-     */
+     *//*
     private void insertDescrip(String descripcion) throws SQLException{
         sSQL ="INSERT INTO "+tabla2+" VALUES ('"+id+"', '"+descripcion+"');";
         if(stmt.execute(sSQL)){
             rs=stmt.getResultSet();
         }
-    }
+    }*/
     
     /**
      * inserta el les tales extras y gestionProductos un registre
@@ -69,12 +69,14 @@ public class Extras implements Connectionsdb, actions{
      * @param precio preu del producte
      * @param descripcion descripcio del producte 
      */
-    public void create(String nombre, String precio, String descripcion) {
-        connection();
+    public void create(int nReserva, int idProducte, String usuari) {
+        connection();        
         try{
-            insertProduct(nombre, precio);
-            searchId(nombre);
-            insertDescrip(descripcion);
+            System.out.println("Estoy aqui");
+            sSQL ="INSERT INTO "+tabla2+" (fk_pk_reserva, fk_pk_productos, fk_pk_usuario) VALUES ('"+nReserva+"', '"+idProducte+"', '"+usuari+"');";
+        if(stmt.execute(sSQL)){
+            rs=stmt.getResultSet();
+        }
         }catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
@@ -101,22 +103,8 @@ public class Extras implements Connectionsdb, actions{
         }
         return rsend;
     }
-    //////////////////////////////////
-    public Object searchs(String nombre) {
-        Object rsend=null;
-        connection();
-        sSQL ="SELECT * FROM "+tabla1+" WHERE nombre='"+nombre+"';";
-        try {
-            rs=stmt.executeQuery(sSQL);
-            rsend=rs;
-        } catch (SQLException e) {
-            System.out.println("SQLException"+ e.getMessage());
-            System.out.println("SQLState"+ e.getSQLState());
-            System.out.println("VendorError"+ e.getErrorCode());
-        }
-        return rsend;
-    }
-    ///////////////////////////////////////
+    
+ 
     
     /**
      * modifica el producte de la taula extras
@@ -124,6 +112,7 @@ public class Extras implements Connectionsdb, actions{
      * @param precio preu del producte
      * @throws SQLException 
      */
+    /*
     private void modProduct(String nombre, String precio) throws SQLException{
         sSQL ="UPDATE "+tabla1+" SET nombre='"+nombre+"', precio='"+precio+"' WHERE id='"+id+"';";
         if(stmt.execute(sSQL)){
@@ -135,7 +124,7 @@ public class Extras implements Connectionsdb, actions{
      * modifica el producte de la taula gestionProductos
      * @param descripcion descripcio del producte
      * @throws SQLException 
-     */
+     *//*
     private void modDescrip(String descripcion) throws SQLException{
         sSQL ="UPDATE "+tabla2+" SET descripcion='"+descripcion+"'WHERE fk_pk_productos='"+id+"';";
         if(stmt.execute(sSQL)){
@@ -148,7 +137,7 @@ public class Extras implements Connectionsdb, actions{
      * @param nombre nom del producte
      * @param precio preu del producte
      * @param descripcion  descricio del producte
-     */
+     *//*
     public void modify(String nombre, String precio, String descripcion) {
         connection();
         try{
@@ -168,7 +157,7 @@ public class Extras implements Connectionsdb, actions{
      * obte el nom dels productes i els guarda en una llista
      * @param nombre nom del producte
      */
-    private void searchId(String nombre) {
+    public int searchId(String nombre) {
         connection();
         sSQL ="SELECT * FROM "+tabla1+" WHERE nombre='"+nombre+"';";
         try {
@@ -180,15 +169,12 @@ public class Extras implements Connectionsdb, actions{
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            return Integer.parseInt(this.id);
         }
     }
     
-    /**
-     * obte totes les dades d'un producte de la taula extras
-     * @param nombre nom del producte
-     * @return retona les dades que del producte buscat
-     */
-    @Override
+      @Override
     public Object search(String nombre) {
         Object rsend=null;
         connection();
@@ -204,48 +190,16 @@ public class Extras implements Connectionsdb, actions{
         return rsend;
     }
     
-    /**
-     * obte tots els noms dels productes de la taula extras
-     * @param 
-     * @return retona les dades que del producte buscat
-     */
-    
-    
-    
-    /**
-     * elimina el registe en la taula extras
-     * @param idEl id del producte a eliminar
-     * @param tablaAc taula de la que s'eliminara
-     */
-    private void elimnairProd(String idEl, String tablaAc){
-        if(tablaAc.equals(this.tabla1)){
-            sSQL ="DELETE FROM "+tablaAc+" WHERE id= '"+idEl+"';";
-        }else{
-            sSQL ="DELETE FROM "+tablaAc+" WHERE fk_pk_productos= '"+idEl+"';";
-        }
-        
-        try {
-            if(stmt.execute(sSQL)){
-                rs=stmt.getResultSet();
-            }
-        } catch (SQLException e) {
-            System.out.println("SQLException"+ e.getMessage());
-            System.out.println("SQLState"+ e.getSQLState());
-            System.out.println("VendorError"+ e.getErrorCode());
-        }
-    }
-    /**
-     * eliminacio del producte
-     * @param nombre nom del producte
-     * @param id2 null 
-     */
     @Override
     public void delete(String nombre, String id2) {
         connection();
         searchId(nombre);
-        elimnairProd(id, tabla1);
-        elimnairProd(id, tabla2);
-        Connectionsdb.cerrarConnect(rs,stmt);
         
+        Connectionsdb.cerrarConnect(rs,stmt);        
     }
+    
+    
+    
+    
+    
 }

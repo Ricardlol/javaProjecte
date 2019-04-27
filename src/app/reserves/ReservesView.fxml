@@ -56,7 +56,7 @@
             <TextField fx:id="numReserva" disable="true" layoutX="182.0" layoutY="237.0" />
             <Label layoutX="46.0" layoutY="283.0" text="Servicio Extra" />
             <ChoiceBox fx:id="servicioExtra" layoutX="182.0" layoutY="279.0" prefWidth="150.0" />
-            <Button fx:id="contrataService" layoutX="346.0" layoutY="279.0" mnemonicParsing="false" text="CONTRATA" />
+            <Button fx:id="contrataService" layoutX="346.0" layoutY="279.0" mnemonicParsing="false" onAction="#btnService" text="CONTRATA" />
          </children>
       </AnchorPane>
       <Separator layoutX="30.0" layoutY="454.0" prefHeight="15.0" prefWidth="447.0" />
