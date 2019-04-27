@@ -11,22 +11,22 @@
         <menus>
           <Menu mnemonicParsing="false" text="Clientes">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#clientView" text="Gestion Clientes" />
+              <MenuItem mnemonicParsing="false" onAction="#clientView" text="Gestión Clientes" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Habitacion">
+          <Menu mnemonicParsing="false" text="Habitación">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#apartamentsView" text="Gestion Habitaciones" />
+              <MenuItem mnemonicParsing="false" onAction="#apartamentsView" text="Gestión Habitaciones" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Productos">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#productsView" text="Gestion Productos" />
+              <MenuItem mnemonicParsing="false" onAction="#productsView" text="Gestión Productos" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Reservas">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#reservesView" text="Gestion Reservas" />
+                <MenuItem mnemonicParsing="false" onAction="#reservesView" text="Gestión Reservas" />
               </items>
             </Menu>
         </menus>

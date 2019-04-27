@@ -6,6 +6,7 @@
 package app.products;
 
 import app.model.Productes;
+import app.model.Authentication;
 
 import java.net.URL;
 
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -43,6 +45,12 @@ public class ProductsController implements Initializable {
     private @FXML GridPane gridpane;
     private final int fila=10;
     private final int col=3;
+    
+    // Botons
+    @FXML Button save;
+    @FXML Button modify;
+    @FXML Button delete;
+    
     /**
      * Initializes the controller class.
      */
@@ -60,6 +68,15 @@ public class ProductsController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         productes= new Productes();
         cabeceras();
+        if(Authentication.getTipus()==0){
+            deshabilitarBtn();
+        }
+    }
+    
+    private void deshabilitarBtn(){
+        save.setDisable(true);
+        modify.setDisable(true);
+        delete.setDisable(true);
     }
     
     public void setStage (Stage stage){

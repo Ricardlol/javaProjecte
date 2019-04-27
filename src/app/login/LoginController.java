@@ -69,9 +69,7 @@ public class LoginController implements Initializable {
         Authentication authentication = new Authentication(txtUser.getText(), txtPass.getText());
         //verifica que datos introducidos sean correctos
         boolean response = authentication.verifyUserData(txtUser.getText(), txtPass.getText());
-      
-        
-       if( response ){ // los datos son correctos
+        if( response ){ // los datos son correctos
             //reemplaza el stage actual por el de la vista "principalView"
             try {
                 this.stage = stage;

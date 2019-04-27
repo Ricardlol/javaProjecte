@@ -48,8 +48,8 @@
       <AnchorPane layoutX="21.0" layoutY="470.0" prefHeight="89.0" prefWidth="461.0" styleClass="backgroundGrey">
          <children>
             <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSave" text="GUARDAR" />
-            <Button layoutX="192.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
-            <Button layoutX="353.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
+            <Button fx:id="modify" layoutX="192.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
+            <Button fx:id="delete" layoutX="353.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
             <Label fx:id="errorGlobal" layoutX="149.0" layoutY="7.0" styleClass="texterr" text="Los campos con * son obligatorios" />
          </children>
       </AnchorPane>
