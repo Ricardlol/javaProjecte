@@ -94,10 +94,10 @@ public class Apartament implements Connectionsdb, actions{
      */
     
     @Override
-    public Object search(String nhab) {
+    public Object search(String id) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE nhabitacion='"+nhab+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE nhabitacion ='"+id+"' OR piso ='"+id+"' OR precio = '"+id+"' OR estado LIKE('"+id+"') OR tipo LIKE('"+id+"') OR caracteristicas LIKE('%"+id+"%');";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;

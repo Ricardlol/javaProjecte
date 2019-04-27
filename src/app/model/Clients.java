@@ -96,7 +96,7 @@ public class Clients implements Connectionsdb, actions{
     public Object search(String id) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE documento='"+id+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE documento LIKE('"+id+"') OR nombre LIKE('"+id+"') OR nacionalidad LIKE('"+id+"') OR email LIKE('"+id+"') OR telefono LIKE('"+id+"');";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;
