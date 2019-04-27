@@ -6,6 +6,7 @@
 package app.apartament;
 
 import app.model.Apartament;
+import app.model.Authentication;
 
 import java.net.URL;
 
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -42,12 +44,6 @@ public class ApartamentController implements Initializable {
     @FXML TextField nhabSearch;
     
     // all Labels in page
-    @FXML Label errorTextHabit;
-    @FXML Label errorTextPiso;
-    @FXML Label errorTextCara;
-    @FXML Label errorTextPrecio;
-    @FXML Label errorTextEstado;
-    @FXML Label errorTextTipo;
     @FXML Label errorTextGlobal;
     
     // menuButton in page
@@ -55,6 +51,12 @@ public class ApartamentController implements Initializable {
     
     // table in page
     @FXML GridPane gridpane;
+    
+    // Botons
+    @FXML Button save;
+    @FXML Button modify;
+    @FXML Button delete;
+    
     int fila=10;
     int col=5;
     
@@ -69,9 +71,18 @@ public class ApartamentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         apartamentObj = new Apartament();
         cabeceras();
+        if(Authentication.getTipus()==0){
+            deshabilitarBtn();
+        }
     }
     
-     public void btnSave(){
+    private void deshabilitarBtn(){
+        save.setDisable(true);
+        modify.setDisable(true);
+        delete.setDisable(true);
+    }
+    
+    public void btnSave(){
         System.out.println("Guardar");
         apartamentObj.create(nHab.getText(), piso.getText(), caract.getText(), precio.getText(), estado.getText(), tipo.getText());
     }

@@ -5,6 +5,8 @@
  */
 package app.clients;
 
+import app.model.Authentication;
+
 import java.net.URL;
 
 import java.util.ResourceBundle;
@@ -20,11 +22,11 @@ import app.model.Clients;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.MenuButton;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -45,14 +47,7 @@ public class ClientsController implements Initializable{
     @FXML TextField nameSearch;
     
     // all Labels in page
-    @FXML Label errorTextDocumentation;
-    @FXML Label errorTextName;
-    @FXML Label errorTextTel;
-    @FXML Label errorTextEmail;
-    @FXML Label errorTextNac;
-    @FXML Label errorTextOc;
-    @FXML Label errorTextCiv;
-    @FXML Label errorTextIncorrectEmail;
+    @FXML Label errorTextGlobal;
     
     // menuButton in page
     @FXML MenuButton optionDoc;
@@ -61,6 +56,11 @@ public class ClientsController implements Initializable{
     @FXML GridPane gridpane;
     int fila=10;
     int col=4;
+    
+    // Botons
+    @FXML Button save;
+    @FXML Button modify;
+    @FXML Button delete;
     
     private Clients clientobj;
     
@@ -76,6 +76,16 @@ public class ClientsController implements Initializable{
         //oculta mensaje de error
         ocultarMensajes();
         clientobj = new Clients();
+        cabeceras();
+        if(Authentication.getTipus()==0){
+            deshabilitarBtn();
+        }
+    }
+    
+    private void deshabilitarBtn(){
+        save.setDisable(true);
+        modify.setDisable(true);
+        delete.setDisable(true);
     }
     
     public void changeToDNI(){
@@ -143,77 +153,8 @@ public class ClientsController implements Initializable{
         }
     }
     
-    private boolean comprovarCampos(){
-        boolean result= true;
-        result=comprovarDocumentacion();
-        if (client.getText().length()==0){
-            errorTextName.setVisible(true);
-            result= false;
-        }
-        if (tel.getText().length()==0){
-            errorTextTel.setVisible(true);
-            result= false;
-        }
-        if (email.getText().length()==0){
-            errorTextEmail.setVisible(true);
-            result= false;
-        }
-        if(email.getText().length()>0){
-            boolean mensaje=validate(4,email.getText());
-            if(!mensaje){
-                errorTextIncorrectEmail.setVisible(true);
-                result= false;
-            }
-        }
-        if (nac.getText().length()==0){
-            errorTextNac.setVisible(true);
-            result= false;
-        }
-        if (ocupation.getText().length()==0){
-            errorTextOc.setVisible(true);
-            result= false;
-        }
-        if (status.getText().length()==0){
-            errorTextCiv.setVisible(true);
-            result= false;
-        }
-        return result;
-    }
-    
-    private boolean comprovarDocumentacion(){
-        boolean result=true;
-        if(documnetation.getText().length()==0 && optionDoc.getText().equals("----")){
-            errorTextDocumentation.setText("Rellena el campo i elige una opcion");
-            errorTextDocumentation.setVisible(true);
-            result = false;
-        }else if(documnetation.getText().length()==0){
-            errorTextDocumentation.setVisible(true);
-            result = false;
-        }else if(optionDoc.getText().equals("----")){
-            errorTextDocumentation.setText("Elige una opcion");
-            errorTextDocumentation.setVisible(true);
-            result = false;
-        }
-        if (result){
-            result = validate(1,optionDoc.getText());
-            System.out.println(result);
-            if (result==false){
-                errorTextDocumentation.setText(optionDoc.getText()+" opcio incorrecta");
-                errorTextDocumentation.setVisible(true);
-            }
-        }
-        return result;
-    }
-    
     private void ocultarMensajes(){
-        errorTextDocumentation.setVisible(false);
-        errorTextName.setVisible(false);
-        errorTextTel.setVisible(false);
-        errorTextEmail.setVisible(false);
-        errorTextNac.setVisible(false);
-        errorTextOc.setVisible(false);
-        errorTextCiv.setVisible(false);
-        errorTextIncorrectEmail.setVisible(false);
+       errorTextGlobal.setVisible(false);
     }
     
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

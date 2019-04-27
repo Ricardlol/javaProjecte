@@ -69,8 +69,8 @@
       <AnchorPane layoutX="17.0" layoutY="479.0" prefHeight="86.0" prefWidth="498.0" styleClass="backgroundGrey">
          <children>
             <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSave" text="GUARDAR" />
-            <Button layoutX="189.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
-            <Button layoutX="353.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
+            <Button fx:id="modify" layoutX="189.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
+            <Button fx:id="delete" layoutX="353.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
             <Label fx:id="errorTextGlobal" layoutX="151.0" layoutY="6.0" prefHeight="16.0" prefWidth="196.0" styleClass="texterr" text="los campos con * son obligatorios">
                <font>
                   <Font size="10.0" />
