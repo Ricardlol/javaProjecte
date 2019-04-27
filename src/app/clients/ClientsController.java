@@ -73,20 +73,9 @@ public class ClientsController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       //oculta mensaje de error
-       ocultarMensajes();
-       clientobj = new Clients();
-       for(int x=0;x<col; x++){
-            if(x==0){
-                gridpane.add(new Label("DOCUMENTO"), x,0);
-            }else if(x==1){
-                gridpane.add(new Label("NOMBRE"), x,0);
-            }else if(x==2){
-                gridpane.add(new Label("TEL"), x,0);
-            }else{
-                gridpane.add(new Label("EMAIL"), x,0);
-            }
-        }
+        //oculta mensaje de error
+        ocultarMensajes();
+        clientobj = new Clients();
     }
     
     public void changeToDNI(){
@@ -120,8 +109,24 @@ public class ClientsController implements Initializable{
         clientobj.delete(documnetation.getText(), null);
     }
     
+    private void cabeceras(){
+        for(int x=0;x<col; x++){
+            if(x==0){
+                gridpane.add(new Label("DOCUMENTO"), x,0);
+            }else if(x==1){
+                gridpane.add(new Label("NOMBRE"), x,0);
+            }else if(x==2){
+                gridpane.add(new Label("TEL"), x,0);
+            }else{
+                gridpane.add(new Label("EMAIL"), x,0);
+            }
+        }
+    }
+    
     public void btnSearch(){
         int i=1;
+        gridpane.getChildren().clear();
+        cabeceras();
         ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
         try {
             while(result.next()) {
