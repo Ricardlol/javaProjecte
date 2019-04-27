@@ -2,11 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="950.0" styleClass="background_Productes" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.products.ProductsController">
@@ -20,21 +22,21 @@
       <AnchorPane layoutX="29.0" layoutY="94.0" prefHeight="358.0" prefWidth="455.0" styleClass="backgroundGrey">
          <children>
             <Label layoutX="70.0" layoutY="15.0" styleClass="labels" text="NOMBRE" />
-            <Label fx:id="errorTextNomProduct" layoutX="130.0" layoutY="13.0" prefHeight="16.0" prefWidth="5.0" styleClass="texterr" text="*">
+            <Label layoutX="130.0" layoutY="13.0" prefHeight="16.0" prefWidth="5.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
             <TextField fx:id="nombreProduct" layoutX="158.0" layoutY="10.0" prefHeight="26.0" prefWidth="220.0" />
             <Label layoutX="80.0" layoutY="60.0" styleClass="labels" text="PRECIO" />
-            <Label fx:id="errorTextprecioProd" layoutX="130.0" layoutY="58.0" prefHeight="16.0" prefWidth="5.0" styleClass="texterr" text="*">
+            <Label layoutX="130.0" layoutY="58.0" prefHeight="16.0" prefWidth="5.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
             <TextField fx:id="precioProduct" layoutX="157.0" layoutY="55.0" prefHeight="26.0" prefWidth="220.0" />
-            <Label layoutX="45.0" layoutY="101.0" styleClass="labels" text="DESCRIPCIÓ" />
-            <Label fx:id="errorTextDescprod" layoutX="130.0" layoutY="98.0" prefHeight="16.0" prefWidth="3.0" styleClass="texterr" text="*">
+            <Label layoutX="45.0" layoutY="101.0" styleClass="labels" text="DESCRIPCIÓN" />
+            <Label layoutX="130.0" layoutY="98.0" prefHeight="16.0" prefWidth="3.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
@@ -57,7 +59,25 @@
             <Label layoutX="33.0" layoutY="14.0" styleClass="labels" text="PRODUCTE" />
             <TextField fx:id="prodBuscar" layoutX="128.0" layoutY="10.0" />
             <Button layoutX="324.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
-            <ListView layoutX="33.0" layoutY="50.0" prefHeight="369.0" prefWidth="367.0" />
+            <GridPane fx:id="gridpane" layoutX="25.0" layoutY="52.0" prefHeight="393.0" prefWidth="371.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="107.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="72.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="153.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>
