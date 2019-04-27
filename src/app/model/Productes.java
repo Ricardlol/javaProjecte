@@ -128,7 +128,7 @@ public class Productes implements Connectionsdb, actions{
     }
     
     /**
-     * obte el id del producte i el guarda en uan variable
+     * opté el id del producte i el guarda en uan variable
      * @param nombre nom del producte
      */
     private void searchId(String nombre) {
@@ -147,7 +147,7 @@ public class Productes implements Connectionsdb, actions{
     }
     
     /**
-     * obte totes les dades d'un producte de la taula extras
+     * opté totes les dades d'un producte de la taula extras
      * @param nombre nom del producte
      * @return retona les dades que del producte buscat
      */
@@ -156,6 +156,27 @@ public class Productes implements Connectionsdb, actions{
         Object rsend=null;
         connection();
         sSQL ="SELECT * FROM "+tabla1+" WHERE nombre='"+nombre+"';";
+        try {
+            rs=stmt.executeQuery(sSQL);
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return rsend;
+    }
+    
+    /**
+     * opté totes les dades d'un producte de la taula extras
+     * @param id id del producte el qual volem la descripcio
+     * @return retona les dades que del producte buscat
+     */
+    
+    public Object searchDescricio(String id) {
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla2+" WHERE fk_pk_productos='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;
