@@ -68,20 +68,7 @@ public class ApartamentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         apartamentObj = new Apartament();
-        for(int x=0;x<col; x++){
-            if(x==0){
-                gridpane.add(new Label("NUM HAB"), x,0);
-            }else if(x==1){
-                gridpane.add(new Label("PISO"), x,0);
-            }else if(x==2){
-                gridpane.add(new Label("PRECIO"), x,0);
-            }else if(x==3){
-                gridpane.add(new Label("ESTADO"), x,0);
-            }else{
-                gridpane.add(new Label("TIPO"), x,0);
-            }
-        }
-        
+        cabeceras();
     }
     
      public void btnSave(){
@@ -97,8 +84,26 @@ public class ApartamentController implements Initializable {
         apartamentObj.delete(nHab.getText(), piso.getText());
     }
     
+    private void cabeceras(){
+        for(int x=0;x<col; x++){
+            if(x==0){
+                gridpane.add(new Label("NUM HAB"), x,0);
+            }else if(x==1){
+                gridpane.add(new Label("PISO"), x,0);
+            }else if(x==2){
+                gridpane.add(new Label("PRECIO"), x,0);
+            }else if(x==3){
+                gridpane.add(new Label("ESTADO"), x,0);
+            }else{
+                gridpane.add(new Label("TIPO"), x,0);
+            }
+        }
+    }
+    
     public void btnSearch(){
         int i=1;
+        gridpane.getChildren().clear();
+        cabeceras();
         ResultSet result = (ResultSet) apartamentObj.search(nhabSearch.getText());
         try {
             while(result.next()) {
