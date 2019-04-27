@@ -6,8 +6,8 @@
 package app.reserves;
 
 import app.model.Authentication;
-
 import app.model.Reserves;
+import app.model.Extras;
 
 //Otros imports
 import java.net.URL;
@@ -69,6 +69,7 @@ public class ReservesController implements Initializable {
     // all ChoiceBox in page
     //@FXML private ChoiceBox cash;
     @FXML ChoiceBox<String> cash;
+    @FXML ChoiceBox<String> servicioExtra;
     
     
   
@@ -77,6 +78,7 @@ public class ReservesController implements Initializable {
      */
     
     private Reserves reservesobj;
+    private Extras extrasobj;
     
     private String usu = Authentication.getUsuari();
 
@@ -84,6 +86,7 @@ public class ReservesController implements Initializable {
    
     private String id;
     ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
+    ObservableList<String> nomproductes = FXCollections.observableArrayList();
     
     
     private Stage stage;
@@ -99,15 +102,23 @@ public class ReservesController implements Initializable {
         
         //String nresrv;
         
-        reservesobj = new Reserves();        
+        reservesobj = new Reserves(); 
+        extrasobj = new Extras();
         cash.setItems(availableChoices);
-        cash.setValue("Pendiente");        
+        cash.setValue("Pendiente");  
+        
         
        //System.out.println("Hello "+getNumReserva());
        numReserva.setText(getNumReserva());
+       
+       getServiciosExtras();
+        servicioExtra.setItems(nomproductes);
+        servicioExtra.setValue("Peluqueria");
+       
         //getNumReserva();
         // deshabilitar las fechas futuras
         
+        //getNombreProductes()
         
         
         
@@ -117,6 +128,8 @@ public class ReservesController implements Initializable {
         this.stage = stage;
     }
     
+    
+    @FXML
     public String getNumReserva(){
         int nreserva = 0 ;
         String nr="";
@@ -125,7 +138,6 @@ public class ReservesController implements Initializable {
         try {
             while(result.next()) {
                 String id = result.getString("id");
-                System.out.println("Hola "+id +" "+"\n");
                 nreserva = Integer.parseInt(id);
                 nreserva++;
                 System.out.println(nreserva);
@@ -138,6 +150,23 @@ public class ReservesController implements Initializable {
         }finally{
             
             return nr;
+        }
+    }
+    
+    @FXML
+    public void getServiciosExtras(){
+        ResultSet result = (ResultSet) extrasobj.getNombreProductes();
+        try {
+            while(result.next()) {
+                nomproductes.add(result.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            
+           
         }
     }
    
@@ -237,12 +266,6 @@ public class ReservesController implements Initializable {
         Period period = Period.between(fechaIni, fechaFin);        
         return Preuapartamento * (float) period.getDays();
     }
-    
-    
-    
-    
-   
-    
 }
 
 
