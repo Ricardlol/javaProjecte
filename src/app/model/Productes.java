@@ -131,9 +131,9 @@ public class Productes implements Connectionsdb, actions{
      * opté el id del producte i el guarda en uan variable
      * @param nombre nom del producte
      */
-    private void searchId(String nombre) {
+    private void searchId(String id) {
         connection();
-        sSQL ="SELECT * FROM "+tabla1+" WHERE nombre='"+nombre+"';";
+        sSQL ="SELECT * FROM "+tabla1+" WHERE nombre LIKE ('"+id+"') OR precio ='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             while(rs.next()){
