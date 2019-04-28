@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  *
@@ -88,18 +87,17 @@ public class Reserves implements Connectionsdb, actions{
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
-        }finally{            
-            return rsend;
         }
+        return rsend;
     }
     
     
     
     @Override
-    public Object search(String cliente) {
+    public Object search(String id) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente='"+cliente+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente Like('"+id+"') OR importe ='"+id+"' OR abono ='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;
