@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  *
@@ -73,11 +72,32 @@ public class Reserves implements Connectionsdb, actions{
         }
     }
     
-    @Override
-    public Object search(String cliente) {
+    public Object getNumeroReserva(){
+        System.out.println("Max num reserva");
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente='"+cliente+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE id IN (SELECT MAX(id) FROM "+tabla+");";
+        
+       // sSQL ="SELECT * FROM "+tabla+" WHERE id='23';";
+        //SELECT MAX(id)FROM reserva;
+        try {
+            rs=stmt.executeQuery(sSQL);
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return rsend;
+    }
+    
+    
+    
+    @Override
+    public Object search(String id) {
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente Like('"+id+"') OR importe ='"+id+"' OR abono ='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;

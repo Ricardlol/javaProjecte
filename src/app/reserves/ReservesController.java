@@ -6,8 +6,8 @@
 package app.reserves;
 
 import app.model.Authentication;
-
 import app.model.Reserves;
+import app.model.Extras;
 
 //Otros imports
 import java.net.URL;
@@ -22,23 +22,19 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 
-
-
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 
 
 /**
@@ -47,9 +43,6 @@ import javafx.collections.ObservableList;
  */
 public class ReservesController implements Initializable {
     
-    
-   
-    
     // all TextFields in page
     @FXML TextField idApartament;
     @FXML TextField horaEntrada;
@@ -57,7 +50,7 @@ public class ReservesController implements Initializable {
     @FXML TextField Import;
     @FXML TextField idClient;
     @FXML TextField reservaBuscar;
-    
+    @FXML TextField numReserva;
     // all Labels in page
    // @FXML Label errorTextCliente;
     //@FXML Label errorDateIniEmpty;
@@ -69,52 +62,148 @@ public class ReservesController implements Initializable {
     // all ChoiceBox in page
     //@FXML private ChoiceBox cash;
     @FXML ChoiceBox<String> cash;
+    @FXML ChoiceBox<String> servicioExtra;
     
+    // table in page
+    @FXML GridPane gridpane;
+    int fila=10;
+    int col=3;
     
-  
-   /**
-     * Initializes the controller class.
-     */
+    //buttons
+    @FXML private Button save;
     
     private Reserves reservesobj;
-    
+    private Extras extrasobj;
+  
     private String usu = Authentication.getUsuari();
 
     private final float Preuapartamento = (float) 100.00;
-   
+
     private String id;
-    ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagado");
-    
-    
+    ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
+    ObservableList<String> nomproductes = FXCollections.observableArrayList();
+        
     private Stage stage;
-    @FXML
-    private Button save;
-    
-   
-    
-    
+
+    /**
+     * Initializes the controller class.
+     */
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-       
         
-        reservesobj = new Reserves();        
+        reservesobj = new Reserves(); 
+        extrasobj = new Extras();
         cash.setItems(availableChoices);
-        cash.setValue("Pendiente");
-        
-        // deshabilitar las fechas futuras
-        
+        cash.setValue("Pendiente");  
+        cabeceras();
         
         
-        
+        //System.out.println("Hello "+getNumReserva());
+        numReserva.setText(getNumReserva());
+       
+        getServiciosExtras();
+        servicioExtra.setItems(nomproductes);
+
     }
     
+    private void cabeceras(){
+        for(int x=0;x<col; x++){
+            if(x==0){
+                gridpane.add(new Label("CLIENTE"), x,0);
+            }else if(x==1){
+                gridpane.add(new Label("IMPORTE"), x,0);
+            }else{
+                gridpane.add(new Label("ABONO"), x,0);
+            }
+        }
+    }
     public void setStage (Stage stage){
         this.stage = stage;
     }
-   
-
+    
+    public String getNumReserva(){
+        int nreserva = 0 ;
+        String nr="";
+        System.out.println("Buscar id reserva");
+        ResultSet result = (ResultSet) reservesobj.getNumeroReserva();
+        try {
+            while(result.next()) {
+                String id = result.getString("id");
+                nreserva = Integer.parseInt(id);
+                nreserva++;
+                System.out.println(nreserva);
+                nr= Integer.toString(nreserva);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return nr;
+    }
+    
+    public void getServiciosExtras(){
+        ResultSet result = (ResultSet) extrasobj.getNombreProductes();
+        try {
+            while(result.next()) {
+                nomproductes.add(result.getString("nombre"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+    }
+    
+    public String getidExtras(String nombre){
+        ResultSet result = (ResultSet) extrasobj.search(nombre);
+        String idstr="";
+        try {
+            while(result.next()) {
+               idstr  = result.getString("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return idstr;
+    }
+    /*
     @FXML
+    public int idServicio(String nombre){
+        int idservicio = 0 ;
+        String ns="";
+        System.out.println("Buscar id Servicio");
+        ResultSet result = (ResultSet) reservesobj.search(nombre);
+        try {
+            while(result.next()) {
+                String id = result.getString("id");
+                idservicio = Integer.parseInt(id);
+                
+                System.out.println(idservicio);
+                //ns= Integer.toString(nservicio);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{
+            
+            return idservicio;
+        }
+    }*/
+    
+    public void btnService(){
+        System.out.println("Hola radiola");
+        int nreserva = Integer.parseInt(numReserva.getText());
+        int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));
+        
+        System.out.println("Contratar Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
+        extrasobj.create(nreserva, id, usu);
+    }
+   
     public void btnSave() {
         System.out.println(hora());
         String h = hora();
@@ -129,7 +218,6 @@ public class ReservesController implements Initializable {
         reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
     }
 
-    @FXML
     public void btnModify() {
         float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
         Import.setText(Float.toString(importEstada));
@@ -150,19 +238,21 @@ public class ReservesController implements Initializable {
         reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), "Pendiente", id);
     }
 
-    @FXML
     public void btnDelete() {
         reservesobj.delete(idClient.getText(), null);
     }
 
-    @FXML
     public void btnSearch() {
-        System.out.println("Buscar");
+        int i=1;
+        gridpane.getChildren().clear();
+        cabeceras();
         ResultSet result = (ResultSet) reservesobj.search(reservaBuscar.getText());
         try {
             while(result.next()) {
-                String id = result.getString("id");
-                System.out.println(id +" "+"\n");
+                gridpane.add(new Label(result.getString("fk_cliente")),0,i);
+                gridpane.add(new Label(result.getString("importe")),1,i);
+                gridpane.add(new Label(result.getString("abono")),2,i);
+                i++;
             }
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -209,12 +299,6 @@ public class ReservesController implements Initializable {
         Period period = Period.between(fechaIni, fechaFin);        
         return Preuapartamento * (float) period.getDays();
     }
-    
-    
-    
-    
-   
-    
 }
 
 
