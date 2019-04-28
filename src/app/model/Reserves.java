@@ -73,6 +73,28 @@ public class Reserves implements Connectionsdb, actions{
         }
     }
     
+    public Object getNumeroReserva(){
+        System.out.println("Max num reserva");
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla+" WHERE id IN (SELECT MAX(id) FROM "+tabla+");";
+        
+       // sSQL ="SELECT * FROM "+tabla+" WHERE id='23';";
+        //SELECT MAX(id)FROM reserva;
+        try {
+            rs=stmt.executeQuery(sSQL);
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }finally{            
+            return rsend;
+        }
+    }
+    
+    
+    
     @Override
     public Object search(String cliente) {
         Object rsend=null;
