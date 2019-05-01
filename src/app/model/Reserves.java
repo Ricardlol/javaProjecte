@@ -23,6 +23,7 @@ public class Reserves implements Connectionsdb, actions{
     private ResultSet rs = null;
     private String tabla = "reserva";
     private String tabla2 = "cliente";
+    private String tabla3 = "contrata";
     
     
     private void connection(){
@@ -93,6 +94,8 @@ public class Reserves implements Connectionsdb, actions{
         }
         return rsend;
     }
+    
+    
     
     public Object searchCliente(String doc) {
         System.out.println("Buscando clientes");

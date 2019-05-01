@@ -196,6 +196,8 @@ public class ReservesController implements Initializable {
         }
     }
     
+    
+    
     public String getidExtras(String nombre){
         ResultSet result = (ResultSet) extrasobj.search(nombre);
         String idstr="";
@@ -235,37 +237,79 @@ public class ReservesController implements Initializable {
         }
     }*/
     
+    public boolean serviciosContratados(int nreserva, int producto){
+        ResultSet result = (ResultSet) extrasobj.getSExtrasContratados(nreserva, producto);
+        extrasobj.getSExtrasContratados(nreserva, producto);
+        boolean servicio=false;
+        System.out.println("Hola1");
+        try {
+            System.out.println("lineas servicios contratados: "+result.getFetchSize());
+            while(result.next()) {               
+                System.out.println("Producto Contratado: "+result.getString("fk_pk_reserva")+"---"+result.getString("fk_pk_productos"));
+                servicio=true;
+            }
+            
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return servicio;
+    
+    }
+    
     public void btnService(){
         System.out.println("Hola Extra");
+        int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));
         int nreserva = Integer.parseInt(numReserva.getText());
         int bdreserva = Integer.parseInt(getNumReserva());
         System.out.println("numReserva: "+nreserva+" -- bdNumReserva: "+bdreserva);
-        if(bdreserva - nreserva == 1){            
-            int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));        
-            System.out.println("Contratado el Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
-            extrasobj.create(nreserva, id, usu);
+        System.out.println("numReserva: "+numReserva.getText()+" Servicio: "+ Integer.toString(id));
+        boolean contratado = serviciosContratados(nreserva, id);
+        System.out.println(contratado);
+        if(!contratado){
+            if(bdreserva - nreserva >= 1){ 
+                extrasobj.create(nreserva, id, usu);
+                txtMsgError.setText("Contratado el servicio "+servicioExtra.getValue());
+                txtMsgError.setVisible(true);
+            }else{
+                System.out.println("Aun no está creada la reserva "+nreserva+" y no puedes contratar el servicio");
+                txtMsgError.setText("Aun no está creada la reserva "+nreserva+"\ny no puedes contratar el servicio");
+                txtMsgError.setVisible(true);
+            }
         }else{
-            System.out.println("Aun no está creada la reserva "+nreserva+" Creala primero y después contrata el servicio");
-            txtMsgError.setText("Aun no está creada la reserva "+nreserva+"\nCreala primero y después contrata el servicio");
-            txtMsgError.setVisible(true);
+            System.out.println("El servicio "+servicioExtra.getValue()+" Ya lo tienes contratado \ny no lo puedes volver a contratar");
+            txtMsgError.setText("El servicio "+servicioExtra.getValue()+" Ya lo tienes contratado \ny no lo puedes volver a contratar");
+            txtMsgError.setVisible(true); 
         }
+        
         
     }    
     
     public void btnSave() throws ParseException{
-      
-        if(!erroresEntradas()){
-           System.out.println(hora());
-                String h = hora();
-                horaEntrada.setText(h);
-                horaSalida.setText("Pendiente");
-                float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-                Import.setText(Float.toString(importEstada));
+        int nreserva = Integer.parseInt(numReserva.getText());
+        int bdreserva = Integer.parseInt(getNumReserva());
+        System.out.println("numReserva: "+nreserva+" -- bdNumReserva: "+bdreserva);
+        if(bdreserva - nreserva == 0){ 
+            if(!erroresEntradas()){
+               System.out.println(hora());
+                    String h = hora();
+                    horaEntrada.setText(h);
+                    horaSalida.setText("Pendiente");
+                    float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+                    Import.setText(Float.toString(importEstada));
 
-                System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
+                    System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
 
-               //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-                reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue()); 
+                   //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+                    reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue()); 
+                    txtMsgError.setText("Contratada la reserva "+numReserva.getText());
+                    txtMsgError.setVisible(true);
+            }
+        }else{
+            System.out.println("La reserva "+nreserva+" ya está creada");
+            txtMsgError.setText("La reserva "+nreserva+" ya está creada");
+            txtMsgError.setVisible(true); 
         }
                 
          
@@ -275,29 +319,36 @@ public class ReservesController implements Initializable {
     
 
     public void btnModify() throws ParseException{
-        
-        if(!erroresEntradas()){
-            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-            Import.setText(Float.toString(importEstada));
+        int nreserva = Integer.parseInt(numReserva.getText());
+        int bdreserva = Integer.parseInt(getNumReserva());
+        System.out.println("numReserva: "+nreserva+" -- bdNumReserva: "+bdreserva);
+        if(bdreserva - nreserva == 1){ 
+            if(!erroresEntradas()){
+                float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+                Import.setText(Float.toString(importEstada));
 
-            //ResultSet result = (ResultSet) reservesobj.search(idClient.getText());
-            ResultSet result = (ResultSet) reservesobj.search(numReserva.getText());
-            //numReserva
-            try {
-                while(result.next()) {
-                   id = result.getString("id");
+                //ResultSet result = (ResultSet) reservesobj.search(idClient.getText());
+                ResultSet result = (ResultSet) reservesobj.search(numReserva.getText());
+                //numReserva
+                try {
+                    while(result.next()) {
+                       id = result.getString("id");
+                    }
+                } catch (SQLException e) {
+                    System.out.println("SQLException"+ e.getMessage());
+                    System.out.println("SQLState"+ e.getSQLState());
+                    System.out.println("VendorError"+ e.getErrorCode());
                 }
-            } catch (SQLException e) {
-                System.out.println("SQLException"+ e.getMessage());
-                System.out.println("SQLState"+ e.getSQLState());
-                System.out.println("VendorError"+ e.getErrorCode());
+                System.out.println("Modificada: ");
+                System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue()+ " "+id);
+                reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue(), id);
             }
-
-            
-            reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue(), id);
-           
-    
+        }else{
+            System.out.println("Aun no está creada la reserva "+nreserva+" Creala primero y después la podrás modificar");
+            txtMsgError.setText("Aun no está creada la reserva "+nreserva+"\nCreala primero y después la podrás modificar");
+            txtMsgError.setVisible(true); 
         }
+        
     }
 
     public void btnDelete() {
