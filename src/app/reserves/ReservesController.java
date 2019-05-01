@@ -264,8 +264,11 @@ public class ReservesController implements Initializable {
         int diasReserva=0;
         if(fechaini.getValue() != null && fechafin.getValue() != null){
             diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
-        }        
-        if(!clienteEncontrado){
+        }
+        if(idClient.getText().equalsIgnoreCase("") && fechaini.getValue() == null && fechafin.getValue() == null){
+            txtMsgError.setText("Tienes que rellenar los \ntres campos obligatorios");
+            txtMsgError.setVisible(true);
+        }else if(!clienteEncontrado){
             System.out.println("Cliente "+idClient.getText()+" No encontrado");
             errorClienteNoEncontrado.setVisible(true);
         }else if(fechaini.getValue() == null && fechafin.getValue() == null){
