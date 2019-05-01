@@ -208,7 +208,7 @@ public class ReservesController implements Initializable {
         extrasobj.create(nreserva, id, usu);
     }
     
-    ////Buena
+    ////Bueno_v1.1
     /*
     public void btnSave() {
         System.out.println(hora());
@@ -225,7 +225,8 @@ public class ReservesController implements Initializable {
     
     }*/
     /////
-    
+    ///Bueno_v1.2
+    /*
     public void btnSave() {
         boolean clienteEncontrado=encontrarCliente();
         int diasReserva=0;
@@ -254,16 +255,49 @@ public class ReservesController implements Initializable {
 
            //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
             reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
-    
-        
-        
-        
         }
-       
-       
-        
     }
+    */
     
+    public void btnSave() {
+        boolean clienteEncontrado=encontrarCliente();
+        int diasReserva=0;
+        if(fechaini.getValue() != null && fechafin.getValue() != null){
+            diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
+        }        
+        if(!clienteEncontrado){
+            System.out.println("Cliente "+idClient.getText()+" No encontrado");
+            errorClienteNoEncontrado.setVisible(true);
+        }else if(fechaini.getValue() == null && fechafin.getValue() == null){
+            System.out.println("Las Fechas Tienen que tener valor");
+            txtMsgError.setText("Las Fechas Tienen que tener valor");
+            txtMsgError.setVisible(true);
+        }else if(fechaini.getValue() == null){
+            System.out.println("La Fecha de Entrada tiene que tener valor"); 
+            txtMsgError.setText("La Fecha de Entrada tiene que tener valor");
+            txtMsgError.setVisible(true);
+        }else if(fechafin.getValue() == null){
+            System.out.println("La Fecha de Salida tiene que tener valor");
+            txtMsgError.setText("La Fecha de Salida tiene que tener valor");
+            txtMsgError.setVisible(true);
+        }else if(fechaini.getValue() != null && fechafin.getValue() != null && diasReserva < 1){
+            System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");
+            txtMsgError.setText("Introduce una fecha de salida \nposterior a la fecha de entrada");
+            txtMsgError.setVisible(true);
+        }else{
+            System.out.println(hora());
+            String h = hora();
+            horaEntrada.setText(h);
+            horaSalida.setText("Pendiente");
+            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+            Import.setText(Float.toString(importEstada));
+
+            System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
+
+           //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+            reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
+        }
+    }
    
     
     
