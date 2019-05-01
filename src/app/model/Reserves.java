@@ -119,7 +119,7 @@ public class Reserves implements Connectionsdb, actions{
     public Object search(String id) {
         Object rsend=null;
         connection();
-        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente Like('"+id+"') OR importe ='"+id+"' OR abono ='"+id+"';";
+        sSQL ="SELECT * FROM "+tabla+" WHERE fk_cliente Like('"+id+"') OR importe ='"+id+"' OR abono ='"+id+"' OR id ='"+id+"';";
         try {
             rs=stmt.executeQuery(sSQL);
             rsend=rs;

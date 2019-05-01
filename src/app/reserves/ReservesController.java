@@ -17,6 +17,9 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.fxml.Initializable;
@@ -34,6 +37,7 @@ import javafx.scene.control.TextField;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -232,164 +236,24 @@ public class ReservesController implements Initializable {
     }*/
     
     public void btnService(){
-        System.out.println("Hola radiola");
+        System.out.println("Hola Extra");
         int nreserva = Integer.parseInt(numReserva.getText());
-        int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));
+        int bdreserva = Integer.parseInt(getNumReserva());
+        System.out.println("numReserva: "+nreserva+" -- bdNumReserva: "+bdreserva);
+        if(bdreserva - nreserva == 1){            
+            int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));        
+            System.out.println("Contratado el Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
+            extrasobj.create(nreserva, id, usu);
+        }else{
+            System.out.println("Aun no está creada la reserva "+nreserva+" Creala primero y después contrata el servicio");
+            txtMsgError.setText("Aun no está creada la reserva "+nreserva+"\nCreala primero y después contrata el servicio");
+            txtMsgError.setVisible(true);
+        }
         
-        System.out.println("Contratar Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
-        extrasobj.create(nreserva, id, usu);
-    }
+    }    
     
-    ////Bueno_v1.1
-    /*
-    public void btnSave() {
-        System.out.println(hora());
-        String h = hora();
-        horaEntrada.setText(h);
-        horaSalida.setText("Pendiente");
-        float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-        Import.setText(Float.toString(importEstada));
-        
-        System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
+    public void btnSave() throws ParseException{
       
-       //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-        reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
-    
-    }*/
-    /////
-    ///Bueno_v1.2
-    /*
-    public void btnSave() {
-        boolean clienteEncontrado=encontrarCliente();
-        int diasReserva=0;
-        if(fechaini.getValue() != null && fechafin.getValue() != null){
-            diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
-        }        
-        if(!clienteEncontrado){
-            System.out.println("Cliente "+idClient.getText()+" No encontrado");
-        }else if(fechaini.getValue() == null && fechafin.getValue() == null){
-            System.out.println("Las Fechas Tienen que tener valor"); 
-        }else if(fechaini.getValue() == null){
-            System.out.println("La Fecha de Entrada tiene que tener valor"); 
-        }else if(fechafin.getValue() == null){
-            System.out.println("La Fecha de Salida tiene que tener valor"); 
-        }else if(fechaini.getValue() != null && fechafin.getValue() != null && diasReserva < 1){
-             System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");   
-        }else{
-            System.out.println(hora());
-            String h = hora();
-            horaEntrada.setText(h);
-            horaSalida.setText("Pendiente");
-            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-            Import.setText(Float.toString(importEstada));
-
-            System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
-
-           //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-            reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
-        }
-    }
-    */
-    ///Bueno_v1.3
-    /*
-    public void btnSave() {
-        boolean clienteEncontrado=encontrarCliente();
-        int diasReserva=0;
-        if(fechaini.getValue() != null && fechafin.getValue() != null){
-            diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
-        }
-        if(idClient.getText().equalsIgnoreCase("") && fechaini.getValue() == null && fechafin.getValue() == null){
-            txtMsgError.setText("Tienes que rellenar los \ntres campos obligatorios");
-            txtMsgError.setVisible(true);
-        }else if(!clienteEncontrado){
-            System.out.println("Cliente "+idClient.getText()+" No encontrado");
-            errorClienteNoEncontrado.setVisible(true);
-        }else if(fechaini.getValue() == null && fechafin.getValue() == null){
-            System.out.println("Las Fechas Tienen que tener valor");
-            txtMsgError.setText("Las Fechas Tienen que tener valor");
-            txtMsgError.setVisible(true);
-        }else if(fechaini.getValue() == null){
-            System.out.println("La Fecha de Entrada tiene que tener valor"); 
-            txtMsgError.setText("La Fecha de Entrada tiene que tener valor");
-            txtMsgError.setVisible(true);
-        }else if(fechafin.getValue() == null){
-            System.out.println("La Fecha de Salida tiene que tener valor");
-            txtMsgError.setText("La Fecha de Salida tiene que tener valor");
-            txtMsgError.setVisible(true);
-        }else if(fechaini.getValue() != null && fechafin.getValue() != null && diasReserva < 1){
-            System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");
-            txtMsgError.setText("Introduce una fecha de salida \nposterior a la fecha de entrada");
-            txtMsgError.setVisible(true);
-        }else{
-            System.out.println(hora());
-            String h = hora();
-            horaEntrada.setText(h);
-            horaSalida.setText("Pendiente");
-            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-            Import.setText(Float.toString(importEstada));
-
-            System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
-
-           //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-            reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
-        }
-    }
-    */
-    ///Bueno_v1.4
-    /*
-    public void btnSave() {
-        boolean clienteEncontrado=encontrarCliente();
-        int diasReserva=0;
-        if(fechaini.getValue() != null && fechafin.getValue() != null){
-            diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
-        }
-        if(idClient.getText().equalsIgnoreCase("") && fechaini.getValue() == null && fechafin.getValue() == null){
-            txtMsgError.setText("Tienes que rellenar los \ntres campos obligatorios");
-            txtMsgError.setVisible(true);
-        }else{
-            if(!clienteEncontrado){
-                System.out.println("Cliente "+idClient.getText()+" No encontrado");
-                if(idClient.getText().equalsIgnoreCase("")){
-                    errorClienteNoEncontrado.setText("No has introducido ningun cliente");
-                }else{
-                    errorClienteNoEncontrado.setText("El Cliente no está registrado, registralo");
-                }
-                errorClienteNoEncontrado.setVisible(true);
-            }else if(fechaini.getValue() == null && fechafin.getValue() == null){
-                System.out.println("Las Fechas Tienen que tener valor");
-                txtMsgError.setText("Las Fechas Tienen que tener valor");
-                txtMsgError.setVisible(true);
-            }else if(fechaini.getValue() == null){
-                System.out.println("La Fecha de Entrada tiene que tener valor"); 
-                txtMsgError.setText("La Fecha de Entrada tiene que tener valor");
-                txtMsgError.setVisible(true);
-            }else if(fechafin.getValue() == null){
-                System.out.println("La Fecha de Salida tiene que tener valor");
-                txtMsgError.setText("La Fecha de Salida tiene que tener valor");
-                txtMsgError.setVisible(true);
-            }else if(fechaini.getValue() != null && fechafin.getValue() != null && diasReserva < 1){
-                System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");
-                txtMsgError.setText("Introduce una fecha de salida \nposterior a la fecha de entrada");
-                txtMsgError.setVisible(true);
-            }else{
-                System.out.println(hora());
-                String h = hora();
-                horaEntrada.setText(h);
-                horaSalida.setText("Pendiente");
-                float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-                Import.setText(Float.toString(importEstada));
-
-                System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
-
-               //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
-                reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
-            }
-        }
-    }
-   */
-    
-    public void btnSave() {
-        //else{
         if(!erroresEntradas()){
            System.out.println(hora());
                 String h = hora();
@@ -404,31 +268,36 @@ public class ReservesController implements Initializable {
                 reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue()); 
         }
                 
-            //}
-       // }
+         
     }
     
     
     
 
-    public void btnModify() {
-        float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
-        Import.setText(Float.toString(importEstada));
+    public void btnModify() throws ParseException{
         
-        ResultSet result = (ResultSet) reservesobj.search(idClient.getText());
-        try {
-            while(result.next()) {
-               id = result.getString("id");
+        if(!erroresEntradas()){
+            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+            Import.setText(Float.toString(importEstada));
+
+            //ResultSet result = (ResultSet) reservesobj.search(idClient.getText());
+            ResultSet result = (ResultSet) reservesobj.search(numReserva.getText());
+            //numReserva
+            try {
+                while(result.next()) {
+                   id = result.getString("id");
+                }
+            } catch (SQLException e) {
+                System.out.println("SQLException"+ e.getMessage());
+                System.out.println("SQLState"+ e.getSQLState());
+                System.out.println("VendorError"+ e.getErrorCode());
             }
-        } catch (SQLException e) {
-            System.out.println("SQLException"+ e.getMessage());
-            System.out.println("SQLState"+ e.getSQLState());
-            System.out.println("VendorError"+ e.getErrorCode());
+
+            
+            reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue(), id);
+           
+    
         }
-        
-        //Modificar reserva
-        //good reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), "Pendiente");
-        reservesobj.modify(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), "Pendiente", id);
     }
 
     public void btnDelete() {
@@ -454,7 +323,7 @@ public class ReservesController implements Initializable {
         }
     }
     
-    private boolean erroresEntradas(){
+    private boolean erroresEntradas() throws ParseException{
         boolean error = false;
         int diasReserva=0;
         
@@ -488,14 +357,24 @@ public class ReservesController implements Initializable {
                 txtMsgError.setText("La Fecha de Entrada tiene que tener valor");
                 txtMsgError.setVisible(true);
                 error = true;
-            }else if(fechafin.getValue() == null){
+            }else if(fechaini.getValue().isBefore(LocalDate.now())){
+                System.out.println("La Fecha de Entrada no puede ser \nanterior a la actual");
+                txtMsgError.setText("La Fecha de Entrada no puede ser \nanterior a la actual");
+                txtMsgError.setVisible(true);
+                error = true;
+            }            
+            else if(fechafin.getValue() == null){
                 System.out.println("La Fecha de Salida tiene que tener valor");
                 txtMsgError.setText("La Fecha de Salida tiene que tener valor");
                 txtMsgError.setVisible(true);
                 error = true;
             }else if(fechaini.getValue() != null && fechafin.getValue() != null){
                 diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
-                if(diasReserva < 1){
+                System.out.println(fechafin.getValue().isBefore(fechaini.getValue()));
+                System.out.println(fechaini.getValue().isBefore(LocalDate.now()));
+                System.out.println(diasReserva);
+                
+                if(diasReserva < 1 || fechafin.getValue().isBefore(fechaini.getValue()) ){
                     System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");
                     txtMsgError.setText("Introduce una fecha de salida \nposterior a la fecha de entrada");
                     txtMsgError.setVisible(true);
@@ -566,16 +445,42 @@ public class ReservesController implements Initializable {
         return lahora;
     }
     
-    private float Importe(LocalDate fechaIni, LocalDate fechaFin){
+    private float Importe(LocalDate fechaIni, LocalDate fechaFin) throws ParseException{
         
         //Period period = Period.between(fechaIni, fechaFin);        
        // return Preuapartamento * (float) period.getDays();
         return getPrecioApartamento() * (float) diasEstancia(fechaIni, fechaFin);
     }
     
-    private int diasEstancia(LocalDate fechaIni, LocalDate fechaFin){
-        Period period = Period.between(fechaIni, fechaFin);
-        return period.getDays();    
+    private int diasEstancia(LocalDate fechaIni, LocalDate fechaFin) throws ParseException{
+        
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-LL-dd");
+        String fini = fechaIni.format(formatter);
+        String ffin = fechaFin.format(formatter);
+        
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+ 
+        Date fechaInicial=dateFormat1.parse(fini);
+        Date fechaFinal=dateFormat2.parse(ffin);
+        int dias=(int) ((fechaFinal.getTime()-fechaInicial.getTime())/86400000);
+
+       /**He observado que la clase Date da un día de Menos
+        * al realizar la comparación de fechas 
+        * cuando el Mes de la fecha inicial es Marzo
+        * y el mes de la fecha inicial es abril,
+        * Lo corrijo con este if
+       */
+       if(fechaIni.getMonthValue()==3 && fechaFin.getMonthValue()==4){
+           dias++;
+       }
+ 
+	
+       /** Period period = Period.between(fechaIni, fechaFin);
+        * return period.getDays();
+        */
+        
+        return dias;    
     }
     
     private void ocultarMensajes(){
