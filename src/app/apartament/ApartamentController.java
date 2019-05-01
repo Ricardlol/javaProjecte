@@ -131,6 +131,22 @@ public class ApartamentController implements Initializable {
             System.out.println("VendorError"+ e.getErrorCode());
         }
     }
+    /*
+    public float getPrecio(String apartamento){
+        float precio = 0;
+        ResultSet result = (ResultSet) apartamentObj.search(apartamento);
+        try {
+            while(result.next()) {
+                precio = Float.parseFloat(result.getString("precio"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        
+        return precio;
+    }*/
     
     public void setStage (Stage stage){
         this.stage = stage;

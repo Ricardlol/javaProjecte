@@ -9,6 +9,8 @@ import app.model.Authentication;
 import app.model.Reserves;
 import app.model.Extras;
 import app.model.Clients;
+import app.model.Apartament;
+import app.apartament.ApartamentController;
 
 //Otros imports
 import java.net.URL;
@@ -78,10 +80,12 @@ public class ReservesController implements Initializable {
     private Reserves reservesobj;
     private Extras extrasobj;
     private Clients clienteobj;
+    private Apartament apartamentObj;
   
     private String usu = Authentication.getUsuari();
 
-    private final float Preuapartamento = (float) 100.00;
+    private float Preuapartamento = 0;
+    //final float Preuapartamento = ApartamentController.getPrecio("1");
 
     private String id;
     ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
@@ -98,6 +102,7 @@ public class ReservesController implements Initializable {
         ocultarMensajes();
         reservesobj = new Reserves(); 
         extrasobj = new Extras();
+        apartamentObj = new Apartament();
         cash.setItems(availableChoices);
         cash.setValue("Pendiente");  
         cabeceras();
@@ -144,6 +149,13 @@ public class ReservesController implements Initializable {
     }
     public void setStage (Stage stage){
         this.stage = stage;
+    }
+    
+    public float getPrecioApartamento(){
+        //ApartamentController.getPrecio("1");
+        System.out.println("Buscar id reserva");
+        Preuapartamento = apartamentObj.getPrecio("1");
+        return Preuapartamento;
     }
     
     public String getNumReserva(){
@@ -558,7 +570,7 @@ public class ReservesController implements Initializable {
         
         //Period period = Period.between(fechaIni, fechaFin);        
        // return Preuapartamento * (float) period.getDays();
-        return Preuapartamento * (float) diasEstancia(fechaIni, fechaFin);
+        return getPrecioApartamento() * (float) diasEstancia(fechaIni, fechaFin);
     }
     
     private int diasEstancia(LocalDate fechaIni, LocalDate fechaFin){

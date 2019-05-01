@@ -89,6 +89,27 @@ public class Apartament implements Connectionsdb, actions{
     
     /**
      * busca un registre en la taula habitacion
+     * @param precio preu d'habitacio
+     * @return retorna el preu d'aquella habitació
+     */
+    public float getPrecio(String apartamento){
+        float precio = 0;
+        ResultSet result = (ResultSet) search(apartamento);
+        try {
+            while(result.next()) {
+                precio = Float.parseFloat(result.getString("precio"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        
+        return precio;
+    }
+    
+    /**
+     * busca un registre en la taula habitacion
      * @param nhab numero d'habitacio
      * @return retorna totes les habilacion amb aquell numero
      */
