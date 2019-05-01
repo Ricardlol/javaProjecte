@@ -32,6 +32,7 @@ import javafx.scene.control.TextField;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -108,6 +109,25 @@ public class ReservesController implements Initializable {
         getServiciosExtras();
         servicioExtra.setItems(nomproductes);
         servicioExtra.setValue("Peluqueria");
+        
+        idClient.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
+        Boolean oldValue, Boolean newValue) -> {
+            if (newValue){
+                errorClienteNoEncontrado.setVisible(false);       
+            }
+        });
+        fechaini.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
+        Boolean oldValue, Boolean newValue) -> {
+            if (newValue){
+                txtMsgError.setVisible(false);
+            }
+        });
+        fechafin.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
+        Boolean oldValue, Boolean newValue) -> {
+            if (newValue){
+                txtMsgError.setVisible(false);
+            }
+        });
 
     }
     
@@ -303,7 +323,8 @@ public class ReservesController implements Initializable {
         }
     }
     */
-    
+    ///Bueno_v1.4
+    /*
     public void btnSave() {
         boolean clienteEncontrado=encontrarCliente();
         int diasReserva=0;
@@ -353,7 +374,28 @@ public class ReservesController implements Initializable {
             }
         }
     }
-   
+   */
+    
+    public void btnSave() {
+        //else{
+        if(!erroresEntradas()){
+           System.out.println(hora());
+                String h = hora();
+                horaEntrada.setText(h);
+                horaSalida.setText("Pendiente");
+                float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+                Import.setText(Float.toString(importEstada));
+
+                System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
+
+               //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+                reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue()); 
+        }
+                
+            //}
+       // }
+    }
+    
     
     
 
@@ -398,6 +440,60 @@ public class ReservesController implements Initializable {
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }
+    }
+    
+    private boolean erroresEntradas(){
+        boolean error = false;
+        int diasReserva=0;
+        
+        if(idClient.getText().equalsIgnoreCase("") && fechaini.getValue() == null && fechafin.getValue() == null){
+            txtMsgError.setText("Tienes que rellenar los \ntres campos obligatorios");
+            txtMsgError.setVisible(true);
+            error = true;
+        }
+        else{
+            if(idClient.getText().equalsIgnoreCase("")){
+                System.out.println("Cliente "+idClient.getText()+" No encontrado");
+                errorClienteNoEncontrado.setText("No has introducido ningun cliente");                
+                errorClienteNoEncontrado.setVisible(true);
+                error = true;
+            }else{
+                boolean clienteEncontrado=encontrarCliente();
+                if(!clienteEncontrado){
+                    errorClienteNoEncontrado.setText("El Cliente no está registrado, registralo");
+                    errorClienteNoEncontrado.setVisible(true);
+                    error = true;
+                }            
+            }
+            
+            if(fechaini.getValue() == null && fechafin.getValue() == null){
+                System.out.println("Las Fechas Tienen que tener valor");
+                txtMsgError.setText("Las Fechas Tienen que tener valor");
+                txtMsgError.setVisible(true);
+                error = true;
+            }else if(fechaini.getValue() == null){
+                System.out.println("La Fecha de Entrada tiene que tener valor"); 
+                txtMsgError.setText("La Fecha de Entrada tiene que tener valor");
+                txtMsgError.setVisible(true);
+                error = true;
+            }else if(fechafin.getValue() == null){
+                System.out.println("La Fecha de Salida tiene que tener valor");
+                txtMsgError.setText("La Fecha de Salida tiene que tener valor");
+                txtMsgError.setVisible(true);
+                error = true;
+            }else if(fechaini.getValue() != null && fechafin.getValue() != null){
+                diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
+                if(diasReserva < 1){
+                    System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");
+                    txtMsgError.setText("Introduce una fecha de salida \nposterior a la fecha de entrada");
+                    txtMsgError.setVisible(true);
+                    error = true;
+                }
+                
+            }
+        
+        }
+        return error;
     }
     
      private boolean encontrarCliente(){
@@ -474,6 +570,8 @@ public class ReservesController implements Initializable {
        errorClienteNoEncontrado.setVisible(false);
        txtMsgError.setVisible(false);
     }
+    
+    
 }
 
 
