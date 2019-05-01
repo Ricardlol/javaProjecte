@@ -174,6 +174,21 @@ public class Extras implements Connectionsdb, actions{
         }
     }
     
+    public Object getSExtrasContratados(int nReserva, int idProducte){
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla2+" WHERE fk_pk_reserva='"+nReserva+"' AND fk_pk_productos='"+idProducte+"';";
+        try {
+            rs=stmt.executeQuery(sSQL);  
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return rsend;
+    }
+    
       @Override
     public Object search(String nombre) {
         Object rsend=null;
