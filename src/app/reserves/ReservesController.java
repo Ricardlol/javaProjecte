@@ -8,6 +8,7 @@ package app.reserves;
 import app.model.Authentication;
 import app.model.Reserves;
 import app.model.Extras;
+import app.model.Clients;
 
 //Otros imports
 import java.net.URL;
@@ -51,9 +52,10 @@ public class ReservesController implements Initializable {
     @FXML TextField idClient;
     @FXML TextField reservaBuscar;
     @FXML TextField numReserva;
+    
     // all Labels in page
-   // @FXML Label errorTextCliente;
-    //@FXML Label errorDateIniEmpty;
+    @FXML Label errorClienteNoEncontrado;
+    @FXML Label txtMsgError;
     
     // all DatePicker in page
     @FXML DatePicker fechaini;
@@ -74,6 +76,7 @@ public class ReservesController implements Initializable {
     
     private Reserves reservesobj;
     private Extras extrasobj;
+    private Clients clienteobj;
   
     private String usu = Authentication.getUsuari();
 
@@ -91,7 +94,7 @@ public class ReservesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-        
+        ocultarMensajes();
         reservesobj = new Reserves(); 
         extrasobj = new Extras();
         cash.setItems(availableChoices);
@@ -104,6 +107,7 @@ public class ReservesController implements Initializable {
        
         getServiciosExtras();
         servicioExtra.setItems(nomproductes);
+        servicioExtra.setValue("Peluqueria");
 
     }
     
@@ -203,7 +207,9 @@ public class ReservesController implements Initializable {
         System.out.println("Contratar Servicio Extra "+nreserva+"---"+id+ "---"+ usu);
         extrasobj.create(nreserva, id, usu);
     }
-   
+    
+    ////Buena
+    /*
     public void btnSave() {
         System.out.println(hora());
         String h = hora();
@@ -216,7 +222,51 @@ public class ReservesController implements Initializable {
       
        //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
         reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
+    
+    }*/
+    /////
+    
+    public void btnSave() {
+        boolean clienteEncontrado=encontrarCliente();
+        int diasReserva=0;
+        if(fechaini.getValue() != null && fechafin.getValue() != null){
+            diasReserva = diasEstancia(fechaini.getValue(), fechafin.getValue());
+        }        
+        if(!clienteEncontrado){
+            System.out.println("Cliente "+idClient.getText()+" No encontrado");
+        }else if(fechaini.getValue() == null && fechafin.getValue() == null){
+            System.out.println("Las Fechas Tienen que tener valor"); 
+        }else if(fechaini.getValue() == null){
+            System.out.println("La Fecha de Entrada tiene que tener valor"); 
+        }else if(fechafin.getValue() == null){
+            System.out.println("La Fecha de Salida tiene que tener valor"); 
+        }else if(fechaini.getValue() != null && fechafin.getValue() != null && diasReserva < 1){
+             System.out.println("Introduce una fecha de salida posterior a la fecha de entrada");   
+        }else{
+            System.out.println(hora());
+            String h = hora();
+            horaEntrada.setText(h);
+            horaSalida.setText("Pendiente");
+            float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
+            Import.setText(Float.toString(importEstada));
+
+            System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ cash.getValue());
+
+           //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
+            reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue());
+    
+        
+        
+        
+        }
+       
+       
+        
     }
+    
+   
+    
+    
 
     public void btnModify() {
         float importEstada = Importe(fechaini.getValue(), fechafin.getValue());
@@ -261,6 +311,31 @@ public class ReservesController implements Initializable {
         }
     }
     
+     private boolean encontrarCliente(){
+        boolean clienteEncontrado = false;
+        System.out.println("-"+idClient.getText().equalsIgnoreCase("")+"-");
+        System.out.println("Buscar Cliente");
+        if(idClient.getText().equalsIgnoreCase("")){
+            System.out.println("NO has introducido Ningun valor");
+        }else{
+            System.out.println("Has introducido valor");
+            String id="";
+            ResultSet result = (ResultSet) reservesobj.searchCliente(idClient.getText());
+            try {
+                while(result.next()) {
+                    id = result.getString("documento");                
+                    clienteEncontrado=true;
+                }
+            } catch (SQLException e) {
+                System.out.println("SQLException"+ e.getMessage());
+                System.out.println("SQLState"+ e.getSQLState());
+                System.out.println("VendorError"+ e.getErrorCode());
+            }
+        }
+        return clienteEncontrado;
+        
+    }
+    
     private String hora(){
         
         LocalTime l = LocalTime.now();
@@ -296,8 +371,19 @@ public class ReservesController implements Initializable {
     
     private float Importe(LocalDate fechaIni, LocalDate fechaFin){
         
-        Period period = Period.between(fechaIni, fechaFin);        
-        return Preuapartamento * (float) period.getDays();
+        //Period period = Period.between(fechaIni, fechaFin);        
+       // return Preuapartamento * (float) period.getDays();
+        return Preuapartamento * (float) diasEstancia(fechaIni, fechaFin);
+    }
+    
+    private int diasEstancia(LocalDate fechaIni, LocalDate fechaFin){
+        Period period = Period.between(fechaIni, fechaFin);
+        return period.getDays();    
+    }
+    
+    private void ocultarMensajes(){
+       errorClienteNoEncontrado.setVisible(false);
+       txtMsgError.setVisible(false);
     }
 }
 

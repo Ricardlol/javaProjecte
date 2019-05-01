@@ -17,7 +17,7 @@ import java.sql.Statement;
 public interface Connectionsdb {
     
     final String database = "java_project";
-    final String hostname = "192.168.0.19";
+    final String hostname = "127.0.0.1";
     final String port = "3306";
     final String user =  "root";
     final String password =  "";

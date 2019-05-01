@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import javafx.scene.control.Label;
 
 /**
  *
@@ -21,6 +22,8 @@ public class Reserves implements Connectionsdb, actions{
     private Statement stmt = null;
     private ResultSet rs = null;
     private String tabla = "reserva";
+    private String tabla2 = "cliente";
+    
     
     private void connection(){
         conn = Connectionsdb.connectarMySQL();
@@ -77,6 +80,25 @@ public class Reserves implements Connectionsdb, actions{
         Object rsend=null;
         connection();
         sSQL ="SELECT * FROM "+tabla+" WHERE id IN (SELECT MAX(id) FROM "+tabla+");";
+        
+       // sSQL ="SELECT * FROM "+tabla+" WHERE id='23';";
+        //SELECT MAX(id)FROM reserva;
+        try {
+            rs=stmt.executeQuery(sSQL);
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return rsend;
+    }
+    
+    public Object searchCliente(String doc) {
+        System.out.println("Buscando clientes");
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla2+" WHERE documento='"+doc+"';";
         
        // sSQL ="SELECT * FROM "+tabla+" WHERE id='23';";
         //SELECT MAX(id)FROM reserva;
