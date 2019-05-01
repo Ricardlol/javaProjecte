@@ -43,7 +43,6 @@ public class ClientsController implements Initializable{
     @FXML TextField email;
     @FXML TextField nac;
     @FXML TextField ocupation;
-    @FXML TextField status;
     @FXML TextField nameSearch;
     
     // all Labels in page
@@ -51,6 +50,7 @@ public class ClientsController implements Initializable{
     
     // menuButton in page
     @FXML MenuButton optionDoc;
+    @FXML MenuButton status;
     
    // table in page
     @FXML GridPane gridpane;
@@ -83,8 +83,6 @@ public class ClientsController implements Initializable{
     }
     
     private void deshabilitarBtn(){
-        save.setDisable(true);
-        modify.setDisable(true);
         delete.setDisable(true);
     }
     
@@ -98,6 +96,18 @@ public class ClientsController implements Initializable{
     
     public void changeToNIE(){
         optionDoc.setText("NIE");
+    }
+    
+    public void changeToSoltero(){
+        status.setText("SOLTERO");
+    }
+    
+    public void changeToDivorciado(){
+        status.setText("DIVORCIDO");
+    }
+    
+    public void changeToCasado(){
+        status.setText("CASADO");
     }
     
     public void btnSave(){

@@ -77,12 +77,18 @@
             </Label>
             <TextField fx:id="ocupation" layoutX="175.0" layoutY="260.0" prefHeight="25.0" prefWidth="200.0" />
             <Label layoutX="60.0" layoutY="315.0" styleClass="labels" text="ESTADO CIVIL" />
+            <MenuButton fx:id="status" layoutX="175.0" layoutY="310.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="---">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#changeToSoltero" text="Soltero" />
+                <MenuItem mnemonicParsing="false" onAction="#changeToCasado" text="Casado" />
+                  <MenuItem mnemonicParsing="false" onAction="#changeToDivorciado" text="Divorciado" />
+              </items>
+            </MenuButton>
             <Label layoutX="145.0" layoutY="313.0" prefHeight="16.0" prefWidth="2.0" styleClass="texterr" text="*">
                <font>
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="status" layoutX="175.0" layoutY="310.0" prefHeight="25.0" prefWidth="200.0" />
          </children>
       </AnchorPane>
       <Separator layoutX="20.0" layoutY="444.0" prefHeight="15.0" prefWidth="472.0" />
