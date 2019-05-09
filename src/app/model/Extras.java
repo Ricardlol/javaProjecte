@@ -112,7 +112,6 @@ public class Extras implements Connectionsdb, actions{
      * @param precio preu del producte
      * @throws SQLException 
      */
-    /*
     private void modProduct(String nombre, String precio) throws SQLException{
         sSQL ="UPDATE "+tabla1+" SET nombre='"+nombre+"', precio='"+precio+"' WHERE id='"+id+"';";
         if(stmt.execute(sSQL)){
@@ -124,7 +123,7 @@ public class Extras implements Connectionsdb, actions{
      * modifica el producte de la taula gestionProductos
      * @param descripcion descripcio del producte
      * @throws SQLException 
-     *//*
+     */
     private void modDescrip(String descripcion) throws SQLException{
         sSQL ="UPDATE "+tabla2+" SET descripcion='"+descripcion+"'WHERE fk_pk_productos='"+id+"';";
         if(stmt.execute(sSQL)){
@@ -137,7 +136,7 @@ public class Extras implements Connectionsdb, actions{
      * @param nombre nom del producte
      * @param precio preu del producte
      * @param descripcion  descricio del producte
-     *//*
+     */
     public void modify(String nombre, String precio, String descripcion) {
         connection();
         try{
@@ -212,9 +211,4 @@ public class Extras implements Connectionsdb, actions{
         
         Connectionsdb.cerrarConnect(rs,stmt);        
     }
-    
-    
-    
-    
-    
 }
