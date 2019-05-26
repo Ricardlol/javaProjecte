@@ -5,12 +5,13 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.cell.*?> 
+<?import javafx.collections.*?> 
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="950.0" styleClass="background_Clientes" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.clients.ClientsController">
    <children>
@@ -106,26 +107,22 @@
             <Label layoutX="35.0" layoutY="18.0" styleClass="labels" text="CLIENTE" />
             <TextField fx:id="nameSearch" layoutX="118.0" layoutY="10.0" />
             <Button fx:id="search" layoutX="305.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
-            <GridPane fx:id="gridpane" layoutX="25.0" layoutY="62.0" prefHeight="383.0" prefWidth="356.0">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="107.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="71.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="67.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="85.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
+            <TableView fx:id="tabla" layoutX="32.0" layoutY="51.0" prefHeight="400.0" prefWidth="346.0">
+              <columns>
+                    <TableColumn id="cDoc" text="Documentación">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="documento" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn id="cNombre" text="Nombre">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="nombre" />
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Email">
+                    </TableColumn>
+                </columns> 
+            </TableView>
          </children>
       </AnchorPane>
    </children>
