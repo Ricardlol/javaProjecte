@@ -33,6 +33,14 @@
     -fx-background-position: center center;
 }
 
+.background_Serveis{
+    -fx-background-image: url(./images/servicios.jpg);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 950 600;
+    -fx-background-position: center center;
+}
+
+
 .backgroundGrey{
     -fx-background-color:  rgba(215,215,215,0.7);
 }
@@ -56,6 +64,13 @@
     -fx-text-fill: #a53b3f;
     -fx-font-size:11px;
     -fx-font-weight: bold;    
+}
+
+.txtReserva{
+    -fx-font-family: Ubuntu;
+    -fx-text-fill: #53A53B;
+    -fx-font-size:11px;
+    -fx-font-weight: bold;
 }
 
 .labels{
