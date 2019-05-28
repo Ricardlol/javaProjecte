@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="950.0" styleClass="background_Serveis" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.productReservas.productReservasController">
+   <children>
+      <Label layoutX="429.0" layoutY="97.0" text="Productes" />
+      <Separator layoutX="146.0" layoutY="123.0" prefHeight="3.0" prefWidth="631.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <Separator prefWidth="200.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <Separator orientation="VERTICAL" prefHeight="200.0" />
+      <AnchorPane layoutX="146.0" layoutY="144.0" prefHeight="200.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

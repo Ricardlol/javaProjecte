@@ -7,7 +7,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="950.0" styleClass="background_Principal" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.principal.PrincipalController">
    <children>
-      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="345.0">
+      <MenuBar layoutX="14.0" layoutY="14.0" prefHeight="29.0" prefWidth="349.0">
         <menus>
           <Menu mnemonicParsing="false" text="Clientes">
             <items>
@@ -27,6 +27,7 @@
             <Menu mnemonicParsing="false" text="Reservas">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#reservesView" text="Gestión Reservas" />
+                <MenuItem mnemonicParsing="false" onAction="#addProductes" text="AddProduct" />
               </items>
             </Menu>
         </menus>
