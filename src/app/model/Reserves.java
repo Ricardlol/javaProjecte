@@ -95,6 +95,27 @@ public class Reserves implements Connectionsdb, actions{
         return rsend;
     }
     
+    public Object getCreadaReserva(int reserva){
+        System.out.println("Buscando reserva: "+reserva);
+        Object rsend=null;
+        connection();
+        sSQL ="SELECT * FROM "+tabla+" WHERE id ='"+reserva+"';";
+        
+       // sSQL ="SELECT * FROM "+tabla+" WHERE id='23';";
+        //SELECT MAX(id)FROM reserva;
+        try {
+            rs=stmt.executeQuery(sSQL);
+            rsend=rs;
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return rsend;
+    }
+    
+    
+    
     
     public Object getExistsReserva(LocalDate fechaEntrada, LocalDate fechaSalida){
         System.out.println("Comprobamos si Existe Reserva"+fechaEntrada+"--"+fechaSalida);
