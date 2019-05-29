@@ -63,6 +63,8 @@ public class ReservesController implements Initializable {
     // all Labels in page
     @FXML Label errorClienteNoEncontrado;
     @FXML Label txtMsgError;
+    @FXML Label fechasNoDisponibles;
+    @FXML Label txtReservaCreada;
     
     // all DatePicker in page
     @FXML DatePicker fechaini;
@@ -129,12 +131,14 @@ public class ReservesController implements Initializable {
         Boolean oldValue, Boolean newValue) -> {
             if (newValue){
                 txtMsgError.setVisible(false);
+                fechasNoDisponibles.setVisible(false);
             }
         });
         fechafin.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
         Boolean oldValue, Boolean newValue) -> {
             if (newValue){
                 txtMsgError.setVisible(false);
+                fechasNoDisponibles.setVisible(false);
             }
         });
 
@@ -303,8 +307,8 @@ public class ReservesController implements Initializable {
 
                    //System.out.println(idClient.getText()+" "+ idApartament.getText()+" "+ usu+" "+ fechaini.getValue()+" "+ horaEntrada.getText()+" "+ fechafin.getValue()+" "+ horaSalida.getText()+" "+ Import.getText()+" "+ "Pendiente");
                     reservesobj.create(idClient.getText(), idApartament.getText(), usu, fechaini.getValue(), horaEntrada.getText(), fechafin.getValue(), horaSalida.getText(), Import.getText(), cash.getValue()); 
-                    txtMsgError.setText("Contratada la reserva "+numReserva.getText());
-                    txtMsgError.setVisible(true);
+                    txtReservaCreada.setText("Contratada la reserva "+numReserva.getText());
+                    txtReservaCreada.setVisible(true);
             }
         }else{
             System.out.println("La reserva "+nreserva+" ya está creada");
@@ -376,6 +380,7 @@ public class ReservesController implements Initializable {
     
     private boolean erroresEntradas() throws ParseException{
         boolean error = false;
+        boolean hayreserva=verificarReserva();
         int diasReserva=0;
         
         if(idClient.getText().equalsIgnoreCase("") && fechaini.getValue() == null && fechafin.getValue() == null){
@@ -433,6 +438,12 @@ public class ReservesController implements Initializable {
                 }
                 
             }
+            
+            if(verificarReserva()){
+                System.out.println("Verificando si se puede reservar");
+                fechasNoDisponibles.setVisible(true);
+                error = true;
+            }
         
         }
         return error;
@@ -462,6 +473,25 @@ public class ReservesController implements Initializable {
         return clienteEncontrado;
         
     }
+    
+    
+    private boolean verificarReserva(){
+        boolean reservaEncontrada = false;
+        int cont=0;
+        System.out.println("Verificando reserva");
+        ResultSet result = (ResultSet) reservesobj.getExistsReserva(fechaini.getValue(), fechafin.getValue());
+        try {            
+            while(result.next()) {
+                reservaEncontrada=true;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQLException"+ e.getMessage());
+            System.out.println("SQLState"+ e.getSQLState());
+            System.out.println("VendorError"+ e.getErrorCode());
+        }
+        return reservaEncontrada;
+    }
+    
     
     private String hora(){
         
@@ -537,6 +567,8 @@ public class ReservesController implements Initializable {
     private void ocultarMensajes(){
        errorClienteNoEncontrado.setVisible(false);
        txtMsgError.setVisible(false);
+       fechasNoDisponibles.setVisible(false);
+       txtReservaCreada.setVisible(false);
     }
     
     

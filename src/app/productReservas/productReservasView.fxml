@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="950.0" styleClass="background_Serveis" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.productReservas.productReservasController">
+   <children>
+      <Label id="serveis_extres" layoutX="438.0" layoutY="40.0" text="Servicios Extras">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="20.0" layoutY="85.0" prefHeight="10.0" prefWidth="900.0" />
+      <AnchorPane layoutX="29.0" layoutY="94.0" prefHeight="352.0" prefWidth="879.0" styleClass="backgroundGrey">
+         <children>
+            <Label layoutX="277.0" layoutY="38.0" styleClass="labels" text="RESERVA" />
+            <Label layoutX="337.0" layoutY="40.0" prefHeight="16.0" prefWidth="5.0" styleClass="texterr" text="*">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <TextField fx:id="numReserva" layoutX="410.0" layoutY="35.0" prefHeight="26.0" prefWidth="220.0" />
+            <Label layoutX="277.0" layoutY="96.0" styleClass="labels" text="SERVICIO EXTRA" />
+            <ChoiceBox fx:id="servicioExtra" layoutX="410.0" layoutY="93.0" prefHeight="25.0" prefWidth="220.0" />
+            <Label fx:id="txtMsgError" layoutX="527.0" layoutY="296.0" styleClass="texterr" text="Error Label" />
+            <Label fx:id="txtMsgContratado" layoutX="504.0" layoutY="324.0" styleClass="txtReserva" text="Servicio Contratado" />
+            
+         </children>
+      </AnchorPane>
+      <Separator layoutX="16.0" layoutY="454.0" prefHeight="15.0" prefWidth="914.0" />
+      <AnchorPane layoutX="29.0" layoutY="469.0" prefHeight="89.0" prefWidth="879.0" styleClass="backgroundGrey">
+         <children>
+            <Label fx:id="errorGlobal" layoutX="380.0" layoutY="14.0" styleClass="texterr" text="Los campos con * son obligatorios" />
+            <Button fx:id="contrataService" layoutX="387.0" layoutY="45.0" mnemonicParsing="false" onAction="#btnService" prefHeight="25.0" prefWidth="162.0" text="CONTRATA" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

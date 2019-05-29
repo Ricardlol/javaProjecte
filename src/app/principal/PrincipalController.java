@@ -26,6 +26,7 @@ import app.clients.ClientsController;
 import app.apartament.ApartamentController;
 import app.products.ProductsController;
 import app.reserves.ReservesController;
+import app.productReservas.productReservasController;
 
 /**
  * FXML Controller class
@@ -89,6 +90,18 @@ public class PrincipalController implements Initializable {
             stage.setTitle("GESTION DE RESERVAS");
             ReservesController reserves = (ReservesController) replaceSceneContent("reserves/ReservesView.fxml");
             reserves.setStage(stage);
+            stage.show();
+        } catch (Exception ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+    
+    public void addProductes(ActionEvent event){
+        try {
+            this.stage = new Stage();
+            stage.setTitle("AÑADIR PRODUCTOS EN LAS RESERVAS");
+            productReservasController addproducts = (productReservasController) replaceSceneContent("productReservas/productReservasView.fxml");
+            addproducts.setStage(stage);
             stage.show();
         } catch (Exception ex) {
             System.err.println(ex.getMessage());

@@ -20,7 +20,7 @@
          </font>
       </Label>
       <Separator layoutX="31.0" layoutY="92.0" prefHeight="15.0" prefWidth="901.0" />
-      <AnchorPane layoutX="29.0" layoutY="104.0" prefHeight="346.0" prefWidth="455.0" styleClass="backgroundGrey">
+      <AnchorPane fx:id="reservaNoDisponible" layoutX="29.0" layoutY="104.0" prefHeight="346.0" prefWidth="455.0" styleClass="backgroundGrey">
          <children>
             <Label layoutX="52.0" layoutY="17.0" text="Apartamento" />
             <TextField fx:id="idApartament" disable="true" layoutX="182.0" layoutY="12.0" text="1" />
@@ -47,20 +47,22 @@
                </font>
             </Label>
             <DatePicker fx:id="fechafin" layoutX="184.0" layoutY="126.0" />
+            <Label fx:id="fechasNoDisponibles" layoutX="203.0" layoutY="157.0" styleClass="texterr" text="Fechas no disponibles" />
             <TextField fx:id="horaSalida" disable="true" layoutX="371.0" layoutY="125.0" prefHeight="25.0" prefWidth="76.0" />
-            <Label fx:id="Importe" layoutX="45.0" layoutY="167.0" text="Importe" />
-            <TextField fx:id="Import" disable="true" layoutX="182.0" layoutY="163.0" />
-            <Label layoutX="48.0" layoutY="202.0" text="Estado" />
-            <ChoiceBox fx:id="cash" accessibleRole="DATE_PICKER" layoutX="182.0" layoutY="198.0" prefWidth="150.0">
+            <Label fx:id="Importe" layoutX="46.0" layoutY="188.0" text="Importe" />
+            <TextField fx:id="Import" disable="true" layoutX="185.0" layoutY="184.0" />
+            <Label layoutX="49.0" layoutY="224.0" text="Estado" />
+            <ChoiceBox fx:id="cash" accessibleRole="DATE_PICKER" layoutX="184.0" layoutY="220.0" prefWidth="150.0">
              
                 
             </ChoiceBox>
-            <Label layoutX="48.0" layoutY="241.0" text="RESERVA" />
-            <TextField fx:id="numReserva" layoutX="182.0" layoutY="237.0" />
+            <Label layoutX="48.0" layoutY="262.0" text="RESERVA" />
+            <TextField fx:id="numReserva" disable="true" layoutX="184.0" layoutY="258.0" />
             <Label layoutX="46.0" layoutY="283.0" text="Servicio Extra" />
-            <ChoiceBox fx:id="servicioExtra" layoutX="182.0" layoutY="279.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="servicioExtra" layoutX="184.0" layoutY="292.0" prefWidth="150.0" />
             <Button fx:id="contrataService" layoutX="346.0" layoutY="279.0" mnemonicParsing="false" onAction="#btnService" text="CONTRATA" />
-            <Label fx:id="txtMsgError" layoutX="182.0" layoutY="304.0" styleClass="texterr" text="Error Label" />
+            <Label fx:id="txtMsgError" layoutX="182.0" layoutY="316.0" styleClass="texterr" text="Error Label" />
+            <Label fx:id="txtReservaCreada" layoutX="185.0" layoutY="332.0" styleClass="txtReserva" text="Reserva" />
          </children>
       </AnchorPane>
       <Separator layoutX="30.0" layoutY="454.0" prefHeight="15.0" prefWidth="447.0" />
