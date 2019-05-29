@@ -10,7 +10,7 @@ import app.model.Reserves;
 import app.model.Extras;
 import app.model.Clients;
 import app.model.Apartament;
-import app.apartament.ApartamentController;
+import app.model.Reservas;
 
 //Otros imports
 import java.net.URL;
@@ -38,10 +38,14 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 
@@ -76,9 +80,10 @@ public class ReservesController implements Initializable {
    // @FXML ChoiceBox<String> servicioExtra;
     
     // table in page
-    @FXML GridPane gridpane;
-    int fila=10;
-    int col=3;
+    @FXML TableView tabla;
+    @FXML TableColumn cCliente;
+    @FXML TableColumn cImporte;
+    @FXML TableColumn cAbono;
     
     //buttons
     @FXML private Button save;
@@ -94,6 +99,7 @@ public class ReservesController implements Initializable {
     //final float Preuapartamento = ApartamentController.getPrecio("1");
 
     private String id;
+    private ObservableList<Reservas> reservasData;
     ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
    // ObservableList<String> nomproductes = FXCollections.observableArrayList();
         
@@ -105,13 +111,15 @@ public class ReservesController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle resources) {
+        cCliente.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("cliente"));
+        cImporte.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("importe"));
+        cAbono.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("abono"));
         ocultarMensajes();
         reservesobj = new Reserves(); 
         //extrasobj = new Extras();
         apartamentObj = new Apartament();
         cash.setItems(availableChoices);
         cash.setValue("Pendiente");  
-        cabeceras();
         
         
         //System.out.println("Hello "+getNumReserva());
@@ -144,17 +152,6 @@ public class ReservesController implements Initializable {
 
     }
     
-    private void cabeceras(){
-        for(int x=0;x<col; x++){
-            if(x==0){
-                gridpane.add(new Label("CLIENTE"), x,0);
-            }else if(x==1){
-                gridpane.add(new Label("IMPORTE"), x,0);
-            }else{
-                gridpane.add(new Label("ABONO"), x,0);
-            }
-        }
-    }
     public void setStage (Stage stage){
         this.stage = stage;
     }
@@ -359,18 +356,15 @@ public class ReservesController implements Initializable {
         reservesobj.delete(idClient.getText(), null);
     }
 
-    public void btnSearch() {
-        int i=1;
-        gridpane.getChildren().clear();
-        cabeceras();
+    public void btnSearch() {        
         ResultSet result = (ResultSet) reservesobj.search(reservaBuscar.getText());
         try {
+            reservasData = FXCollections.observableArrayList();
             while(result.next()) {
-                gridpane.add(new Label(result.getString("fk_cliente")),0,i);
-                gridpane.add(new Label(result.getString("importe")),1,i);
-                gridpane.add(new Label(result.getString("abono")),2,i);
-                i++;
+                Reservas reserva = new Reservas(result);
+                reservasData.add(reserva);
             }
+            tabla.setItems(reservasData);
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
