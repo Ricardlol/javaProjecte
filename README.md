@@ -4,10 +4,10 @@ Treball de java(getio d'apartaments)
  * [modificacions](#Modificacions)
 
 ## Modificacions
-1. [Gestion de reservas (fechas)](###Gestion_de_reservas)
-2. [Nueva ventana para reservar productos](###Nueva_ventana_para_reservar_productos)
-3. [Labels para indicar si la accion se a echo correctamente](###Labels_para_indicar_si_la_accion_se_a_echo_correctamente)
-4. [Vista en tablaView y no en GridPlane](###Vista_en_tablaView_y_no_en_GridPlane)
+1. [Gestion de reservas (fechas)](#Gestion_de_reservas)
+2. [Nueva ventana para reservar productos](#Nueva_ventana_para_reservar_productos)
+3. [Labels para indicar si la accion se a echo correctamente](#Labels_para_indicar_si_la_accion_se_a_echo_correctamente)
+4. [Vista en tablaView y no en GridPlane](#Vista_en_tablaView_y_no_en_GridPlane)
 
 ### Gestion_de_reservas
 
