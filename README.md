@@ -30,11 +30,11 @@ Trasladamos de la vista "reservas" a la nueva vista "productReservas", que hace 
 Si la reserva no existe aparecerá un mensaje de error indicando que se tiene que crear previamente la reserva, este error saldrá en la vista en forma de label.
 Cada servicio solo se podrá contratar un sola vez y si este ya esta contratado mostrará un mensaje de error indicando que ya está contartado, si tiene éxito la contratación mostrará un mensaje en la vista de operación exitosa.
 
-### Labels para indicar si la accion se a echo correctamente
+### Labels_para_indicar_si_la_accion_se_a_echo_correctamente
 
 Aparte de la gestión anterior de los label hemos creado unos nuevos en las otras vistas para indicar si las acciones has sido exitosas.
 
-### Vista en tablaView y no en GridPlane
+### Vista_en_tablaView_y_no_en_GridPlane
 
 Hemos cambiado todos los gridPlanes por tablesWies, modiifcando las vistas, insertando el nuevo codigo
 ```java
