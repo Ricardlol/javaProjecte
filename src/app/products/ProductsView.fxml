@@ -3,12 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="950.0" styleClass="background_Productes" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.products.ProductsController">
    <children>
@@ -49,7 +49,8 @@
             <Button fx:id="save" layoutX="41.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnSave" text="GUARDAR" />
             <Button fx:id="modify" layoutX="192.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnModify" text="MODIFICAR" />
             <Button fx:id="delete" layoutX="353.0" layoutY="35.0" mnemonicParsing="false" onAction="#btnDelete" text="ELIMINAR" />
-            <Label fx:id="errorGlobal" layoutX="149.0" layoutY="7.0" styleClass="texterr" text="Los campos con * son obligatorios" />
+            <Label fx:id="errorTextGlobal" layoutX="149.0" layoutY="7.0" styleClass="texterr" text="Los campos con * son obligatorios" />
+            <Label fx:id="Succesful" layoutX="174.0" layoutY="6.0" styleClass="txtReserva" stylesheets="@../resources/MyStyle.css" text="Correcto" />
          </children>
       </AnchorPane>
       <Separator layoutX="485.0" layoutY="106.0" orientation="VERTICAL" prefHeight="432.0" prefWidth="15.0" />
@@ -60,9 +61,9 @@
             <Button layoutX="324.0" layoutY="9.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
             <TableView fx:id="tabla" layoutX="32.0" layoutY="51.0" prefHeight="400.0" prefWidth="346.0">
               <columns>
-                    <TableColumn fx:id="cNombre" text="Nombre"/>
-                    <TableColumn fx:id="cPrecio" text="Preció"/>
-                    <TableColumn fx:id="cDes" text="Descripción"/>
+                    <TableColumn fx:id="cNombre" text="Nombre" />
+                    <TableColumn fx:id="cPrecio" text="Preció" />
+                    <TableColumn fx:id="cDes" text="Descripción" />
                 </columns> 
             </TableView>
          </children>

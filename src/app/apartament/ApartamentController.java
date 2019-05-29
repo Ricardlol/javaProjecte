@@ -8,7 +8,6 @@ package app.apartament;
 import app.model.Apartament;
 import app.model.Apartamento;
 import app.model.Authentication;
-import app.model.Personas;
 
 import java.net.URL;
 
@@ -92,7 +91,7 @@ public class ApartamentController implements Initializable {
         if(Authentication.getTipus()==0){
             deshabilitarBtn();
         }
-        
+        tabla.setEditable(false);
         tabla.setRowFactory(tv -> {
            TableRow<Apartamento> row = new TableRow<>();
            row.setOnMouseClicked(event -> {
