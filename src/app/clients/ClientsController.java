@@ -61,6 +61,9 @@ public class ClientsController implements Initializable{
     
     @FXML TableView tabla;
     @FXML TableColumn cNombre;
+    @FXML TableColumn cDoc;
+    @FXML TableColumn cEmail;
+    @FXML TableColumn cTel;
     // Botons
     @FXML Button save;
     @FXML Button modify;
@@ -78,9 +81,16 @@ public class ClientsController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //oculta mensaje de error
-        cNombre.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("nombre"));
+        // columnas de la tabla
+        cNombre.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("nom"));
+        cDoc.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("doc"));
+        cEmail.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("email"));
+        cTel.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("tel"));
+        
+        //oculta mensajes
         ocultarMensajes();
+        
+        //objeto clientes
         clientobj = new Clients();
         if(Authentication.getTipus()==0){
             deshabilitarBtn();

@@ -109,14 +109,10 @@
             <Button fx:id="search" layoutX="305.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
             <TableView fx:id="tabla" layoutX="32.0" layoutY="51.0" prefHeight="400.0" prefWidth="346.0">
               <columns>
-                    <TableColumn id="cDoc" text="Documentación">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="documento" />
-                        </cellValueFactory>
-                    </TableColumn>
+                    <TableColumn fx:id="cDoc" text="Documentación"/>
                     <TableColumn fx:id="cNombre" text="Nombre"/>
-                    <TableColumn text="Email">
-                    </TableColumn>
+                    <TableColumn fx:id="cEmail" text="Email"/>
+                    <TableColumn fx:id="cTel" text="Tel"/>
                 </columns> 
             </TableView>
          </children>
