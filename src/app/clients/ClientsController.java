@@ -34,7 +34,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
+import java.awt.event.MouseEvent;
+import javafx.scene.control.TableRow;
 
 /**
  * FXML Controller class
@@ -54,6 +55,7 @@ public class ClientsController implements Initializable{
     
     // all Labels in page
     @FXML Label errorTextGlobal;
+    @FXML Label Succesful;
     
     // menuButton in page
     @FXML MenuButton optionDoc;
@@ -87,9 +89,25 @@ public class ClientsController implements Initializable{
         cEmail.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("email"));
         cTel.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("tel"));
         
+        tabla.setRowFactory(tv -> {
+           TableRow<Personas> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+               if(event.getClickCount() == 2 && (! row.isEmpty())){
+                   Personas rowData = row.getItem();
+                   documnetation.setText(rowData.getDoc());
+                   client.setText(rowData.getNom());
+                   tel.setText(rowData.getTel());
+                   email.setText(rowData.getEmail());
+                   nac.setText(rowData.getNac());
+                   ocupation.setText(rowData.getOcupacion());
+                   status.setText(rowData.getEstado());
+               }
+           });
+           return row;
+        });
         //oculta mensajes
         ocultarMensajes();
-        
+        tabla.setEditable(false);
         //objeto clientes
         clientobj = new Clients();
         if(Authentication.getTipus()==0){
@@ -126,22 +144,40 @@ public class ClientsController implements Initializable{
     }
     
     public void btnSave(){
-        clientobj.create(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
-        /*ocultarMensajes();
+        ocultarMensajes();
         boolean campos = comprovarCampos();
         if(campos){
-            System.out.println("A la base de datos !!!");
+            Succesful.setText("Se ha CREADO con éxito");
+            Succesful.setVisible(true);
+            clientobj.create(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
         } else{
-            System.out.println("Pon los bien puto");
-        }*/
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnModify(){
-        clientobj.modify(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha MODIFICADO con éxito");
+            Succesful.setVisible(true);
+            clientobj.modify(documnetation.getText(), client.getText(), tel.getText(), email.getText(), nac.getText(), ocupation.getText(), status.getText());
+        } else{
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnDelete(){
-        clientobj.delete(documnetation.getText(), null);
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha ELIMINADO con éxito");
+            Succesful.setVisible(true);
+            clientobj.delete(documnetation.getText(), null);
+        } else{
+            errorTextGlobal.setVisible(true);
+        }
+        
     }
     
     public void btnSearch(){        
@@ -152,7 +188,6 @@ public class ClientsController implements Initializable{
                 Personas persona = new Personas(result);
                 personData.add(persona);
             }
-            System.out.println(personData);
             tabla.setItems(personData);
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
@@ -163,9 +198,37 @@ public class ClientsController implements Initializable{
     
     private void ocultarMensajes(){
        errorTextGlobal.setVisible(false);
+       Succesful.setVisible(false);
     }
     
-    private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+    private boolean comprovarCampos(){
+        
+        boolean result = true;
+        if(documnetation.getText().length()==0){
+            result = false;
+        }
+        else if(documnetation.getText().length()==0){
+            result = false;
+        }
+        else if(client.getText().length()==0){
+            result = false;
+        }
+        else if(tel.getText().length()==0){
+            result = false;
+        }
+        else if(nac.getText().length()==0){
+            result = false;
+        }
+        else if(ocupation.getText().length()==0){
+            result = false;
+        }
+        else if(status.getText().equals("---")){
+            result = false;
+        }
+        return result;
+    }
+    
+    /*private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     
     public static final Pattern VALID_DNI_REGEX = Pattern.compile("/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", Pattern.CASE_INSENSITIVE);
 
@@ -180,7 +243,8 @@ public class ClientsController implements Initializable{
             
         }
         return matcher.find();
-    }
+    }*/
+    
     public void setStage (Stage stage){
         this.stage = stage;
     }
