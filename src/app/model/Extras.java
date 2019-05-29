@@ -22,6 +22,7 @@ public class Extras implements Connectionsdb, actions{
     private Statement stmt = null;
     private ResultSet rs = null;
     private String id="";
+    private String tabla = "reserva";
     private final String tabla1 = "extras";
     private final String tabla2 = "contrata";
     private ObservableList<String> nomproductes = FXCollections.observableArrayList();
@@ -103,6 +104,8 @@ public class Extras implements Connectionsdb, actions{
         }
         return rsend;
     }
+    
+ 
     
  
     

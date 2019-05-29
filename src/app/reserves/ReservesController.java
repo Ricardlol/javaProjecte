@@ -131,12 +131,14 @@ public class ReservesController implements Initializable {
         Boolean oldValue, Boolean newValue) -> {
             if (newValue){
                 txtMsgError.setVisible(false);
+                fechasNoDisponibles.setVisible(false);
             }
         });
         fechafin.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
         Boolean oldValue, Boolean newValue) -> {
             if (newValue){
                 txtMsgError.setVisible(false);
+                fechasNoDisponibles.setVisible(false);
             }
         });
 
