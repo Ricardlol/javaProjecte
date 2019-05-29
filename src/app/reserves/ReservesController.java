@@ -73,7 +73,7 @@ public class ReservesController implements Initializable {
     // all ChoiceBox in page
     //@FXML private ChoiceBox cash;
     @FXML ChoiceBox<String> cash;
-    @FXML ChoiceBox<String> servicioExtra;
+   // @FXML ChoiceBox<String> servicioExtra;
     
     // table in page
     @FXML GridPane gridpane;
@@ -84,7 +84,7 @@ public class ReservesController implements Initializable {
     @FXML private Button save;
     
     private Reserves reservesobj;
-    private Extras extrasobj;
+   // private Extras extrasobj;
     private Clients clienteobj;
     private Apartament apartamentObj;
   
@@ -95,7 +95,7 @@ public class ReservesController implements Initializable {
 
     private String id;
     ObservableList<String> availableChoices = FXCollections.observableArrayList("Pendiente", "Pagada", "Anulada");
-    ObservableList<String> nomproductes = FXCollections.observableArrayList();
+   // ObservableList<String> nomproductes = FXCollections.observableArrayList();
         
     private Stage stage;
 
@@ -107,7 +107,7 @@ public class ReservesController implements Initializable {
     public void initialize(URL url, ResourceBundle resources) {
         ocultarMensajes();
         reservesobj = new Reserves(); 
-        extrasobj = new Extras();
+        //extrasobj = new Extras();
         apartamentObj = new Apartament();
         cash.setItems(availableChoices);
         cash.setValue("Pendiente");  
@@ -116,11 +116,11 @@ public class ReservesController implements Initializable {
         
         //System.out.println("Hello "+getNumReserva());
         numReserva.setText(getNumReserva());
-       
+       /*
         getServiciosExtras();
         servicioExtra.setItems(nomproductes);
         servicioExtra.setValue("Peluqueria");
-        
+        */
         idClient.focusedProperty().addListener((ObservableValue<? extends Boolean> observable,
         Boolean oldValue, Boolean newValue) -> {
             if (newValue){
@@ -186,7 +186,7 @@ public class ReservesController implements Initializable {
         }
         return nr;
     }
-    
+    /*
     public void getServiciosExtras(){
         ResultSet result = (ResultSet) extrasobj.getNombreProductes();
         try {
@@ -200,8 +200,8 @@ public class ReservesController implements Initializable {
         }
     }
     
-    
-    
+    */
+    /*
     public String getidExtras(String nombre){
         ResultSet result = (ResultSet) extrasobj.search(nombre);
         String idstr="";
@@ -215,7 +215,7 @@ public class ReservesController implements Initializable {
             System.out.println("VendorError"+ e.getErrorCode());
         }
         return idstr;
-    }
+    }*/
     /*
     @FXML
     public int idServicio(String nombre){
@@ -240,7 +240,7 @@ public class ReservesController implements Initializable {
             return idservicio;
         }
     }*/
-    
+    /*
     public boolean serviciosContratados(int nreserva, int producto){
         ResultSet result = (ResultSet) extrasobj.getSExtrasContratados(nreserva, producto);
         extrasobj.getSExtrasContratados(nreserva, producto);
@@ -260,8 +260,8 @@ public class ReservesController implements Initializable {
         }
         return servicio;
     
-    }
-    
+    }*/
+    /*
     public void btnService(){
         System.out.println("Hola Extra");
         int id = Integer.parseInt(getidExtras(servicioExtra.getValue()));
@@ -288,7 +288,7 @@ public class ReservesController implements Initializable {
         }
         
         
-    }    
+    }    */
     
     public void btnSave() throws ParseException{
         int nreserva = Integer.parseInt(numReserva.getText());
