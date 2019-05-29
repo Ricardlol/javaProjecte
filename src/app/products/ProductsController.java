@@ -7,6 +7,7 @@ package app.products;
 
 import app.model.Productes;
 import app.model.Authentication;
+import app.model.Products;
 
 import java.net.URL;
 
@@ -14,15 +15,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.ResourceBundle;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 /**
@@ -42,15 +48,17 @@ public class ProductsController implements Initializable {
     private @FXML Label errorGlobal;
     
     // table in page
-    private @FXML GridPane gridpane;
-    private final int fila=10;
-    private final int col=3;
+    @FXML TableView tabla;
+    @FXML TableColumn cNombre;
+    @FXML TableColumn cPrecio;
+    @FXML TableColumn cDes;
     
     // Botons
     @FXML Button save;
     @FXML Button modify;
     @FXML Button delete;
     
+    private ObservableList<Products> productsData;
     /**
      * Initializes the controller class.
      */
@@ -66,8 +74,10 @@ public class ProductsController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cNombre.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("nom"));
+        cPrecio.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("precio"));
+        cDes.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("descrip"));
         productes= new Productes();
-        cabeceras();
         if(Authentication.getTipus()==0){
             deshabilitarBtn();
         }
@@ -95,33 +105,20 @@ public class ProductsController implements Initializable {
         productes.delete(nombreProduct.getText(), descprod.getText());
     }
     
-    private void cabeceras(){
-        for(int x=0;x<col; x++){
-            if(x==0){
-                gridpane.add(new Label("NOMBRE"), x,0);
-            }else if(x==1){
-                gridpane.add(new Label("PRECIO"), x,0);
-            }else{
-                gridpane.add(new Label("DESCRIPCIÓN"), x,0);
-            }
-        }
-    }
-    
     public void btnSearch(){
         int i=1;
-        gridpane.getChildren().clear();
-        cabeceras();
         ResultSet result = (ResultSet) productes.search(prodBuscar.getText());
         try {
+            productsData = FXCollections.observableArrayList();
             while(result.next()) {
-                gridpane.add(new Label(result.getString("nombre")),0,i);
-                gridpane.add(new Label(result.getString("precio")),1,i);
+                Products producte = new Products(result);
                 ResultSet resultdesc = (ResultSet) productes.searchDescricio(result.getString("id"));
                 while(resultdesc.next()){
-                    gridpane.add(new Label(resultdesc.getString("descripcion")),2,i);
+                    producte.setDescrip(resultdesc.getString("descripcion"));
                 }
-                i++;
+                productsData.add(producte);
             }
+            tabla.setItems(productsData);
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
