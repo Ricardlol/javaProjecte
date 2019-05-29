@@ -8,6 +8,7 @@ package app.apartament;
 import app.model.Apartament;
 import app.model.Apartamento;
 import app.model.Authentication;
+import app.model.Personas;
 
 import java.net.URL;
 
@@ -26,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -45,15 +47,16 @@ public class ApartamentController implements Initializable {
     @FXML TextField piso;
     @FXML TextArea caract;
     @FXML TextField precio;
-    @FXML TextField estado;
     @FXML TextField tipo;
     @FXML TextField nhabSearch;
     
     // all Labels in page
     @FXML Label errorTextGlobal;
+    @FXML Label Succesful;
+
     
     // menuButton in page
-    @FXML MenuButton optionDoc;
+    @FXML MenuButton estado;
     
     // table in page
     @FXML TableView tabla;
@@ -78,14 +81,41 @@ public class ApartamentController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        ocultarMensajes();
         cNhabitacion.setCellValueFactory(new PropertyValueFactory<Apartamento,StringProperty>("habitacion"));
         cPiso.setCellValueFactory(new PropertyValueFactory<Apartamento,StringProperty>("piso"));
         cEstado.setCellValueFactory(new PropertyValueFactory<Apartamento,StringProperty>("estado"));
         cTipo.setCellValueFactory(new PropertyValueFactory<Apartamento,StringProperty>("tipo"));
+        
         apartamentObj = new Apartament();
+        
         if(Authentication.getTipus()==0){
             deshabilitarBtn();
         }
+        
+        tabla.setRowFactory(tv -> {
+           TableRow<Apartamento> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+               if(event.getClickCount() == 2 && (! row.isEmpty())){
+                   Apartamento rowData = row.getItem();
+                   nHab.setText(rowData.getHabitacion());
+                   piso.setText(rowData.getPiso());
+                   caract.setText(rowData.getCarac());
+                   precio.setText(rowData.getPrecio());
+                   tipo.setText(rowData.getTipo());
+                   estado.setText(rowData.getEstado());
+               }
+           });
+           return row;
+        });
+    }
+    
+    public void changeOcupado(){
+        estado.setText("OCUPADO");
+    }
+    
+    public void changeLibre(){
+        estado.setText("LIBRE");
     }
     
     private void deshabilitarBtn(){
@@ -95,8 +125,16 @@ public class ApartamentController implements Initializable {
     }
     
     public void btnSave(){
-        System.out.println("Guardar");
-        apartamentObj.create(nHab.getText(), piso.getText(), caract.getText(), precio.getText(), estado.getText(), tipo.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha CREADO con éxito");
+            Succesful.setVisible(true);
+            apartamentObj.create(nHab.getText(), piso.getText(), caract.getText(), precio.getText(), estado.getText(), tipo.getText());
+    
+        }else{
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnModify(){
@@ -122,22 +160,41 @@ public class ApartamentController implements Initializable {
             System.out.println("VendorError"+ e.getErrorCode());
         }
     }
-    /*
-    public float getPrecio(String apartamento){
-        float precio = 0;
-        ResultSet result = (ResultSet) apartamentObj.search(apartamento);
-        try {
-            while(result.next()) {
-                precio = Float.parseFloat(result.getString("precio"));
-            }
-        } catch (SQLException e) {
-            System.out.println("SQLException"+ e.getMessage());
-            System.out.println("SQLState"+ e.getSQLState());
-            System.out.println("VendorError"+ e.getErrorCode());
+    private void ocultarMensajes(){
+       errorTextGlobal.setVisible(false);
+       Succesful.setVisible(false);
+    }
+    
+    private boolean comprovarCampos(){
+        /*
+        @FXML TextField nHab;
+    @FXML TextField piso;
+    @FXML TextArea caract;
+    @FXML TextField precio;
+    @FXML TextField estado;
+    @FXML TextField tipo;
+        */
+        boolean result = true;
+        if(nHab.getText().length()==0){
+            result = false;
         }
-        
-        return precio;
-    }*/
+        else if(piso.getText().length()==0){
+            result = false;
+        }
+        else if(caract.getText().length()==0){
+            result = false;
+        }
+        else if(precio.getText().length()==0){
+            result = false;
+        }
+        else if(tipo.getText().length()==0){
+            result = false;
+        }
+        else if(estado.getText().equals("---")){
+            result = false;
+        }
+        return result;
+    }
     
     public void setStage (Stage stage){
         this.stage = stage;

@@ -2,16 +2,15 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 
 <AnchorPane id="AnchorPane" prefHeight="570.0" prefWidth="950.0" styleClass="background_Apartamento" stylesheets="@../resources/MyStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.apartament.ApartamentController">
    <children>
@@ -57,7 +56,12 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <TextField fx:id="estado" layoutX="230.0" layoutY="265.0" prefHeight="26.0" prefWidth="232.0" />
+            <MenuButton fx:id="estado" layoutX="230.0" layoutY="265.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" text="---">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#changeOcupado" text="OCUPADO" />
+                <MenuItem mnemonicParsing="false" onAction="#changeLibre" text="LIBRE" />
+              </items>
+            </MenuButton>
             <Label layoutX="131.0" layoutY="315.0" styleClass="labels" text="TIPO" />
             <Label fx:id="errorTextTipo" layoutX="165.0" layoutY="313.0" prefHeight="16.0" prefWidth="9.0" styleClass="texterr" text="*">
                <font>
@@ -78,6 +82,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
+            <Label fx:id="Succesful" layoutX="182.0" layoutY="8.0" styleClass="txtReserva" stylesheets="@../resources/MyStyle.css" text="Correcto" />
          </children>
       </AnchorPane>
       <Separator layoutX="521.0" layoutY="117.0" orientation="VERTICAL" prefHeight="443.0" prefWidth="15.0" />
@@ -88,10 +93,10 @@
             <Button fx:id="search" layoutX="300.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnSearch" text="BUSCAR" />
             <TableView fx:id="tabla" layoutX="32.0" layoutY="51.0" prefHeight="400.0" prefWidth="346.0">
               <columns>
-                    <TableColumn fx:id="cNhabitacion" text="Habitación"/>
-                    <TableColumn fx:id="cPiso" text="Piso"/>
-                    <TableColumn fx:id="cEstado" text="Estado"/>
-                    <TableColumn fx:id="cTipo" text="Tipo"/>
+                    <TableColumn fx:id="cNhabitacion" text="Habitación" />
+                    <TableColumn fx:id="cPiso" text="Piso" />
+                    <TableColumn fx:id="cEstado" text="Estado" />
+                    <TableColumn fx:id="cTipo" text="Tipo" />
                 </columns> 
             </TableView>
          </children>
