@@ -10,6 +10,7 @@ import app.model.Reserves;
 import app.model.Extras;
 import app.model.Clients;
 import app.model.Apartament;
+import app.model.Personas;
 import app.model.Reservas;
 
 //Otros imports
@@ -44,6 +45,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
@@ -114,6 +116,22 @@ public class ReservesController implements Initializable {
         cCliente.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("cliente"));
         cImporte.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("importe"));
         cAbono.setCellValueFactory(new PropertyValueFactory<Reservas,StringProperty>("abono"));
+        
+        tabla.setRowFactory(tv -> {
+           TableRow<Reservas> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+               if(event.getClickCount() == 2 && (! row.isEmpty())){
+                   Reservas rowData = row.getItem();
+                   horaEntrada.setText(rowData.getHoraIn());
+                   horaSalida.setText(rowData.getHorafi());
+                   Import.setText(rowData.getImporte());
+                   idClient.setText(rowData.getCliente());
+                   
+               }
+           });
+           return row;
+        });
+        
         ocultarMensajes();
         reservesobj = new Reserves(); 
         //extrasobj = new Extras();
