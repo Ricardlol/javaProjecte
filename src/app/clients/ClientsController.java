@@ -19,14 +19,21 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 import app.model.Clients;
+import app.model.Personas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -52,11 +59,11 @@ public class ClientsController implements Initializable{
     @FXML MenuButton optionDoc;
     @FXML MenuButton status;
     
-   // table in page
-    @FXML GridPane gridpane;
-    int fila=10;
-    int col=4;
-    
+    @FXML TableView tabla;
+    @FXML TableColumn cNombre;
+    @FXML TableColumn cDoc;
+    @FXML TableColumn cEmail;
+    @FXML TableColumn cTel;
     // Botons
     @FXML Button save;
     @FXML Button modify;
@@ -66,6 +73,7 @@ public class ClientsController implements Initializable{
     
     private Stage stage;
     
+    private ObservableList<Personas> personData;
     /**
      * Initializes the controller class.
      * @param url
@@ -73,10 +81,17 @@ public class ClientsController implements Initializable{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //oculta mensaje de error
+        // columnas de la tabla
+        cNombre.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("nom"));
+        cDoc.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("doc"));
+        cEmail.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("email"));
+        cTel.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("tel"));
+        
+        //oculta mensajes
         ocultarMensajes();
+        
+        //objeto clientes
         clientobj = new Clients();
-        cabeceras();
         if(Authentication.getTipus()==0){
             deshabilitarBtn();
         }
@@ -129,33 +144,16 @@ public class ClientsController implements Initializable{
         clientobj.delete(documnetation.getText(), null);
     }
     
-    private void cabeceras(){
-        for(int x=0;x<col; x++){
-            if(x==0){
-                gridpane.add(new Label("DOCUMENTO"), x,0);
-            }else if(x==1){
-                gridpane.add(new Label("NOMBRE"), x,0);
-            }else if(x==2){
-                gridpane.add(new Label("TEL"), x,0);
-            }else{
-                gridpane.add(new Label("EMAIL"), x,0);
-            }
-        }
-    }
-    
-    public void btnSearch(){
-        int i=1;
-        gridpane.getChildren().clear();
-        cabeceras();
+    public void btnSearch(){        
         ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
         try {
+            personData = FXCollections.observableArrayList();
             while(result.next()) {
-                gridpane.add(new Label(result.getString("documento")),0,i);
-                gridpane.add(new Label(result.getString("nombre")),1,i);
-                gridpane.add(new Label(result.getString("telefono")),2,i);
-                gridpane.add(new Label(result.getString("email")),3,i);
-                i++;
+                Personas persona = new Personas(result);
+                personData.add(persona);
             }
+            System.out.println(personData);
+            tabla.setItems(personData);
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());
