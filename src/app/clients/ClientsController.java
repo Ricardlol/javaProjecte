@@ -19,9 +19,11 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 import app.model.Clients;
+import app.model.Personas;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -30,8 +32,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javax.swing.table.TableColumn;
 
 /**
  * FXML Controller class
@@ -67,6 +70,7 @@ public class ClientsController implements Initializable{
     
     private Stage stage;
     
+    private ObservableList<Personas> personData;
     /**
      * Initializes the controller class.
      * @param url
@@ -75,6 +79,7 @@ public class ClientsController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //oculta mensaje de error
+        cNombre.setCellValueFactory(new PropertyValueFactory<Personas,StringProperty>("nombre"));
         ocultarMensajes();
         clientobj = new Clients();
         if(Authentication.getTipus()==0){
@@ -132,14 +137,13 @@ public class ClientsController implements Initializable{
     public void btnSearch(){        
         ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
         try {
-            ObservableList data = tabla.getItems();
+            personData = FXCollections.observableArrayList();
             while(result.next()) {
-                data.add(
-                    result.getString("documento")
-                );
-                
+                Personas persona = new Personas(result);
+                personData.add(persona);
             }
-            tabla.getItems().setAll(data);
+            System.out.println(personData);
+            tabla.setItems(personData);
         } catch (SQLException e) {
             System.out.println("SQLException"+ e.getMessage());
             System.out.println("SQLState"+ e.getSQLState());

@@ -114,11 +114,7 @@
                             <PropertyValueFactory property="documento" />
                         </cellValueFactory>
                     </TableColumn>
-                    <TableColumn id="cNombre" text="Nombre">
-                        <cellValueFactory>
-                            <PropertyValueFactory property="nombre" />
-                        </cellValueFactory>
-                    </TableColumn>
+                    <TableColumn fx:id="cNombre" text="Nombre"/>
                     <TableColumn text="Email">
                     </TableColumn>
                 </columns> 
