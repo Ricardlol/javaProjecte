@@ -36,11 +36,35 @@ Aparte de la gestión anterior de los label hemos creado unos nuevos en las otra
 
 ### Vista_en_tablaView_y_no_en_GridPlane
 
-Hemos cambiado todos los gridPlanes por tablesWies, modiifcando las vistas, insertando el nuevo codigo
+Hemos cambiado todos los gridPlanes por tablesWies, modiifcando las vistas, insertando el nuevo codigo de Ejemplo:
 ```java
-
+<TableView fx:id="tabla" layoutX="32.0" layoutY="51.0" prefHeight="400.0" prefWidth="346.0">
+	<columns>
+		<TableColumn fx:id="cDoc" text="Documentación" />
+		<TableColumn fx:id="cNombre" editable="false" text="Nombre" />
+		<TableColumn fx:id="cEmail" text="Email" />
+		<TableColumn fx:id="cTel" text="Tel" />
+	</columns> 
+</TableView>
 ```
 y en el controlador pondremos el siguente:
 ```java
-
+ResultSet result = (ResultSet) clientobj.search(nameSearch.getText());
+try {
+	ObservableList<Personas> personData = FXCollections.observableArrayList();
+	while(result.next()) {
+		Personas persona = new Personas(result);
+		personData.add(persona);
+	}
+	tabla.setItems(personData);
+} catch (SQLException e) {
+    System.out.println("SQLException"+ e.getMessage());
+    System.out.println("SQLState"+ e.getSQLState());
+    System.out.println("VendorError"+ e.getErrorCode());
+}
 ```
+
+### Autocompletar
+
+Implementamos la funcion de hacer doble click a la tabla y que se autocomplete los campos a rellenar.
+
