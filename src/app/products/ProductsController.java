@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -45,7 +46,8 @@ public class ProductsController implements Initializable {
     private @FXML TextArea descprod;
     
     // todos los labels de la pagina
-    private @FXML Label errorGlobal;
+    @FXML Label errorTextGlobal;
+    @FXML Label Succesful;
     
     // table in page
     @FXML TableView tabla;
@@ -77,10 +79,33 @@ public class ProductsController implements Initializable {
         cNombre.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("nom"));
         cPrecio.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("precio"));
         cDes.setCellValueFactory(new PropertyValueFactory<Products,StringProperty>("descrip"));
+        
+        ocultarMensajes();
+        tabla.setEditable(false);
+        
         productes= new Productes();
+        
         if(Authentication.getTipus()==0){
             deshabilitarBtn();
         }
+        
+        tabla.setRowFactory(tv -> {
+           TableRow<Products> row = new TableRow<>();
+           row.setOnMouseClicked(event -> {
+               if(event.getClickCount() == 2 && (! row.isEmpty())){
+                   Products rowData = row.getItem();
+                   nombreProduct.setText(rowData.getNom());
+                   precioProduct.setText(rowData.getPrecio());
+                   descprod.setText(rowData.getDescrip());
+               }
+           });
+           return row;
+        });
+    }
+    
+    private void ocultarMensajes(){
+       errorTextGlobal.setVisible(false);
+       Succesful.setVisible(false);
     }
     
     private void deshabilitarBtn(){
@@ -94,15 +119,40 @@ public class ProductsController implements Initializable {
     }
     
     public void btnSave(){
-        productes.create(nombreProduct.getText(), precioProduct.getText(), descprod.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha CREADO con éxito");
+            Succesful.setVisible(true);
+            productes.create(nombreProduct.getText(), precioProduct.getText(), descprod.getText());
+        } else{
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnModify(){
-        productes.modify(nombreProduct.getText(), precioProduct.getText(), descprod.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha MODIFICADO con éxito");
+            Succesful.setVisible(true);
+            productes.modify(nombreProduct.getText(), precioProduct.getText(), descprod.getText());
+        } else{
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnDelete(){
-        productes.delete(nombreProduct.getText(), descprod.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha ELIMINADO con éxito");
+            Succesful.setVisible(true);
+            productes.delete(nombreProduct.getText(), descprod.getText());
+        } else{
+            errorTextGlobal.setVisible(true);
+        }
+        
     }
     
     public void btnSearch(){
@@ -124,6 +174,19 @@ public class ProductsController implements Initializable {
             System.out.println("SQLState"+ e.getSQLState());
             System.out.println("VendorError"+ e.getErrorCode());
         }
+    }
+    private boolean comprovarCampos(){
+        boolean result = true;
+        if(nombreProduct.getText().length()==0){
+            result = false;
+        }
+        else if(precioProduct.getText().length()==0){
+            result = false;
+        }
+        else if(descprod.getText().length()==0){
+            result = false;
+        }
+        return result;
     }
     
 }
