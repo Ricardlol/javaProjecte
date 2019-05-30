@@ -128,6 +128,8 @@ public class ReservesController implements Initializable {
                    idClient.setText(rowData.getCliente());
                    fechaini.setValue(LocalDate.parse(rowData.getFechaIn()) );
                    fechafin.setValue(LocalDate.parse(rowData.getFechafi()) );
+                   numReserva.setText(rowData.getid());
+                   
                }
            });
            return row;

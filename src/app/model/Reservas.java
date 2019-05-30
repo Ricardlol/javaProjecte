@@ -22,6 +22,7 @@ public class Reservas {
     StringProperty horaIn;
     StringProperty fechafi;
     StringProperty horafi;
+    StringProperty id;
     
     public Reservas(ResultSet result) throws SQLException {
         cliente= new SimpleStringProperty(result.getString("fk_cliente"));
@@ -32,6 +33,7 @@ public class Reservas {
         horaIn=new SimpleStringProperty(result.getString("horaIn"));
         fechafi=new SimpleStringProperty(result.getString("fechafi"));
         horafi=new SimpleStringProperty(result.getString("horafi"));
+        id=new SimpleStringProperty(result.getString("id"));
     }
     
     public String getCliente(){
@@ -57,5 +59,8 @@ public class Reservas {
     }
     public String getHorafi(){
         return horafi.get();
+    }
+    public String getid(){
+        return id.get();
     }
 }
