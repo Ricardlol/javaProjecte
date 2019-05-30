@@ -55,7 +55,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label fx:id="errorTextIncorrectEmail" layoutX="227.0" layoutY="191.0" prefHeight="16.0" prefWidth="101.0" styleClass="texterr" text="Email incorrecto">
+            <Label fx:id="errorTextEmail" layoutX="227.0" layoutY="191.0" prefHeight="16.0" prefWidth="101.0" styleClass="texterr" text="Email incorrecto">
                <font>
                   <Font size="10.0" />
                </font>
