@@ -137,11 +137,28 @@ public class ApartamentController implements Initializable {
     }
     
     public void btnModify(){
-        apartamentObj.modify(nHab.getText(), piso.getText(), caract.getText(), precio.getText(), estado.getText(), tipo.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha MODIFICADO con éxito");
+            Succesful.setVisible(true);
+            apartamentObj.modify(nHab.getText(), piso.getText(), caract.getText(), precio.getText(), estado.getText(), tipo.getText());
+        }else{
+            errorTextGlobal.setVisible(true);
+        }
     }
     
     public void btnDelete(){
-        apartamentObj.delete(nHab.getText(), piso.getText());
+        ocultarMensajes();
+        boolean campos = comprovarCampos();
+        if(campos){
+            Succesful.setText("Se ha ELIMINADO con éxito");
+            Succesful.setVisible(true);
+            apartamentObj.delete(nHab.getText(), piso.getText());
+        }else{
+            errorTextGlobal.setVisible(true);
+        }
+        
     }
     
     public void btnSearch(){
