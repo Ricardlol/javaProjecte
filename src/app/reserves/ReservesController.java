@@ -126,7 +126,8 @@ public class ReservesController implements Initializable {
                    horaSalida.setText(rowData.getHorafi());
                    Import.setText(rowData.getImporte());
                    idClient.setText(rowData.getCliente());
-                   
+                   fechaini.setValue(LocalDate.parse(rowData.getFechaIn()) );
+                   fechafin.setValue(LocalDate.parse(rowData.getFechafi()) );
                }
            });
            return row;
